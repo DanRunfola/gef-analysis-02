@@ -14,6 +14,7 @@
 # To create a "release" of this repo which can be use later for replication/testing purposes:
 
 If you are using the latest versions of geoML, CausualForest, and any other referenced repos:
+
 1. run analysis
 2. push results of analysis to your project's github repo (optional)
 3. update `vagrant_setup.sh` by uncommenting the appropriate `git checkout` lines and update the hash to the current commits of each repo (geoML, CausalForest, etc.)
