@@ -1,8 +1,23 @@
 
+import os
 import pandas as pd
+
+repo_dir = os.path.dirname(
+    os.path.dirname(os.path.realpath(__file__)))
+
 
 
 # (M1) Programmatic w/ LD objectives;  Null Case Comparisons
+
+m1_csv = "{0}/raw_data/programmatic_control.csv".format(repo_dir)
+m1_df = pd.read_csv(m1_csv, quotechar='\"',
+                    na_values='', keep_default_na=False,
+                    encoding='utf-8')
+
+m1_df['treatment'] = 0
+
+m1_out = "{0}/data_prep/analysis_cases/m1_data.csv".format(repo_dir)
+m1_df.to_csv(m1_out, index=False, encoding='utf-8')
 
 
 
