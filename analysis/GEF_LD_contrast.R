@@ -1,8 +1,8 @@
 if (Sys.getenv("USER") == "vagrant") {
 
   geoml_src <- "/home/vagrant/geoML/geoML.R"
-  input_src <-  "/vagrant/prepared_data/GEF_LD_contrast.csv"
-  output_dir <- "/vagrant/outputs/LD_MFA_Contrast/NDVI/"
+  input_src <-  "/vagrant/data_prep/GEF_LD_contrast.csv"
+  output_dir <- "/vagrant/results/LD_MFA_Contrast/NDVI/"
 
 } else {
 
