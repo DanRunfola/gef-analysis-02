@@ -1,8 +1,7 @@
 
 # general setup
 
-requires vagrant and virtual box
-`sudo apt-get install-y vagrant virutalbox`
+requires vagrant and virtual box (on ubuntu `sudo apt-get install -y vagrant virutalbox`)
 
 1. clone/pull this repo
 2. `cd /path/to/repo`
