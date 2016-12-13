@@ -9,7 +9,7 @@ repo_dir = os.path.dirname(
 
 # (M1) Programmatic w/ LD objectives;  Null Case Comparisons
 
-m1_csv = "{0}/raw_data/programmatic_control.csv".format(repo_dir)
+m1_csv = "{0}/data_prep/merged_data.csv".format(repo_dir)
 m1_df = pd.read_csv(m1_csv, quotechar='\"',
                     na_values='', keep_default_na=False,
                     encoding='utf-8')
