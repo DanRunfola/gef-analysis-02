@@ -1,5 +1,6 @@
 
 path <- "/vagrant/results/m3a"
+dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")

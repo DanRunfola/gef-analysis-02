@@ -1,5 +1,6 @@
 
 path <- "/vagrant/results/m11b" #change path ZLV
+dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
