@@ -1,5 +1,6 @@
 
 path <- "/vagrant/results/m1b"
+dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
@@ -9,10 +10,10 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1_data.csv")
 
 
 #Calculate outcome
-tot.forest.percent <- (full.dta$X00forest25.na.sum - 
+tot.forest.percent <- (full.dta$X00forest25.na.sum -
                          (rowSums(full.dta[18:31])-full.dta[33])) / full.dta$lossyr25.na.categorical_count
 
-#Convert to square kilometers of forest cover 
+#Convert to square kilometers of forest cover
 full.dta$tot.forest.km.outcome <- as.vector(tot.forest.percent)[[1]] * (pi * 10^2)
 
 # Define control variables

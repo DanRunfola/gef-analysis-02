@@ -1,5 +1,7 @@
 
+
 path <- "/vagrant/results/m1a"
+dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
@@ -49,7 +51,7 @@ t <- geoML(dta=full.dta,
            counterfactual.name = "Null Case",
            tree.ctrl = c(2,10),
            col.invert = FALSE,
-           tree.cnt = 10
+           tree.cnt = 1000
 )
 
 
