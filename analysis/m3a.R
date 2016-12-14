@@ -49,7 +49,7 @@ t <- geoML(dta=full.dta,
            counterfactual.name = "MFA w/ LD",
            tree.ctrl = c(2,10),
            col.invert = FALSE,
-           tree.cnt = 10
+           tree.cnt = 1000
 )
 
 

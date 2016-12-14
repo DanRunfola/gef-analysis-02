@@ -3,8 +3,12 @@ import os
 import pandas as pd
 import numpy as np
 
-repo_dir = os.path.dirname(
-    os.path.dirname(os.path.realpath(__file__)))
+
+if os.environ.get('USER') == "vagrant":
+    repo_dir = os.path.dirname(
+        os.path.dirname(os.path.realpath(__file__)))
+else:
+    repo_dir = os.path.realpath(".")
 
 
 def read_csv(path):
@@ -80,117 +84,197 @@ land_id_list = list(set(land_id_list))
 
 # -------------------------------------
 
-# check geocoded land degradation
+# # check geocoded land degradation
 # bio_id_list = list(data_df.loc[data_df['type'] == 'bio', 'gef_id'])
 
 
 # # check GEF project records (if any column contains "BD")
-# cnames_01 = [i for i in list(ancillary_01_df.columns) if i != 'GEF ID']
-# matches_01 = ['BD' in list(ancillary_01_df.iloc[i])
+# cnames_03 = [i for i in list(ancillary_01_df.columns) if i != 'GEF ID']
+# matches_03 = ['BD' in list(ancillary_01_df.iloc[i])
 #               for i in range(len(ancillary_01_df))]
-# land_id_list_01 = list(ancillary_01_df.loc[matches_01, 'GEF ID'].astype('str'))
+# bio_id_list_01 = list(ancillary_01_df.loc[matches_01, 'GEF ID'].astype('str'))
 
 
-# cnames_02 = [i for i in list(ancillary_02_df.columns) if i != 'GEF ID']
-# matches_02 = ['BD' in list(ancillary_01_df.iloc[i])
+# cnames_04 = [i for i in list(ancillary_02_df.columns) if i != 'GEF ID']
+# matches_04 = ['BD' in list(ancillary_01_df.iloc[i])
 #               for i in range(len(ancillary_01_df))]
-# land_id_list_02 = list(ancillary_02_df.loc[matches_02, 'GEF ID'].astype('str'))
+# bio_id_list_02 = list(ancillary_02_df.loc[matches_02, 'GEF ID'].astype('str'))
 
 
 # # check aiddata ancillary ("Sub-Foci" column)
 # bio_keywords = ["BD", "Biodiversity"]
 
 
+# # combine different land id lists
+# bio_id_list = bio_id_list_00 + bio_id_list_01 + bio_id_list_02 + bio_id_list_03
+# bio_id_list = list(set(bio_id_list))
+
+# -------------------------------------
+
+# multi country
+multicountry_id_list = list(set(ancillary_04_df.loc[ancillary_04_df["Country"].isin(["Regional", "Global"]), 'GEF_ID'].astype('int').astype('str')))
+
+# multi agency
+multiagency_id_list = list(set(ancillary_04_df.loc[ancillary_04_df["Secondary agency(ies)"].isnull(), 'GEF_ID'].astype('int').astype('str')))
+
+
 # -----------------------------------------------------------------------------
 
 
+def build_case(case_id, treatment, control):
+    case_df = data_df.copy(deep=True)
+
+    case_df.loc[treatment, 'treatment'] = 1
+    case_df.loc[control, 'treatment'] = 0
+
+    case_df = case_df.loc[case_df['treatment'] != -1]
+
+    case_out = "{0}/data_prep/analysis_cases/{1}_data.csv".format(repo_dir, case_id)
+    case_df.to_csv(case_out, index=False, encoding='utf-8')
+
+
+print
 # (M1)
 #   Treatment:  Programmatic w/ LD objectives
 #   Control:    Null Case Comparisons
 
-m1_df = data_df.copy(deep=True)
-
-m1_df.loc[(m1_df['type'] == 'prog') & (m1_df['gef_id'].isin(land_id_list)), 'treatment'] = 1
-m1_df.loc[(m1_df['type'] == 'rand'), 'treatment'] = 0
-
-m1_df = m1_df.loc[m1_df['treatment'] != -1]
-
-m1_out = "{0}/data_prep/analysis_cases/m1_data.csv".format(repo_dir)
-m1_df.to_csv(m1_out, index=False, encoding='utf-8')
+m1t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
+m1c = (data_df['type'] == 'rand')
+build_case('m1', m1t, m1c)
 
 
 # (M2)
 #   Treatment:  Programmatic w/ Biodiversity objectives
 #   Control:    Null Case Comparisons
 
+# m2t = (m2_df['type'] == 'prog') & (m2_df['gef_id'].isin(bio_id_list))
+# m2c = (m2_df['type'] == 'rand')
+# build_case('m2', m2t, m2c)
 
 
 # (M3)
 #   Treatment:  Programmatic w/ LD objectives
 #   Control:    MFA w/ LD objectives
 
-m3_df = data_df.copy(deep=True)
-
-m3_df.loc[(m3_df['type'] == 'prog') & (m3_df['gef_id'].isin(land_id_list)), 'treatment'] = 1
-m3_df.loc[(m3_df['type'] == 'mfa') & (m3_df['gef_id'].isin(land_id_list)), 'treatment'] = 0
-
-m3_df = m3_df.loc[m3_df['treatment'] != -1]
-
-m3_out = "{0}/data_prep/analysis_cases/m3_data.csv".format(repo_dir)
-m3_df.to_csv(m3_out, index=False, encoding='utf-8')
+m3t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
+m3c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(land_id_list))
+build_case('m3', m3t, m3c)
 
 
 # (M4)
 #   Treatment:  Programmatic w/ Biodiversity objectives
 #   Control:    MFA w/ Biodiversity objectives
 
+# m4t = (m4_df['type'] == 'prog') & (m4_df['gef_id'].isin(bio_id_list))
+# m4c = (m4_df['type'] == 'mfa') & (m4_df['gef_id'].isin(bio_id_list))
+# build_case('m4', m4t, m4c)
 
 
-# (M5)
-#   Treatment:  Programmatic multi-country w/ LD objectives
-#   Control:    Non-programmatic single-country w/ LD objectives
+# # (M5)
+# #   Treatment:  Programmatic multi-country w/ LD objectives
+# #   Control:    Non-programmatic single-country w/ LD objectives
+# #               (aka: LD single-country)
+
+m5t = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(land_id_list))
+       & (data_df['gef_id'].isin(multicountry_id_list)))
+m5c = ((data_df['type'] == 'land')
+       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
+       & ~(data_df['gef_id'].isin(multicountry_id_list)))
+build_case('m5', m5t, m5c)
 
 
+# # (M6)
+# #   Treatment:  Programmatic multi-country w/ Biodiversity objectives
+# #   Control:    Non-programmatic single-country w/ Biodiversity objectives
+# #               (aka: Biodiversity single-country)
 
-# (M6)
-#   Treatment:  Programmatic multi-country w/ Biodiversity objectives
-#   Control:    Non-programmatic single-country w/ Biodiversity objectives
+# m6t = ((m6_df['type'] == 'prog')
+#        & (m6_df['gef_id'].isin(bio_id_list))
+#        & (m6_df['gef_id'].isin(multicountry_id_list)))
+# m6c = ((m6_df['type'] == 'bio')
+#        & ~(m6_df['gef_id'].isin(list(set(m6_df.loc[m6_df['type'] == "prog", 'gef_id']))))
+#        & ~(m6_df['gef_id'].isin(multicountry_id_list)))
+# build_case('m6', m6t, m6c)
 
 
+# # (M7)
+# #   Treatment:  Programmatic multi-agency w/ LD objectives
+# #   Control:    Non-programmatic single-agency w/ LD objectives
+# #               (aka: LD single-agency)
 
-# (M7)
-#   Treatment:  Programmatic multi-agency w/ LD objectives
-#   Control:    Non-programmatic single-agency w/ LD objectives
-
+m7t = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(land_id_list))
+       & (data_df['gef_id'].isin(multiagency_id_list)))
+m7c = ((data_df['type'] == 'land')
+       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
+       & ~(data_df['gef_id'].isin(multiagency_id_list)))
+build_case('m7', m7t, m7c)
 
 
 # (M8)
 #   Treatment:  Programmatic multi-agency w/ Biodiversity objectives
 #   Control:    Non-programmatic single-agency w/ Biodiversity objectives
+#               (aka: Biodiversity single-agency)
 
+# m8t = ((data_df['type'] == 'prog')
+#        & (data_df['gef_id'].isin(bio_id_list))
+#        & (data_df['gef_id'].isin(multiagency_id_list)))
+# m8c = ((data_df['type'] == 'bio')
+#        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
+#        & ~(data_df['gef_id'].isin(multiagency_id_list)))
+# build_case('m8', m8t, m8c)
 
 
 # (M9)
 #   Treatment:  Programmatic multi-country w/ LD objectives
 #   Control:    Programmatic single-country w/ LD objectives
 
+m9t = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(land_id_list))
+       & (data_df['gef_id'].isin(multicountry_id_list)))
+m9c = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(land_id_list))
+       & ~(data_df['gef_id'].isin(multicountry_id_list)))
+build_case('m9', m9t, m9c)
 
 
 # (M10)
 #   Treatment:  Programmatic multi-country w/ Biodiversity objectives
 #   Control:    Programmatic single-country w/ Biodiversity objectives
 
+# m10t = ((data_df['type'] == 'prog')
+#        & (data_df['gef_id'].isin(bio_id_list))
+#        & (data_df['gef_id'].isin(multicountry_id_list)))
+# m10c = ((data_df['type'] == 'prog')
+#        & (data_df['gef_id'].isin(bio_id_list))
+#        & ~(data_df['gef_id'].isin(multicountry_id_list)))
+# build_case('m10', m10t, m10c)
 
 
 # (M11)
 #   Treatment:  Programmatic multi-agency w/ LD objectives
 #   Control:    Programmatic single-agency w/ LD objectives
 
+m11t = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(land_id_list))
+       & (data_df['gef_id'].isin(multiagency_id_list)))
+m11c = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(land_id_list))
+       & ~(data_df['gef_id'].isin(multiagency_id_list)))
+build_case('m11', m11t, m11c)
 
 
 # (M12)
 #   Treatment:  Programmatic multi-agency w/ Biodiversity objectives
 #   Control:    Programmatic single-agency w/ Biodiversity objectives
 
+# m12t = ((data_df['type'] == 'prog')
+#        & (data_df['gef_id'].isin(bio_id_list))
+#        & (data_df['gef_id'].isin(multiagency_id_list)))
+# m12c = ((data_df['type'] == 'prog')
+#        & (data_df['gef_id'].isin(bio_id_list))
+#        & ~(data_df['gef_id'].isin(multiagency_id_list)))
+# build_case('m12', m12t, m12c)
 
 

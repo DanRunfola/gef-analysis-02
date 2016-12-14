@@ -4,15 +4,14 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/Users/Zhonghui/Documents/AidData/REU/github/GEF_Programmatic/data_prep/analysis_cases/m3_data.csv")
-#/vagrant/data_prep/analysis_cases/m3_data.csv
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv")
 
 
 #Calculate outcome
-tot.forest.percent <- (full.dta$X00forest25.na.sum - 
+tot.forest.percent <- (full.dta$00forest25.na.sum -
                          (rowSums(full.dta[18:31])-full.dta[33])) / full.dta$lossyr25.na.categorical_count
 
-#Convert to square kilometers of forest cover 
+#Convert to square kilometers of forest cover
 full.dta$tot.forest.km.outcome <- as.vector(tot.forest.percent)[[1]] * (pi * 10^2)
 
 # Define control variables
@@ -58,5 +57,5 @@ t <- geoML(dta=full.dta,
            counterfactual.name = "MFA w/ LD",
            tree.ctrl = c(2,10),
            col.invert = FALSE,
-           tree.cnt = 10
+           tree.cnt = 1000
 )
