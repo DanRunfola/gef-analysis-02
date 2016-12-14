@@ -1,10 +1,10 @@
 
-path <- "/vagrant/results/m3b"
+path <- "/vagrant/results/m5b"
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv")
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m5_data.csv")
 #/vagrant/data_prep/analysis_cases/m3_data.csv
 
 
@@ -43,10 +43,10 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "NDVI (2002, Unitless)"
 )
 
-out_path = "/vagrant/results/m3b/"
+out_path = "/vagrant/results/m5b/"
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "Programmatic w/ LD"),
+           trt=c("treatment", "Programmatic multi-country w/ LD"),
            ctrl=c(Vars, VarNames),
            outcome=c("tot.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
            out_path=out_path,
@@ -55,7 +55,7 @@ t <- geoML(dta=full.dta,
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
            caliper=2.0,
-           counterfactual.name = "MFA w/ LD",
+           counterfactual.name = "Non-programmatic single-country w/ LD",
            tree.ctrl = c(2,10),
            col.invert = FALSE,
            tree.cnt = 10
