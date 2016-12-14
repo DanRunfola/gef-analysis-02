@@ -1,19 +1,10 @@
 
-path <- "/vagrant/results/m3b"
+path <- "/vagrant/results/m5a"
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv")
-#/vagrant/data_prep/analysis_cases/m3_data.csv
-
-
-#Calculate outcome
-tot.forest.percent <- (full.dta$X00forest25.na.sum - 
-                         (rowSums(full.dta[18:31])-full.dta[33])) / full.dta$lossyr25.na.categorical_count
-
-#Convert to square kilometers of forest cover 
-full.dta$tot.forest.km.outcome <- as.vector(tot.forest.percent)[[1]] * (pi * 10^2)
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m5_data.csv")
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
@@ -43,20 +34,23 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "NDVI (2002, Unitless)"
 )
 
-out_path = "/vagrant/results/m3b/"
+out_path = "/vagrant/results/m5a/"
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "Programmatic w/ LD"),
+           trt=c("treatment", "Programmatic multi-country w/ LD"),
            ctrl=c(Vars, VarNames),
-           outcome=c("tot.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
+           outcome=c("ltdr_yearly_ndvi_mean.2013.mean", "2013 NDVI"),
            out_path=out_path,
-           file.prefix="FC_Hansen",
+           file.prefix="NDVI_max",
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
            caliper=2.0,
-           counterfactual.name = "MFA w/ LD",
+           counterfactual.name = "Non-programmatic single-country w/ LD",
            tree.ctrl = c(2,10),
            col.invert = FALSE,
            tree.cnt = 10
 )
+
+
+
