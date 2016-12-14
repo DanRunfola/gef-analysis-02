@@ -45,7 +45,6 @@ ancillary_04_df = read_csv(ancillary_04_csv)
 
 # -------------------------------------
 
-# check geocoded land degradation
 land_id_list_00 = list(data_df.loc[data_df['type'] == 'land', 'gef_id'])
 
 
@@ -81,7 +80,25 @@ land_id_list = list(set(land_id_list))
 
 # -------------------------------------
 
+# check geocoded land degradation
 # bio_id_list = list(data_df.loc[data_df['type'] == 'bio', 'gef_id'])
+
+
+# # check GEF project records (if any column contains "BD")
+# cnames_01 = [i for i in list(ancillary_01_df.columns) if i != 'GEF ID']
+# matches_01 = ['BD' in list(ancillary_01_df.iloc[i])
+#               for i in range(len(ancillary_01_df))]
+# land_id_list_01 = list(ancillary_01_df.loc[matches_01, 'GEF ID'].astype('str'))
+
+
+# cnames_02 = [i for i in list(ancillary_02_df.columns) if i != 'GEF ID']
+# matches_02 = ['BD' in list(ancillary_01_df.iloc[i])
+#               for i in range(len(ancillary_01_df))]
+# land_id_list_02 = list(ancillary_02_df.loc[matches_02, 'GEF ID'].astype('str'))
+
+
+# # check aiddata ancillary ("Sub-Foci" column)
+# bio_keywords = ["BD", "Biodiversity"]
 
 
 # -----------------------------------------------------------------------------
@@ -91,6 +108,15 @@ land_id_list = list(set(land_id_list))
 #   Treatment:  Programmatic w/ LD objectives
 #   Control:    Null Case Comparisons
 
+m1_df = data_df.copy(deep=True)
+
+m1_df.loc[(m1_df['type'] == 'prog') & (m1_df['gef_id'].isin(land_id_list)), 'treatment'] = 1
+m1_df.loc[(m1_df['type'] == 'rand'), 'treatment'] = 0
+
+m1_df = m1_df.loc[m1_df['treatment'] != -1]
+
+m1_out = "{0}/data_prep/analysis_cases/m1_data.csv".format(repo_dir)
+m1_df.to_csv(m1_out, index=False, encoding='utf-8')
 
 
 # (M2)
