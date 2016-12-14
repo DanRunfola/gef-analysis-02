@@ -1,5 +1,5 @@
 
-path <- "/vagrant/results/m3b"
+path <- "/vagrant/results/m1b"
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
@@ -43,7 +43,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "NDVI (2002, Unitless)"
 )
 
-out_path = "/vagrant/results/m3b/"
+out_path = "/vagrant/results/m1b/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ LD"),
@@ -55,7 +55,7 @@ t <- geoML(dta=full.dta,
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
            caliper=2.0,
-           counterfactual.name = "MFA w/ LD",
+           counterfactual.name = "Null Case",
            tree.ctrl = c(2,10),
            col.invert = FALSE,
            tree.cnt = 10
