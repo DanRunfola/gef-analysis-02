@@ -5,7 +5,7 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m7_data.csv") #change input data ZLV
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m7_data.csv", check.names = FALSE) #change input data ZLV
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",

@@ -5,12 +5,12 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m7_data.csv") #change input data ZLV
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m7_data.csv", check.names = FALSE) #change input data ZLV
 #/vagrant/data_prep/analysis_cases/m3_data.csv
 
 
 #Calculate outcome
-tot.forest.percent <- (full.dta$00forest25.na.sum -
+tot.forest.percent <- (full.dta$"00forest25.na.sum" -
                          (rowSums(full.dta[18:31])-full.dta[33])) / full.dta$lossyr25.na.categorical_count
 
 #Convert to square kilometers of forest cover
