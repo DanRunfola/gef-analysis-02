@@ -21,19 +21,19 @@ def read_csv(path):
 
 # load main data
 data_csv = "{0}/data_prep/merged_data.csv".format(repo_dir)
-data_df = read_csv(data_csv)
+data_raw_df = read_csv(data_csv)
 
 # initialize treatment field as -1
 # for each case:
 #   actual treatments will be set to 1
 #   actual controls will be set to 0
 # then all remaining (-1) can be dropped
-data_df['treatment'] = -1
+data_raw_df['treatment'] = -1
 
 # add gef_id of -1 to random control points
 # so we can match on field without nan errors
-data_df.loc[data_df['type'] == 'rand', 'gef_id'] = -1
-data_df['gef_id'] = data_df['gef_id'].astype('int').astype('str')
+data_raw_df.loc[data_raw_df['type'] == 'rand', 'gef_id'] = -1
+data_raw_df['gef_id'] = data_raw_df['gef_id'].astype('int').astype('str')
 
 
 # load ancillary data
@@ -46,6 +46,19 @@ ancillary_01_df = read_csv(ancillary_01_csv)
 ancillary_02_df = read_csv(ancillary_02_csv)
 ancillary_03_df = read_csv(ancillary_03_csv)
 ancillary_04_df = read_csv(ancillary_04_csv)
+
+
+# merge project data from ancillary_04 with main data
+
+ancillary_04_df['GEF_ID'] = ancillary_04_df['GEF_ID'].astype('int').astype('str')
+
+data_df = data_raw_df.copy(deep=True)
+data_df = data_df.merge(ancillary_04_df,
+                        left_on='gef_id', right_on='GEF_ID',
+                        how='left')
+
+data_df_out = "{0}/data_prep/analysis_cases/base_data.csv".format(repo_dir)
+data_df.to_csv(data_df_out, index=False, encoding='utf-8')
 
 # -------------------------------------
 
