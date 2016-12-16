@@ -21,19 +21,19 @@ def read_csv(path):
 
 # load main data
 data_csv = "{0}/data_prep/merged_data.csv".format(repo_dir)
-data_df = read_csv(data_csv)
+data_raw_df = read_csv(data_csv)
 
 # initialize treatment field as -1
 # for each case:
 #   actual treatments will be set to 1
 #   actual controls will be set to 0
 # then all remaining (-1) can be dropped
-data_df['treatment'] = -1
+data_raw_df['treatment'] = -1
 
 # add gef_id of -1 to random control points
 # so we can match on field without nan errors
-data_df.loc[data_df['type'] == 'rand', 'gef_id'] = -1
-data_df['gef_id'] = data_df['gef_id'].astype('int').astype('str')
+data_raw_df.loc[data_raw_df['type'] == 'rand', 'gef_id'] = -1
+data_raw_df['gef_id'] = data_raw_df['gef_id'].astype('int').astype('str')
 
 
 # load ancillary data
@@ -46,6 +46,19 @@ ancillary_01_df = read_csv(ancillary_01_csv)
 ancillary_02_df = read_csv(ancillary_02_csv)
 ancillary_03_df = read_csv(ancillary_03_csv)
 ancillary_04_df = read_csv(ancillary_04_csv)
+
+
+# merge project data from ancillary_04 with main data
+
+ancillary_04_df['GEF_ID'] = ancillary_04_df['GEF_ID'].astype('int').astype('str')
+
+data_df = data_raw_df.copy(deep=True)
+data_df = data_df.merge(ancillary_04_df,
+                        left_on='gef_id', right_on='GEF_ID',
+                        how='left')
+
+data_df_out = "{0}/data_prep/analysis_cases/base_data.csv".format(repo_dir)
+data_df.to_csv(data_df_out, index=False, encoding='utf-8')
 
 # -------------------------------------
 
@@ -69,12 +82,12 @@ land_id_list_02 = list(ancillary_02_df.loc[matches_02, 'GEF ID'].astype('str'))
 land_keywords = ["LD", "Sustainable", "SFM", "REDD", "LULUCF",
                  "Land", "Degradation", "Degredation", "Sustainable"]
 
-raw_matches = ancillary_03_df['Sub-Foci'].str.contains('|'.join(land_keywords))
-clean_matches = [
+raw_land_matches = ancillary_03_df['Sub-Foci'].str.contains('|'.join(land_keywords))
+clean_land_matches = [
     False if np.isnan(x) else x
-    for x in raw_matches
+    for x in raw_land_matches
 ]
-land_id_list_03 = list(ancillary_03_df.loc[clean_matches, 'GEF_ID']
+land_id_list_03 = list(ancillary_03_df.loc[clean_land_matches, 'GEF_ID']
     .astype('int').astype('str'))
 
 
@@ -84,30 +97,38 @@ land_id_list = list(set(land_id_list))
 
 # -------------------------------------
 
-# # check geocoded land degradation
-# bio_id_list = list(data_df.loc[data_df['type'] == 'bio', 'gef_id'])
+# check geocoded land degradation
+bio_id_list_00 = list(data_df.loc[data_df['type'] == 'bio', 'gef_id'])
 
 
-# # check GEF project records (if any column contains "BD")
-# cnames_03 = [i for i in list(ancillary_01_df.columns) if i != 'GEF ID']
-# matches_03 = ['BD' in list(ancillary_01_df.iloc[i])
-#               for i in range(len(ancillary_01_df))]
-# bio_id_list_01 = list(ancillary_01_df.loc[matches_01, 'GEF ID'].astype('str'))
+# check GEF project records (if any column contains "BD")
+cnames_03 = [i for i in list(ancillary_01_df.columns) if i != 'GEF ID']
+matches_03 = ['BD' in list(ancillary_01_df.iloc[i])
+              for i in range(len(ancillary_01_df))]
+bio_id_list_01 = list(ancillary_01_df.loc[matches_01, 'GEF ID'].astype('str'))
 
 
-# cnames_04 = [i for i in list(ancillary_02_df.columns) if i != 'GEF ID']
-# matches_04 = ['BD' in list(ancillary_01_df.iloc[i])
-#               for i in range(len(ancillary_01_df))]
-# bio_id_list_02 = list(ancillary_02_df.loc[matches_02, 'GEF ID'].astype('str'))
+cnames_04 = [i for i in list(ancillary_02_df.columns) if i != 'GEF ID']
+matches_04 = ['BD' in list(ancillary_01_df.iloc[i])
+              for i in range(len(ancillary_01_df))]
+bio_id_list_02 = list(ancillary_02_df.loc[matches_02, 'GEF ID'].astype('str'))
 
 
-# # check aiddata ancillary ("Sub-Foci" column)
-# bio_keywords = ["BD", "Biodiversity"]
+# check aiddata ancillary ("Sub-Foci" column)
+bio_keywords = ["BD", "Biodiversity"]
+
+raw_bio_matches = ancillary_03_df['Sub-Foci'].str.contains('|'.join(bio_keywords))
+clean_bio_matches = [
+    False if np.isnan(x) else x
+    for x in raw_bio_matches
+]
+bio_id_list_03 = list(ancillary_03_df.loc[clean_bio_matches, 'GEF_ID']
+    .astype('int').astype('str'))
 
 
-# # combine different land id lists
-# bio_id_list = bio_id_list_00 + bio_id_list_01 + bio_id_list_02 + bio_id_list_03
-# bio_id_list = list(set(bio_id_list))
+# combine different land id lists
+bio_id_list = bio_id_list_00 + bio_id_list_01 + bio_id_list_02 + bio_id_list_03
+bio_id_list = list(set(bio_id_list))
 
 # -------------------------------------
 
@@ -157,11 +178,11 @@ print m1_stats
 #   Treatment:  Programmatic w/ Biodiversity objectives
 #   Control:    Null Case Comparisons
 
-# print "Running M2"
-# m2t = (m2_df['type'] == 'prog') & (m2_df['gef_id'].isin(bio_id_list))
-# m2c = (m2_df['type'] == 'rand')
-# m2_stats = build_case('m2', m2t, m2c)
-# print m2_stats
+print "Running M2"
+m2t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
+m2c = (data_df['type'] == 'rand')
+m2_stats = build_case('m2', m2t, m2c)
+print m2_stats
 
 
 # -----------------
@@ -181,11 +202,11 @@ print m3_stats
 #   Treatment:  Programmatic w/ Biodiversity objectives
 #   Control:    MFA w/ Biodiversity objectives
 
-# print "Running M4"
-# m4t = (m4_df['type'] == 'prog') & (m4_df['gef_id'].isin(bio_id_list))
-# m4c = (m4_df['type'] == 'mfa') & (m4_df['gef_id'].isin(bio_id_list))
-# m4_stats = build_case('m4', m4t, m4c)
-# print m4_stats
+print "Running M4"
+m4t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
+m4c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(bio_id_list))
+m4_stats = build_case('m4', m4t, m4c)
+print m4_stats
 
 
 # -----------------
@@ -211,15 +232,15 @@ print m5_stats
 #   Control:    Non-programmatic single-country w/ Biodiversity objectives
 #               (aka: Biodiversity single-country)
 
-# print "Running M6"
-# m6t = ((m6_df['type'] == 'prog')
-#        & (m6_df['gef_id'].isin(bio_id_list))
-#        & (m6_df['gef_id'].isin(multicountry_id_list)))
-# m6c = ((m6_df['type'] == 'bio')
-#        & ~(m6_df['gef_id'].isin(list(set(m6_df.loc[m6_df['type'] == "prog", 'gef_id']))))
-#        & ~(m6_df['gef_id'].isin(multicountry_id_list)))
-# m6_stats = build_case('m6', m6t, m6c)
-# print m6_stats
+print "Running M6"
+m6t = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(bio_id_list))
+       & (data_df['gef_id'].isin(multicountry_id_list)))
+m6c = ((data_df['type'] == 'bio')
+       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
+       & ~(data_df['gef_id'].isin(multicountry_id_list)))
+m6_stats = build_case('m6', m6t, m6c)
+print m6_stats
 
 
 # -----------------
@@ -245,15 +266,15 @@ print m7_stats
 #   Control:    Non-programmatic single-agency w/ Biodiversity objectives
 #               (aka: Biodiversity single-agency)
 
-# print "Running M8"
-# m8t = ((data_df['type'] == 'prog')
-#        & (data_df['gef_id'].isin(bio_id_list))
-#        & (data_df['gef_id'].isin(multiagency_id_list)))
-# m8c = ((data_df['type'] == 'bio')
-#        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
-#        & ~(data_df['gef_id'].isin(multiagency_id_list)))
-# m8_stats = build_case('m8', m8t, m8c)
-# print m8_stats
+print "Running M8"
+m8t = ((data_df['type'] == 'prog')
+       & (data_df['gef_id'].isin(bio_id_list))
+       & (data_df['gef_id'].isin(multiagency_id_list)))
+m8c = ((data_df['type'] == 'bio')
+       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
+       & ~(data_df['gef_id'].isin(multiagency_id_list)))
+m8_stats = build_case('m8', m8t, m8c)
+print m8_stats
 
 
 # -----------------
@@ -277,15 +298,15 @@ print m9_stats
 #   Treatment:  Programmatic multi-country w/ Biodiversity objectives
 #   Control:    Programmatic single-country w/ Biodiversity objectives
 
-# print "Running M10"
-# m10t = ((data_df['type'] == 'prog')
-#         & (data_df['gef_id'].isin(bio_id_list))
-#         & (data_df['gef_id'].isin(multicountry_id_list)))
-# m10c = ((data_df['type'] == 'prog')
-#         & (data_df['gef_id'].isin(bio_id_list))
-#         & ~(data_df['gef_id'].isin(multicountry_id_list)))
-# m10_stats = build_case('m10', m10t, m10c)
-# print m10_stats
+print "Running M10"
+m10t = ((data_df['type'] == 'prog')
+        & (data_df['gef_id'].isin(bio_id_list))
+        & (data_df['gef_id'].isin(multicountry_id_list)))
+m10c = ((data_df['type'] == 'prog')
+        & (data_df['gef_id'].isin(bio_id_list))
+        & ~(data_df['gef_id'].isin(multicountry_id_list)))
+m10_stats = build_case('m10', m10t, m10c)
+print m10_stats
 
 
 # -----------------
@@ -309,13 +330,13 @@ print m11_stats
 #   Treatment:  Programmatic multi-agency w/ Biodiversity objectives
 #   Control:    Programmatic single-agency w/ Biodiversity objectives
 
-# print "Running M12"
-# m12t = ((data_df['type'] == 'prog')
-#         & (data_df['gef_id'].isin(bio_id_list))
-#         & (data_df['gef_id'].isin(multiagency_id_list)))
-# m12c = ((data_df['type'] == 'prog')
-#         & (data_df['gef_id'].isin(bio_id_list))
-#         & ~(data_df['gef_id'].isin(multiagency_id_list)))
-# m12_stats = build_case('m12', m12t, m12c)
-# print m12_stats
+print "Running M12"
+m12t = ((data_df['type'] == 'prog')
+        & (data_df['gef_id'].isin(bio_id_list))
+        & (data_df['gef_id'].isin(multiagency_id_list)))
+m12c = ((data_df['type'] == 'prog')
+        & (data_df['gef_id'].isin(bio_id_list))
+        & ~(data_df['gef_id'].isin(multiagency_id_list)))
+m12_stats = build_case('m12', m12t, m12c)
+print m12_stats
 

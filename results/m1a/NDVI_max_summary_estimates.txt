@@ -1,0 +1,9 @@
+
+Treatment Cases:
+T dim: 53
+
+Control Cases:
+C dim: 5007
+
+Uncertainty Mean (+/- 95%):
+406.1
