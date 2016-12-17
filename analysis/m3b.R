@@ -7,13 +7,28 @@ source("/home/vagrant/geoML/geoML.R")
 
 full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv", check.names = FALSE)
 
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv", stringsAsFactors=FALSE)
+
+full.dta$GEF.Project.Grant.CEO.endorse.stage <- gsub(",","",full.dta$GEF.Project.Grant.CEO.endorse.stage)
+full.dta$GEF.Project.Grant.CEO.endorse.stage <- as.numeric(as.character(full.dta$GEF.Project.Grant.CEO.endorse.stage))
+
+full.dta$Cofinance.CEO.endorse.stage <- gsub(",","",full.dta$Cofinance.CEO.endorse.stage)
+full.dta$Cofinance.CEO.endorse.stage <- as.numeric(as.character(full.dta$Cofinance.CEO.endorse.stage))
+
+full.dta <- full.dta[!is.na(full.dta$GEF.Project.Grant.CEO.endorse.stage),]
+
 
 #Calculate outcome
-tot.forest.percent <- (full.dta$"00forest25.na.sum" -
-                         (rowSums(full.dta[18:31])-full.dta[33])) / full.dta$lossyr25.na.categorical_count
+print(names(full.dta))
+tot.forest.percent <- (full.dta$"X00forest25.na.sum" -
+                        rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count
+
+
 
 #Convert to square kilometers of forest cover
-full.dta$tot.forest.km.outcome <- as.vector(tot.forest.percent)[[1]] * (pi * 10^2)
+full.dta$tot.forest.km.outcome <- as.vector(tot.forest.percent) * (pi * 10^2)
+
+print(full.dta$tot.forest.km.outcome)
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
@@ -27,7 +42,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean")
+           "ltdr_yearly_ndvi_mean.2002.mean", "GEF.Project.Grant.CEO.endorse.stage")
 
 VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Elevation (m)", "Slope (degrees)",
@@ -40,7 +55,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)"
+              "NDVI (2002, Unitless)", "GEF Funding"
 )
 
 out_path = "/vagrant/results/m3b/"
@@ -56,7 +71,7 @@ t <- geoML(dta=full.dta,
            geog.fields = c("latitude", "longitude"),
            caliper=2.0,
            counterfactual.name = "MFA w/ LD",
-           tree.ctrl = c(2,10),
+           tree.ctrl = c(20,500),
            col.invert = FALSE,
-           tree.cnt = 1000
+           tree.cnt = 10000
 )

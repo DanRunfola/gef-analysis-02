@@ -52,7 +52,7 @@ t <- geoML(dta=full.dta,
            caliper=0.25,
            counterfactual.name = "Null Case",
            top.rep=c("GEF_ID", "Title"),
-           tree.ctrl = c(2,500),
+           tree.ctrl = c(20,500),
            col.invert = FALSE,
            tree.cnt = 10000
 )
