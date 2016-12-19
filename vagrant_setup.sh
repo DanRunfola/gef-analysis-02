@@ -41,12 +41,15 @@ cd CausalForest
 # prep vm with scikit and python
 
 cd ~
-wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-bash Miniconda2-latest-Linux-x86_64.sh -b
+wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86.sh
+bash Miniconda2-latest-Linux-x86.sh -b
 miniconda2/bin/conda install -y scikit-learn
 sudo apt-get install -y python-pip python-dev
 sudo pip install --upgrade pip
-sudo pip install Cython nose numpy pandas
+sudo pip install Cython 
+sudo pip install nose
+sudo pip install numpy
+sudo pip install pandas  
 sudo apt-get install -y python-scipy
 
 cd CausalForest/scikit-learn
