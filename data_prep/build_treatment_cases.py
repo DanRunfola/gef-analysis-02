@@ -1,7 +1,14 @@
 
+import sys
 import os
 import pandas as pd
 import numpy as np
+
+dry_run = False
+if len(sys.argv) == 2:
+    if sys.argv[1] in [1, "1", "True", "true", "T", "t", "yes", "Y", "Yes"]:
+        dry_run = True
+        print "Running dry run..."
 
 
 if os.environ.get('USER') == "vagrant":
@@ -142,7 +149,7 @@ multiagency_id_list = list(set(ancillary_04_df.loc[~ancillary_04_df["Secondary a
 # -----------------------------------------------------------------------------
 
 
-def build_case(case_id, treatment, control):
+def build_case(case_id, treatment, control, dry_run=False):
     case_df = data_df.copy(deep=True)
 
     case_df.loc[treatment, 'treatment'] = 1
@@ -151,7 +158,8 @@ def build_case(case_id, treatment, control):
     case_df = case_df.loc[case_df['treatment'] != -1]
 
     case_out = "{0}/data_prep/analysis_cases/{1}_data.csv".format(repo_dir, case_id)
-    case_df.to_csv(case_out, index=False, encoding='utf-8')
+    if not dry_run:
+        case_df.to_csv(case_out, index=False, encoding='utf-8')
 
     stats = {}
     stats['treatment_count'] = sum(treatment)
@@ -169,7 +177,7 @@ def build_case(case_id, treatment, control):
 print "Running M1"
 m1t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
 m1c = (data_df['type'] == 'rand')
-m1_stats = build_case('m1', m1t, m1c)
+m1_stats = build_case('m1', m1t, m1c, dry_run=dry_run)
 print m1_stats
 
 
@@ -181,7 +189,7 @@ print m1_stats
 print "Running M2"
 m2t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
 m2c = (data_df['type'] == 'rand')
-m2_stats = build_case('m2', m2t, m2c)
+m2_stats = build_case('m2', m2t, m2c, dry_run=dry_run)
 print m2_stats
 
 
@@ -193,7 +201,7 @@ print m2_stats
 print "Running M3"
 m3t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
 m3c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(land_id_list))
-m3_stats = build_case('m3', m3t, m3c)
+m3_stats = build_case('m3', m3t, m3c, dry_run=dry_run)
 print m3_stats
 
 
@@ -205,7 +213,7 @@ print m3_stats
 print "Running M4"
 m4t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
 m4c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(bio_id_list))
-m4_stats = build_case('m4', m4t, m4c)
+m4_stats = build_case('m4', m4t, m4c, dry_run=dry_run)
 print m4_stats
 
 
@@ -222,7 +230,7 @@ m5t = ((data_df['type'] == 'prog')
 m5c = ((data_df['type'] == 'land')
        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
        & ~(data_df['gef_id'].isin(multicountry_id_list)))
-m5_stats = build_case('m5', m5t, m5c)
+m5_stats = build_case('m5', m5t, m5c, dry_run=dry_run)
 print m5_stats
 
 
@@ -239,7 +247,7 @@ m6t = ((data_df['type'] == 'prog')
 m6c = ((data_df['type'] == 'bio')
        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
        & ~(data_df['gef_id'].isin(multicountry_id_list)))
-m6_stats = build_case('m6', m6t, m6c)
+m6_stats = build_case('m6', m6t, m6c, dry_run=dry_run)
 print m6_stats
 
 
@@ -256,7 +264,7 @@ m7t = ((data_df['type'] == 'prog')
 m7c = ((data_df['type'] == 'land')
        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
        & ~(data_df['gef_id'].isin(multiagency_id_list)))
-m7_stats = build_case('m7', m7t, m7c)
+m7_stats = build_case('m7', m7t, m7c, dry_run=dry_run)
 print m7_stats
 
 
@@ -273,7 +281,7 @@ m8t = ((data_df['type'] == 'prog')
 m8c = ((data_df['type'] == 'bio')
        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
        & ~(data_df['gef_id'].isin(multiagency_id_list)))
-m8_stats = build_case('m8', m8t, m8c)
+m8_stats = build_case('m8', m8t, m8c, dry_run=dry_run)
 print m8_stats
 
 
@@ -289,7 +297,7 @@ m9t = ((data_df['type'] == 'prog')
 m9c = ((data_df['type'] == 'prog')
        & (data_df['gef_id'].isin(land_id_list))
        & ~(data_df['gef_id'].isin(multicountry_id_list)))
-m9_stats = build_case('m9', m9t, m9c)
+m9_stats = build_case('m9', m9t, m9c, dry_run=dry_run)
 print m9_stats
 
 
@@ -305,7 +313,7 @@ m10t = ((data_df['type'] == 'prog')
 m10c = ((data_df['type'] == 'prog')
         & (data_df['gef_id'].isin(bio_id_list))
         & ~(data_df['gef_id'].isin(multicountry_id_list)))
-m10_stats = build_case('m10', m10t, m10c)
+m10_stats = build_case('m10', m10t, m10c, dry_run=dry_run)
 print m10_stats
 
 
@@ -321,7 +329,7 @@ m11t = ((data_df['type'] == 'prog')
 m11c = ((data_df['type'] == 'prog')
         & (data_df['gef_id'].isin(land_id_list))
         & ~(data_df['gef_id'].isin(multiagency_id_list)))
-m11_stats = build_case('m11', m11t, m11c)
+m11_stats = build_case('m11', m11t, m11c, dry_run=dry_run)
 print m11_stats
 
 
@@ -337,6 +345,6 @@ m12t = ((data_df['type'] == 'prog')
 m12c = ((data_df['type'] == 'prog')
         & (data_df['gef_id'].isin(bio_id_list))
         & ~(data_df['gef_id'].isin(multiagency_id_list)))
-m12_stats = build_case('m12', m12t, m12c)
+m12_stats = build_case('m12', m12t, m12c, dry_run=dry_run)
 print m12_stats
 
