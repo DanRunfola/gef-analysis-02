@@ -6,8 +6,8 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m4_data.csv", 
-                     check.names = FALSE, 
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m4_data.csv",
+                     check.names = FALSE,
                      stringsAsFactors=FALSE)
 
 
@@ -54,7 +54,7 @@ t <- geoML(dta=full.dta,
            top.rep=c("GEF_ID", "Title"),
            tree.ctrl = c(20,500),
            col.invert = FALSE,
-           tree.cnt = 10000
+           tree.cnt = 1000001
 )
 
 

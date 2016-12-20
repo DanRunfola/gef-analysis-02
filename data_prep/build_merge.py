@@ -26,6 +26,11 @@ bio_csv = "{0}/raw_data/biodiversity_treatment.csv".format(repo_dir)
 bio_df = read_csv(bio_csv)
 bio_df['type'] = 'bio'
 
+# external biodiversity (treatment)
+ext_bio_csv = "{0}/raw_data/merge_gef_external_bio.csv".format(repo_dir)
+ext_bio_df = read_csv(ext_bio_csv)
+ext_bio_df['type'] = 'ext_bio'
+
 
 # land degradation (treatment)
 land_csv = "{0}/raw_data/landdegradation_treatment.csv".format(repo_dir)
@@ -63,8 +68,12 @@ rand_df = rand_df.merge(rand_coord_df[['id', 'latitude', 'longitude']], on='id')
 
 
 # concat all data
+# merged_df = pd.concat([bio_df, ext_bio_df, land_df, mfa_df, prog_df, rand_df])
 merged_df = pd.concat([bio_df, land_df, mfa_df, prog_df, rand_df])
 
+col_first = ['gef_id', 'type', 'id', 'SP_ID', 'longitude', 'latitude']
+col_last = [i for i in list(merged_df.columns) if i not in col_first]
+merged_df = merged_df[col_first + col_last]
 
 # add iba field
 merged_gdf = gpd.GeoDataFrame(merged_df)

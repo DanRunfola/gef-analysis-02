@@ -40,7 +40,15 @@ data_raw_df['treatment'] = -1
 # add gef_id of -1 to random control points
 # so we can match on field without nan errors
 data_raw_df.loc[data_raw_df['type'] == 'rand', 'gef_id'] = -1
-data_raw_df['gef_id'] = data_raw_df['gef_id'].astype('int').astype('str')
+
+def clean_gef_id(val):
+    try:
+        return str(int(val))
+    except:
+        return -999
+
+data_raw_df['gef_id'] = data_raw_df['gef_id'].apply(lambda z: clean_gef_id(z))
+data_raw_df = data_raw_df.loc[data_raw_df['gef_id'] != -999]
 
 
 # load ancillary data
@@ -98,11 +106,12 @@ land_id_list_03 = list(ancillary_03_df.loc[clean_land_matches, 'GEF_ID']
 # combine different land id lists
 land_id_list = land_id_list_00 + land_id_list_01 + land_id_list_02 + land_id_list_03
 land_id_list = list(set(land_id_list))
+print 'land id count: {0}'.format(len(land_id_list))
 
 # -------------------------------------
 
 # check geocoded land degradation
-bio_id_list_00 = list(data_df.loc[data_df['type'] == 'bio', 'gef_id'])
+bio_id_list_00 = list(data_df.loc[data_df['type'].isin(['bio', 'ext_bio']), 'gef_id'])
 
 
 # check GEF project records (if any column contains "BD")
@@ -133,6 +142,7 @@ bio_id_list_03 = list(ancillary_03_df.loc[clean_bio_matches, 'GEF_ID']
 # combine different land id lists
 bio_id_list = bio_id_list_00 + bio_id_list_01 + bio_id_list_02 + bio_id_list_03
 bio_id_list = list(set(bio_id_list))
+print 'bio id count: {0}'.format(len(bio_id_list))
 
 # -------------------------------------
 
@@ -146,6 +156,10 @@ multiagency_id_list = list(set(ancillary_04_df.loc[~ancillary_04_df["Secondary a
 data_df['multicountry'] = [int(i) for i in data_df['gef_id'].isin(multicountry_id_list)]
 data_df['multiagency'] = [int(i) for i in data_df['gef_id'].isin(multiagency_id_list)]
 
+data_df.loc[data_df['type'] == 'rand', 'multicountry'] = np.random.randint(2, size=len(data_df['type'] == 'rand'))
+data_df.loc[data_df['type'] == 'rand', 'multiagency'] = np.random.randint(2, size=len(data_df['type'] == 'rand'))
+
+
 # -------------------------------------
 
 data_df_out = "{0}/data_prep/analysis_cases/base_data.csv".format(repo_dir)
@@ -157,21 +171,17 @@ data_df.to_csv(data_df_out, index=False, encoding='utf-8')
 
 def build_case(case_id, treatment, control, dry_run=False):
     case_df = data_df.copy(deep=True)
-
+    case_df['treatment'] = -1
     case_df.loc[treatment, 'treatment'] = 1
     case_df.loc[control, 'treatment'] = 0
-
     case_df = case_df.loc[case_df['treatment'] != -1]
-
     case_out = "{0}/data_prep/analysis_cases/{1}_data.csv".format(repo_dir, case_id)
     if not dry_run:
         case_df.to_csv(case_out, index=False, encoding='utf-8')
-
     stats = {}
     stats['treatment_count'] = sum(treatment)
     stats['control_count'] = sum(control)
     stats['total_count'] = len(case_df)
-
     return stats
 
 
@@ -180,7 +190,7 @@ def build_case(case_id, treatment, control, dry_run=False):
 #   Treatment:  Programmatic w/ LD objectives
 #   Control:    Null Case Comparisons
 
-print "Running M1"
+print "Running Prog M1"
 m1t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
 m1c = (data_df['type'] == 'rand')
 m1_stats = build_case('m1', m1t, m1c, dry_run=dry_run)
@@ -192,7 +202,7 @@ print m1_stats
 #   Treatment:  Programmatic w/ Biodiversity objectives
 #   Control:    Null Case Comparisons
 
-print "Running M2"
+print "Running Prog M2"
 m2t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
 m2c = (data_df['type'] == 'rand')
 m2_stats = build_case('m2', m2t, m2c, dry_run=dry_run)
@@ -204,7 +214,7 @@ print m2_stats
 #   Treatment:  Programmatic w/ LD objectives
 #   Control:    MFA w/ LD objectives
 
-print "Running M3"
+print "Running Prog M3"
 m3t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
 m3c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(land_id_list))
 m3_stats = build_case('m3', m3t, m3c, dry_run=dry_run)
@@ -216,7 +226,7 @@ print m3_stats
 #   Treatment:  Programmatic w/ Biodiversity objectives
 #   Control:    MFA w/ Biodiversity objectives
 
-print "Running M4"
+print "Running Prog M4"
 m4t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
 m4c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(bio_id_list))
 m4_stats = build_case('m4', m4t, m4c, dry_run=dry_run)
@@ -225,32 +235,15 @@ print m4_stats
 
 # -----------------
 # (M5)
-#   Treatment:  Programmatic multi-country w/ LD objectives
-#   Control:    Non-programmatic single-country w/ LD objectives
-#               (aka: LD single-country)
-
-print "Running M5"
-m5t = ((data_df['type'] == 'prog')
-       & (data_df['gef_id'].isin(land_id_list))
-       & (data_df['gef_id'].isin(multicountry_id_list)))
-m5c = ((data_df['type'] == 'land')
-       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
-       & ~(data_df['gef_id'].isin(multicountry_id_list)))
-m5_stats = build_case('m5', m5t, m5c, dry_run=dry_run)
-print m5_stats
-
-
-# -----------------
-# (M6)
 #   Treatment:  Programmatic multi-country w/ Biodiversity objectives
 #   Control:    Non-programmatic single-country w/ Biodiversity objectives
 #               (aka: Biodiversity single-country)
 
-print "Running M6"
+print "Running Prog M5"
 m6t = ((data_df['type'] == 'prog')
        & (data_df['gef_id'].isin(bio_id_list))
        & (data_df['gef_id'].isin(multicountry_id_list)))
-m6c = ((data_df['type'] == 'bio')
+m6c = ((data_df['type'].isin(['bio', 'ext_bio']))
        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
        & ~(data_df['gef_id'].isin(multicountry_id_list)))
 m6_stats = build_case('m6', m6t, m6c, dry_run=dry_run)
@@ -258,20 +251,32 @@ print m6_stats
 
 
 # -----------------
-# (M7)
-#   Treatment:  Programmatic multi-agency w/ LD objectives
-#   Control:    Non-programmatic single-agency w/ LD objectives
-#               (aka: LD single-agency)
+# (M6)
+#   Treatment:  Programmatic w/ LD objectives
+#   Control:    Null Case Comparisons with random multicountry binary
 
-print "Running M7"
+print "Running Prog M6"
+m6t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
+m6c = (data_df['type'] == 'rand') & (data_df['multicountry'] == 1)
+m6_stats = build_case('m6', m6t, m6c, dry_run=dry_run)
+print m6_stats
+
+
+# -----------------
+# (M7)
+#   Treatment:  Programmatic multi-country w/ Biodiversity objectives
+#   Control:    Programmatic single-country w/ Biodiversity objectives
+
+print "Running Prog M7"
 m7t = ((data_df['type'] == 'prog')
-       & (data_df['gef_id'].isin(land_id_list))
-       & (data_df['gef_id'].isin(multiagency_id_list)))
-m7c = ((data_df['type'] == 'land')
-       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
-       & ~(data_df['gef_id'].isin(multiagency_id_list)))
+        & (data_df['gef_id'].isin(bio_id_list))
+        & (data_df['gef_id'].isin(multicountry_id_list)))
+m7c = ((data_df['type'] == 'prog')
+        & (data_df['gef_id'].isin(bio_id_list))
+        & ~(data_df['gef_id'].isin(multicountry_id_list)))
 m7_stats = build_case('m7', m7t, m7c, dry_run=dry_run)
 print m7_stats
+
 
 
 # -----------------
@@ -280,77 +285,81 @@ print m7_stats
 #   Control:    Non-programmatic single-agency w/ Biodiversity objectives
 #               (aka: Biodiversity single-agency)
 
-print "Running M8"
+print "Running Prog M8"
 m8t = ((data_df['type'] == 'prog')
        & (data_df['gef_id'].isin(bio_id_list))
        & (data_df['gef_id'].isin(multiagency_id_list)))
-m8c = ((data_df['type'] == 'bio')
+m8c = ((data_df['type'].isin(['bio', 'ext_bio']))
        & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
        & ~(data_df['gef_id'].isin(multiagency_id_list)))
 m8_stats = build_case('m8', m8t, m8c, dry_run=dry_run)
 print m8_stats
 
 
+
 # -----------------
 # (M9)
-#   Treatment:  Programmatic multi-country w/ LD objectives
-#   Control:    Programmatic single-country w/ LD objectives
+#   Treatment:  Programmatic w/ LD objectives
+#   Control:    Null Case Comparisons with random multiagency binary
 
-print "Running M9"
-m9t = ((data_df['type'] == 'prog')
-       & (data_df['gef_id'].isin(land_id_list))
-       & (data_df['gef_id'].isin(multicountry_id_list)))
-m9c = ((data_df['type'] == 'prog')
-       & (data_df['gef_id'].isin(land_id_list))
-       & ~(data_df['gef_id'].isin(multicountry_id_list)))
+print "Running Prog M9"
+m9t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
+m9c = (data_df['type'] == 'rand') & (data_df['multiagency'] == 1)
 m9_stats = build_case('m9', m9t, m9c, dry_run=dry_run)
 print m9_stats
 
 
 # -----------------
 # (M10)
-#   Treatment:  Programmatic multi-country w/ Biodiversity objectives
-#   Control:    Programmatic single-country w/ Biodiversity objectives
+#   Treatment:  Programmatic w/ Bio objectives
+#   Control:    Null Case Comparisons with random multiagency binary
 
-print "Running M10"
-m10t = ((data_df['type'] == 'prog')
-        & (data_df['gef_id'].isin(bio_id_list))
-        & (data_df['gef_id'].isin(multicountry_id_list)))
-m10c = ((data_df['type'] == 'prog')
-        & (data_df['gef_id'].isin(bio_id_list))
-        & ~(data_df['gef_id'].isin(multicountry_id_list)))
+print "Running Prog M10"
+m10t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
+m10c = (data_df['type'] == 'rand') & (data_df['multiagency'] == 1)
 m10_stats = build_case('m10', m10t, m10c, dry_run=dry_run)
 print m10_stats
 
 
-# -----------------
-# (M11)
-#   Treatment:  Programmatic multi-agency w/ LD objectives
-#   Control:    Programmatic single-agency w/ LD objectives
-
-print "Running M11"
-m11t = ((data_df['type'] == 'prog')
-        & (data_df['gef_id'].isin(land_id_list))
-        & (data_df['gef_id'].isin(multiagency_id_list)))
-m11c = ((data_df['type'] == 'prog')
-        & (data_df['gef_id'].isin(land_id_list))
-        & ~(data_df['gef_id'].isin(multiagency_id_list)))
-m11_stats = build_case('m11', m11t, m11c, dry_run=dry_run)
-print m11_stats
+# =====================================
 
 
 # -----------------
-# (M12)
-#   Treatment:  Programmatic multi-agency w/ Biodiversity objectives
-#   Control:    Programmatic single-agency w/ Biodiversity objectives
+# (M1)
+#   Treatment:  Biodiversity projects
+#   Control:    Null Case Comparisons
 
-print "Running M12"
-m12t = ((data_df['type'] == 'prog')
-        & (data_df['gef_id'].isin(bio_id_list))
-        & (data_df['gef_id'].isin(multiagency_id_list)))
-m12c = ((data_df['type'] == 'prog')
-        & (data_df['gef_id'].isin(bio_id_list))
-        & ~(data_df['gef_id'].isin(multiagency_id_list)))
-m12_stats = build_case('m12', m12t, m12c, dry_run=dry_run)
-print m12_stats
+print "Running Bio M1"
+bm1t = (data_df['type'].isin(['bio', 'ext_bio']))
+bm1c = (data_df['type'] == 'rand')
+bm1_stats = build_case('bm1', bm1t, bm1c, dry_run=dry_run)
+print bm1_stats
+
+
+# -----------------
+# (M2)
+#   Treatment:  Biodiversity projects
+#   Control:    Land degradation projects
+
+print "Running Bio M2"
+bm2t = (data_df['type'].isin(['bio', 'ext_bio']))
+bm2c = (data_df['type'] == 'land')
+bm2_stats = build_case('bm2', bm2t, bm2c, dry_run=dry_run)
+print bm2_stats
+
+
+# -----------------
+# (M3)
+#   Treatment:  Biodiversity projects
+#   Control:    Null Case Comparisons
+
+print "Running Bio M3"
+bm3t = (data_df['type'].isin(['bio', 'ext_bio']))
+bm3c = (data_df['type'] == 'rand')
+bm3_stats = build_case('bm3', bm3t, bm3c, dry_run=dry_run)
+print bm3_stats
+
+
+
+
 
