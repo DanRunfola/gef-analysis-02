@@ -1,6 +1,4 @@
-
 Treatment Cases:
-T dim: 53
-
+53
 Control Cases:
-C dim: 175
+175
