@@ -33,8 +33,6 @@ full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
 full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
 
 
-print(full.dta$tot.forest.km.outcome)
-
 
 # -----------------------------------------------------------------------------
 
@@ -72,7 +70,7 @@ out_path = "/vagrant/results/m3b/"
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ LD"),
            ctrl=c(Vars, VarNames),
-           outcome=c("tot.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
+           outcome=c("chg.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
            out_path=out_path,
            file.prefix="FC_Hansen",
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
