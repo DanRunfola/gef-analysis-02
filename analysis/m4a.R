@@ -7,8 +7,9 @@ file.remove(file.path(path, list.files(path)))
 source("/home/vagrant/geoML/geoML.R")
 
 full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m4_data.csv",
-                     check.names = FALSE,
-                     stringsAsFactors=FALSE)
+                     check.names = FALSE, stringsAsFactors=FALSE)
+
+# -----------------------------------------------------------------------------
 
 
 # Define control variables
@@ -49,12 +50,13 @@ t <- geoML(dta=full.dta,
            kvar=c("v4composites_calibrated.2002.mean","treecover2000.na.mean",
                   "ltdr_yearly_ndvi_mean.2002.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=0.25,
+           caliper=0.5,
            counterfactual.name = "MFA w/ Bio",
            top.rep=c("GEF_ID", "Title"),
            tree.ctrl = c(20,500),
+           tree.cex = 0.25,
            col.invert = FALSE,
-           tree.cnt = 1000001
+           tree.cnt = 100001
 )
 
 

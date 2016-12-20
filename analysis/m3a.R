@@ -5,15 +5,24 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv", stringsAsFactors=FALSE)
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv",
+                     check.names=FALSE, stringsAsFactors=FALSE)
 
-full.dta$GEF.Project.Grant.CEO.endorse.stage <- gsub(",","",full.dta$GEF.Project.Grant.CEO.endorse.stage)
-full.dta$GEF.Project.Grant.CEO.endorse.stage <- as.numeric(as.character(full.dta$GEF.Project.Grant.CEO.endorse.stage))
 
-full.dta$Cofinance.CEO.endorse.stage <- gsub(",","",full.dta$Cofinance.CEO.endorse.stage)
-full.dta$Cofinance.CEO.endorse.stage <- as.numeric(as.character(full.dta$Cofinance.CEO.endorse.stage))
+# -----------------------------------------------------------------------------
 
-full.dta <- full.dta[!is.na(full.dta$GEF.Project.Grant.CEO.endorse.stage),]
+
+full.dta$'GEF Project Grant CEO endorse stage' <- gsub(",","",full.dta$'GEF Project Grant CEO endorse stage')
+full.dta$'GEF Project Grant CEO endorse stage' <- as.numeric(as.character(full.dta$'GEF Project Grant CEO endorse stage'))
+
+full.dta$'Cofinance CEO endorse stage' <- gsub(",","",full.dta$'Cofinance CEO endorse stage')
+full.dta$'Cofinance CEO endorse stage' <- as.numeric(as.character(full.dta$'Cofinance CEO endorse stage'))
+
+full.dta <- full.dta[!is.na(full.dta$'GEF Project Grant CEO endorse stage'),]
+
+
+# -----------------------------------------------------------------------------
+
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
@@ -28,7 +37,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
            "ltdr_yearly_ndvi_mean.2002.mean",
-	   "GEF.Project.Grant.CEO.endorse.stage"
+	         "GEF.Project.Grant.CEO.endorse.stage"
 	   )
 
 VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
@@ -55,11 +64,12 @@ t <- geoML(dta=full.dta,
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=5.0,
+           caliper=1.5,
            counterfactual.name = "MFA w/ LD",
            tree.ctrl = c(20,500),
+           tree.cex = 0.25,
            col.invert = FALSE,
-           tree.cnt = 1000001
+           tree.cnt = 100001
 )
 
 

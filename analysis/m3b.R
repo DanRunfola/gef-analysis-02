@@ -5,30 +5,39 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv", check.names = FALSE)
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv",
+                     check.names=FALSE, stringsAsFactors=FALSE)
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv", stringsAsFactors=FALSE)
 
-full.dta$GEF.Project.Grant.CEO.endorse.stage <- gsub(",","",full.dta$GEF.Project.Grant.CEO.endorse.stage)
-full.dta$GEF.Project.Grant.CEO.endorse.stage <- as.numeric(as.character(full.dta$GEF.Project.Grant.CEO.endorse.stage))
+# -----------------------------------------------------------------------------
 
-full.dta$Cofinance.CEO.endorse.stage <- gsub(",","",full.dta$Cofinance.CEO.endorse.stage)
-full.dta$Cofinance.CEO.endorse.stage <- as.numeric(as.character(full.dta$Cofinance.CEO.endorse.stage))
 
-full.dta <- full.dta[!is.na(full.dta$GEF.Project.Grant.CEO.endorse.stage),]
+full.dta$'GEF Project Grant CEO endorse stage' <- gsub(",","",full.dta$'GEF Project Grant CEO endorse stage')
+full.dta$'GEF Project Grant CEO endorse stage' <- as.numeric(as.character(full.dta$'GEF Project Grant CEO endorse stage'))
+
+full.dta$'Cofinance CEO endorse stage' <- gsub(",","",full.dta$'Cofinance CEO endorse stage')
+full.dta$'Cofinance CEO endorse stage' <- as.numeric(as.character(full.dta$'Cofinance CEO endorse stage'))
+
+full.dta <- full.dta[!is.na(full.dta$'GEF Project Grant CEO endorse stage'),]
+
 
 
 #Calculate outcome
-print(names(full.dta))
-tot.forest.percent <- (full.dta$"X00forest25.na.sum" -
+tot.forest.percent <- (full.dta$'00forest25.na.sum' -
                         rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count
 
 
-
 #Convert to square kilometers of forest cover
-full.dta$tot.forest.km.outcome <- as.vector(tot.forest.percent) * (pi * 10^2)
+full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
+
+full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
+
 
 print(full.dta$tot.forest.km.outcome)
+
+
+# -----------------------------------------------------------------------------
+
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
@@ -69,9 +78,10 @@ t <- geoML(dta=full.dta,
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=2.0,
+           caliper=1.5,
            counterfactual.name = "MFA w/ LD",
            tree.ctrl = c(20,500),
-           col.invert = FALSE,
-           tree.cnt = 1000001
+           tree.cex = 0.25,
+           col.invert = TRUE,
+           tree.cnt = 100001
 )
