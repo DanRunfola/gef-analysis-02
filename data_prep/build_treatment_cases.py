@@ -162,6 +162,13 @@ data_df.loc[data_df['type'] == 'rand', 'multiagency'] = np.random.randint(2, siz
 
 # -------------------------------------
 
+# programmatic id list
+
+prog_id_list = list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))
+
+
+# -------------------------------------
+
 data_df_out = "{0}/data_prep/analysis_cases/base_data.csv".format(repo_dir)
 data_df.to_csv(data_df_out, index=False, encoding='utf-8')
 
@@ -216,7 +223,8 @@ print m2_stats
 
 print "Running Prog M3"
 m3t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
-m3c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(land_id_list))
+m3c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(land_id_list)
+       & ~(data_df['gef_id'].isin(prog_id_list)))
 m3_stats = build_case('m3', m3t, m3c, dry_run=dry_run)
 print m3_stats
 
@@ -228,7 +236,8 @@ print m3_stats
 
 print "Running Prog M4"
 m4t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
-m4c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(bio_id_list))
+m4c = (data_df['type'] == 'mfa') & (data_df['gef_id'].isin(bio_id_list)
+       & ~(data_df['gef_id'].isin(prog_id_list)))
 m4_stats = build_case('m4', m4t, m4c, dry_run=dry_run)
 print m4_stats
 
@@ -244,7 +253,7 @@ m6t = ((data_df['type'] == 'prog')
        & (data_df['gef_id'].isin(bio_id_list))
        & (data_df['gef_id'].isin(multicountry_id_list)))
 m6c = ((data_df['type'].isin(['bio', 'ext_bio']))
-       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
+       & ~(data_df['gef_id'].isin(prog_id_list))
        & ~(data_df['gef_id'].isin(multicountry_id_list)))
 m6_stats = build_case('m6', m6t, m6c, dry_run=dry_run)
 print m6_stats
@@ -255,7 +264,7 @@ print m6_stats
 #   Treatment:  Programmatic w/ LD objectives
 #   Control:    Null Case Comparisons with random multicountry binary
 
-print "Running Prog M6"
+print "Running Prog M6*"
 m6t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
 m6c = (data_df['type'] == 'rand') & (data_df['multicountry'] == 1)
 m6_stats = build_case('m6', m6t, m6c, dry_run=dry_run)
@@ -290,7 +299,7 @@ m8t = ((data_df['type'] == 'prog')
        & (data_df['gef_id'].isin(bio_id_list))
        & (data_df['gef_id'].isin(multiagency_id_list)))
 m8c = ((data_df['type'].isin(['bio', 'ext_bio']))
-       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))))
+       & ~(data_df['gef_id'].isin(prog_id_list))
        & ~(data_df['gef_id'].isin(multiagency_id_list)))
 m8_stats = build_case('m8', m8t, m8c, dry_run=dry_run)
 print m8_stats
@@ -302,7 +311,7 @@ print m8_stats
 #   Treatment:  Programmatic w/ LD objectives
 #   Control:    Null Case Comparisons with random multiagency binary
 
-print "Running Prog M9"
+print "Running Prog M9*"
 m9t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
 m9c = (data_df['type'] == 'rand') & (data_df['multiagency'] == 1)
 m9_stats = build_case('m9', m9t, m9c, dry_run=dry_run)
@@ -314,7 +323,7 @@ print m9_stats
 #   Treatment:  Programmatic w/ Bio objectives
 #   Control:    Null Case Comparisons with random multiagency binary
 
-print "Running Prog M10"
+print "Running Prog M10*"
 m10t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
 m10c = (data_df['type'] == 'rand') & (data_df['multiagency'] == 1)
 m10_stats = build_case('m10', m10t, m10c, dry_run=dry_run)
@@ -329,7 +338,7 @@ print m10_stats
 print "Running Prog M11"
 m11t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
 m11c = ((data_df['type'].isin(['land']))
-       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id'])))))
+       & ~(data_df['gef_id'].isin(prog_id_list)))
 m11_stats = build_case('m11', m11t, m11c, dry_run=dry_run)
 print m11_stats
 
@@ -342,7 +351,7 @@ print m11_stats
 print "Running Prog M12"
 m12t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
 m12c = ((data_df['type'].isin(['bio', 'ext_bio']))
-       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id'])))))
+       & ~(data_df['gef_id'].isin(prog_id_list)))
 m12_stats = build_case('m12', m12t, m12c, dry_run=dry_run)
 print m12_stats
 
@@ -369,7 +378,8 @@ print bm1_stats
 
 print "Running Bio M2"
 bm2t = (data_df['type'].isin(['bio', 'ext_bio']))
-bm2c = (data_df['type'] == 'land')
+bm2c = ((data_df['type'] == 'land')
+       & ~(data_df['gef_id'].isin(prog_id_list)))
 bm2_stats = build_case('bm2', bm2t, bm2c, dry_run=dry_run)
 print bm2_stats
 
