@@ -321,6 +321,32 @@ m10_stats = build_case('m10', m10t, m10c, dry_run=dry_run)
 print m10_stats
 
 
+# -----------------
+# (M11)
+#   Treatment:  Programmatic projects w/ LD objectives
+#   Control:    Non-Programmatic projects w/ LD objectives
+
+print "Running Prog M11"
+m11t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
+m11c = ((data_df['type'].isin(['land']))
+       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id'])))))
+m11_stats = build_case('m11', m11t, m11c, dry_run=dry_run)
+print m11_stats
+
+
+# -----------------
+# (M12)
+#   Treatment:  Programmatic projects w/ Bio objectives
+#   Control:    Non-Programmatic projects w/ Bio objectives
+
+print "Running Prog M12"
+m12t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
+m12c = ((data_df['type'].isin(['bio', 'ext_bio']))
+       & ~(data_df['gef_id'].isin(list(set(data_df.loc[data_df['type'] == "prog", 'gef_id'])))))
+m12_stats = build_case('m12', m12t, m12c, dry_run=dry_run)
+print m12_stats
+
+
 # =====================================
 
 
