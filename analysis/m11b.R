@@ -59,5 +59,5 @@ t <- geoML(dta=full.dta,
            counterfactual.name = "Programmatic single-agency w/ LD", #add control case ZLV
            tree.ctrl = c(2,10),
            col.invert = FALSE,
-           tree.cnt = 1000
+           tree.cnt = 10000
 )

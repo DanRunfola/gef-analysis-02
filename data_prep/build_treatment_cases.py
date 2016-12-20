@@ -64,9 +64,6 @@ data_df = data_df.merge(ancillary_04_df,
                         left_on='gef_id', right_on='GEF_ID',
                         how='left')
 
-data_df_out = "{0}/data_prep/analysis_cases/base_data.csv".format(repo_dir)
-data_df.to_csv(data_df_out, index=False, encoding='utf-8')
-
 # -------------------------------------
 
 land_id_list_00 = list(data_df.loc[data_df['type'] == 'land', 'gef_id'])
@@ -144,6 +141,15 @@ multicountry_id_list = list(set(ancillary_04_df.loc[ancillary_04_df["Country"].i
 
 # multi agency
 multiagency_id_list = list(set(ancillary_04_df.loc[~ancillary_04_df["Secondary agency(ies)"].isnull(), 'GEF_ID'].astype('int').astype('str')))
+
+
+data_df['multicountry'] = [int(i) for i in data_df['gef_id'].isin(multicountry_id_list)]
+data_df['multiagency'] = [int(i) for i in data_df['gef_id'].isin(multiagency_id_list)]
+
+# -------------------------------------
+
+data_df_out = "{0}/data_prep/analysis_cases/base_data.csv".format(repo_dir)
+data_df.to_csv(data_df_out, index=False, encoding='utf-8')
 
 
 # -----------------------------------------------------------------------------

@@ -1,1 +1,4 @@
 .vagrant
+.Rhistory
+*_rf.csv
+raw_data/wdpa/shps/*
