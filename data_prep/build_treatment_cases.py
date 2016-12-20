@@ -249,14 +249,14 @@ print m4_stats
 #               (aka: Biodiversity single-country)
 
 print "Running Prog M5"
-m6t = ((data_df['type'] == 'prog')
+m5t = ((data_df['type'] == 'prog')
        & (data_df['gef_id'].isin(bio_id_list))
        & (data_df['gef_id'].isin(multicountry_id_list)))
-m6c = ((data_df['type'].isin(['bio', 'ext_bio']))
+m5c = ((data_df['type'].isin(['bio', 'ext_bio']))
        & ~(data_df['gef_id'].isin(prog_id_list))
        & ~(data_df['gef_id'].isin(multicountry_id_list)))
-m6_stats = build_case('m6', m6t, m6c, dry_run=dry_run)
-print m6_stats
+m5_stats = build_case('m5', m5t, m5c, dry_run=False)
+print m5_stats
 
 
 # -----------------
