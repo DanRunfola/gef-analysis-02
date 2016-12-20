@@ -27,7 +27,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean", 
+           "ltdr_yearly_ndvi_mean.2002.mean",
 	   "GEF.Project.Grant.CEO.endorse.stage"
 	   )
 
@@ -59,7 +59,7 @@ t <- geoML(dta=full.dta,
            counterfactual.name = "MFA w/ LD",
            tree.ctrl = c(20,500),
            col.invert = FALSE,
-           tree.cnt = 10000
+           tree.cnt = 1000001
 )
 
 
