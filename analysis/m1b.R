@@ -13,13 +13,11 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1_data.csv", check.name
 tot.forest.percent <- (full.dta$"00forest25.na.sum" -
                         rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count 
 
-print(names(full.dta))
-print(summary(tot.forest.percent))
-
 
 #Convert to square kilometers of forest cover
-full.dta$tot.forest.km.outcome <- as.vector(tot.forest.percent) * (pi * 10^2)
+full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
 
+full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
 
 
 # Define control variables
@@ -55,16 +53,16 @@ out_path = "/vagrant/results/m1b/"
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ LD"),
            ctrl=c(Vars, VarNames),
-           outcome=c("tot.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
+           outcome=c("chg.forest.km.outcome", "Forest Cover Loss 2000 to 2013 (Sq. km)"),
            out_path=out_path,
            file.prefix="forest_cover",
            kvar=c("v4composites_calibrated.2002.mean","treecover2000.na.mean",
                   "ltdr_yearly_ndvi_mean.2002.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=0.25,
+           caliper=1.0,
            counterfactual.name = "Null Case",
            top.rep=c("GEF_ID", "Title"),
            tree.ctrl = c(20,500),
-           col.invert = FALSE,
-           tree.cnt = 10000
+           col.invert = TRUE,
+           tree.cnt = 100001
 )
