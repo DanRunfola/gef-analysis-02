@@ -176,7 +176,7 @@ data_df.to_csv(data_df_out, index=False, encoding='utf-8')
 # -----------------------------------------------------------------------------
 
 
-def build_case(case_id, treatment, control, dry_run=False):
+def build_case(case_id, treatment, control, dry_run=dry_run):
     case_df = data_df.copy(deep=True)
     case_df['treatment'] = -1
     case_df.loc[treatment, 'treatment'] = 1
@@ -266,7 +266,7 @@ print m6_stats
 
 print "Running Prog M6*"
 m6t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
-m6c = (data_df['type'] == 'rand') & (data_df['multicountry'] == 1)
+m6c = (data_df['type'] == 'rand')
 m6_stats = build_case('m6', m6t, m6c, dry_run=dry_run)
 print m6_stats
 
@@ -313,7 +313,7 @@ print m8_stats
 
 print "Running Prog M9*"
 m9t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(land_id_list))
-m9c = (data_df['type'] == 'rand') & (data_df['multiagency'] == 1)
+m9c = (data_df['type'] == 'rand')
 m9_stats = build_case('m9', m9t, m9c, dry_run=dry_run)
 print m9_stats
 
@@ -325,7 +325,7 @@ print m9_stats
 
 print "Running Prog M10*"
 m10t = (data_df['type'] == 'prog') & (data_df['gef_id'].isin(bio_id_list))
-m10c = (data_df['type'] == 'rand') & (data_df['multiagency'] == 1)
+m10c = (data_df['type'] == 'rand')
 m10_stats = build_case('m10', m10t, m10c, dry_run=dry_run)
 print m10_stats
 
