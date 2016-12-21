@@ -1,11 +1,31 @@
 
-path <- "/vagrant/results/m9a" #change path ZLV
+path <- "/vagrant/results/m6b"
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m9_data.csv", check.names = FALSE) #change input data ZLV
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m6_data.csv",
+                     check.names=FALSE, stringsAsFactors=FALSE)
+
+
+# -----------------------------------------------------------------------------
+
+
+#Calculate outcome
+tot.forest.percent <- (full.dta$'00forest25.na.sum' -
+                        rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count
+
+
+#Convert to square kilometers of forest cover
+full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
+
+full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
+
+
+
+# -----------------------------------------------------------------------------
+
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
@@ -35,23 +55,21 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "NDVI (2002, Unitless)"
 )
 
-out_path = "/vagrant/results/m9a/" #change path ZLV
+out_path = "/vagrant/results/m6b/"
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "Programmatic multi-country w/ LD"), #add treatment case ZLV
+           trt=c("treatment", "Programmatic w/ LD (multi-country control)"),
            ctrl=c(Vars, VarNames),
-           outcome=c("ltdr_yearly_ndvi_mean.2013.mean", "2013 NDVI"),
+           outcome=c("chg.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
            out_path=out_path,
-           file.prefix="NDVI_max",
+           file.prefix="FC_Hansen",
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=2.0,
-           counterfactual.name = "Programmatic single-country w/ LD", #add control case ZLV
-           tree.ctrl = c(2,10),
-           col.invert = FALSE,
-           tree.cnt = 10000
+           caliper=1.5,
+           counterfactual.name = "Null case Comparison",
+           tree.ctrl = c(20,500),
+           tree.cex = 0.25,
+           col.invert = TRUE,
+           tree.cnt = 100001
 )
-
-
-
