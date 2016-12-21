@@ -1,11 +1,11 @@
 
-path <- "/vagrant/results/m6a"
+path <- "/vagrant/results/m10a"
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m6_data.csv",
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m10_data.csv",
                      check.names=FALSE, stringsAsFactors=FALSE)
 
 
@@ -28,7 +28,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean"
+           "ltdr_yearly_ndvi_mean.2002.mean", "multicountry"
 	   )
 
 VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
@@ -42,9 +42,9 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)")
+              "NDVI (2002, Unitless)", "Multi Country")
 
-out_path = "/vagrant/results/m6a/"
+out_path = "/vagrant/results/m10a/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ LD (multi-country control)"),

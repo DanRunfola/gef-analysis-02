@@ -36,8 +36,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean",
-	         "GEF.Project.Grant.CEO.endorse.stage"
+           "ltdr_yearly_ndvi_mean.2002.mean"
 	   )
 
 VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
@@ -51,7 +50,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)", "GEF Grant")
+              "NDVI (2002, Unitless)")
 
 out_path = "/vagrant/results/m12a/"
 
@@ -64,9 +63,9 @@ t <- geoML(dta=full.dta,
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=1.5,
+           caliper=2.5,
            counterfactual.name = "Stand-alone LD (MFA + SFA) multi-country",
-           tree.ctrl = c(20,500),
+           tree.ctrl = c(2,500),
            tree.cex = 0.25,
            col.invert = FALSE,
            tree.cnt = 100001

@@ -416,6 +416,7 @@ case_name = "m12"
 case_t = (
     (data_df['type'] == 'prog')
     & (data_df['gef_id'].isin(land_id_list))
+    & (data_df['gef_id'].isin(multicountry_id_list))
 )
 case_c = (
     (data_df['type'].isin(['land']))
@@ -435,6 +436,7 @@ case_name = "m13"
 case_t = (
     (data_df['type'] == 'prog')
     & (data_df['gef_id'].isin(bio_id_list))
+    & (data_df['gef_id'].isin(multicountry_id_list))
 )
 case_c = (
     (data_df['type'].isin(['bio', 'ext_bio']))
