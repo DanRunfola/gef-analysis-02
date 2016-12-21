@@ -48,7 +48,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
 out_path = "/vagrant/results/mfa1a/"
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "Programmatic w/ Bio (multi-agency control)"),
+           trt=c("treatment", "Land degradation projects"),
            ctrl=c(Vars, VarNames),
            outcome=c("iba_statescore", "IBA State Score"),
            out_path=out_path,

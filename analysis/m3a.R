@@ -1,11 +1,11 @@
 
-path <- "/vagrant/results/m3a"
+path <- "/vagrant/results/m11a"
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m3_data.csv",
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m11_data.csv",
                      check.names=FALSE, stringsAsFactors=FALSE)
 
 
@@ -53,7 +53,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Nightime Lights (2002, Relative)",
               "NDVI (2002, Unitless)", "GEF Grant")
 
-out_path = "/vagrant/results/m3a/"
+out_path = "/vagrant/results/m11a/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ LD"),
@@ -65,7 +65,7 @@ t <- geoML(dta=full.dta,
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
            caliper=1.5,
-           counterfactual.name = "MFA w/ LD",
+           counterfactual.name = "Non-Programmatic w/ LD",
            tree.ctrl = c(20,500),
            tree.cex = 0.25,
            col.invert = FALSE,

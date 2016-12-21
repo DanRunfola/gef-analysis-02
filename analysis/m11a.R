@@ -1,12 +1,12 @@
 
-path <- "/vagrant/results/m11a"
+path <- "/vagrant/results/m7a"
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m11_data.csv",
-                     check.names=FALSE, stringsAsFactors=FALSE)
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m7_data.csv", check.names = FALSE)
+#/vagrant/data_prep/analysis_cases/m3_data.csv
 
 
 # -----------------------------------------------------------------------------
@@ -36,9 +36,9 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean",
-	         "GEF.Project.Grant.CEO.endorse.stage"
-	   )
+           "ltdr_yearly_ndvi_mean.2002.mean", "GEF.Project.Grant.CEO.endorse.stage",
+           "iba_distance"
+)
 
 VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Elevation (m)", "Slope (degrees)",
@@ -51,26 +51,24 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)", "GEF Grant")
+              "NDVI (2002, Unitless)", "GEF Funding",
+              "Distance to IBA"
+)
 
-out_path = "/vagrant/results/m11a/"
+out_path = "/vagrant/results/m7a/"
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "Programmatic w/ LD"),
+           trt=c("treatment", "Programmatic multi-country w/ Bio"),
            ctrl=c(Vars, VarNames),
-           outcome=c("ltdr_yearly_ndvi_mean.2013.mean", "2013 NDVI"),
+           outcome=c("iba_statescore", "IBA State Score"),
            out_path=out_path,
-           file.prefix="NDVI_max",
+           file.prefix="IBA_state",
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
            caliper=1.5,
-           counterfactual.name = "Non-Programmatic w/ LD",
-           tree.ctrl = c(20,500),
-           tree.cex = 0.25,
+           counterfactual.name = "Non-programmatic single-country w/ Bio",
+           tree.ctrl = c(2,10),
            col.invert = FALSE,
            tree.cnt = 100001
 )
-
-
-

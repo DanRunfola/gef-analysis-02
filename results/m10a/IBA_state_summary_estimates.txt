@@ -1,4 +1,0 @@
-Treatment Cases:
-275
-Control Cases:
-5007

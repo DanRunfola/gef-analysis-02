@@ -58,7 +58,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
 out_path = "/vagrant/results/mfa3a/"
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "Programmatic multi-country w/ Bio"),
+           trt=c("treatment", "MFA projects"),
            ctrl=c(Vars, VarNames),
            outcome=c("iba_statescore", "IBA State Score"),
            out_path=out_path,
@@ -67,8 +67,9 @@ t <- geoML(dta=full.dta,
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
            caliper=1.5,
-           counterfactual.name = "Non-programmatic single-country w/ Bio",
-           tree.ctrl = c(2,10),
+           counterfactual.name = "Single Focal Bio",
+           tree.ctrl = c(20,500),
+           tree.cex = 0.25,
            col.invert = FALSE,
            tree.cnt = 100001
 )
