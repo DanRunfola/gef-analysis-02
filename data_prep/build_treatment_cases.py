@@ -162,9 +162,10 @@ data_df.loc[data_df['type'] == 'rand', 'multiagency'] = np.random.randint(2, siz
 
 # -------------------------------------
 
-# programmatic id list
 
 prog_id_list = list(set(data_df.loc[data_df['type'] == "prog", 'gef_id']))
+
+mfa_id_list = list(set(data_df.loc[data_df['type'] == "mfa", 'gef_id']))
 
 
 # -------------------------------------
@@ -191,6 +192,9 @@ def build_case(case_id, treatment, control, dry_run=dry_run):
     stats['total_count'] = len(case_df)
     return stats
 
+
+# =====================================
+# programmatic
 
 # -----------------
 # (M1)
@@ -357,7 +361,7 @@ print m12_stats
 
 
 # =====================================
-
+# biodiversity
 
 # -----------------
 # (M1)
@@ -396,6 +400,42 @@ bm3_stats = build_case('bm3', bm3t, bm3c, dry_run=dry_run)
 print bm3_stats
 
 
+# =====================================
+# multifocal areas
+
+# -----------------
+# (M1)
+#   Treatment:  Land degradation projects
+#   Control:    Null Case Comparisons
+
+print "Running MFA M1"
+mm1t = (data_df['type'].isin(['land']))
+mm1c = (data_df['type'] == 'rand')
+mm1_stats = build_case('mm1', mm1t, mm1c, dry_run=dry_run)
+print mm1_stats
 
 
+# -----------------
+# (M2)
+#   Treatment:  MFA projects
+#   Control:    Null Case Comparisons
+
+print "Running MFA M2"
+mm2t = (data_df['type'].isin(['mfa']))
+mm2c = (data_df['type'] == 'rand')
+mm2_stats = build_case('mm2', mm2t, mm2c, dry_run=dry_run)
+print mm2_stats
+
+
+# -----------------
+# (M3)
+#   Treatment:  MFA projects
+#   Control:    Single Focal Bio
+
+print "Running MFA M3"
+mm3t = (data_df['type'].isin(['mfa']))
+mm3c = ((data_df['type'].isin(['bio', 'ext_bio']))
+       & ~(data_df['gef_id'].isin(prog_id_list + mfa_id_list)))
+mm3_stats = build_case('mm3', mm3t, mm3c, dry_run=dry_run)
+print mm3_stats
 
