@@ -545,3 +545,19 @@ case_c = (
 case_stats = build_case(case_name, case_t, case_c, dry_run=dry_run)
 print case_stats
 
+
+# -----------------
+# Treatment:  MFA projects w/ Bio
+# Control:    Null Case Comparisons
+
+case_name = "mm4"
+case_t = (
+    (data_df['type'].isin(['mfa']))
+    & (data_df['gef_id'].isin(bio_id_list))
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_stats = build_case(case_name, case_t, case_c, dry_run=False)
+print case_stats
+
