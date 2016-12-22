@@ -409,30 +409,11 @@ print case_stats
 
 
 # -----------------
-# Treatment:  Programmatic multi-country w/ LD objectives
-# Control:    Stand-alone LD (MFA + SFA) w/ multi-country designation.
-
-case_name = "m12"
-case_t = (
-    (data_df['type'] == 'prog')
-    & (data_df['gef_id'].isin(land_id_list))
-    & (data_df['gef_id'].isin(multicountry_id_list))
-)
-case_c = (
-    (data_df['type'].isin(['land']))
-    & ~(data_df['gef_id'].isin(prog_id_list))
-    & (data_df['gef_id'].isin(multicountry_id_list))
-)
-case_stats = build_case(case_name, case_t, case_c, dry_run=dry_run)
-print case_stats
-
-
-# -----------------
 # Treatment:  Programmatic multi-country w/ Bio objectives
 # Control:    Stand-alone Bio (MFA + SFA) w/ multi-country designation.
 
 
-case_name = "m13"
+case_name = "m12"
 case_t = (
     (data_df['type'] == 'prog')
     & (data_df['gef_id'].isin(bio_id_list))
