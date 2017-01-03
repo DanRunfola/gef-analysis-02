@@ -37,6 +37,20 @@ cd CausalForest
 # git checkout 'ce49e6cc2c0ffdce28dc2ad4aa17cfa0baab54a2'
 
 
+# currently private repo, needs to be public for auto clone without credentials
+
+# cd ~
+# rm -rf geoValuate
+# git clone https://github.com/itpir/geoValuate.git
+# cd geoValuate
+
+# uncomment following line and edit hash if you
+# want to pull specific version of repo
+# git checkout 'ce49e6cc2c0ffdce28dc2ad4aa17cfa0baab54a2'
+
+
+
+
 # -------------------
 # prep vm with scikit and python
 
@@ -46,10 +60,10 @@ bash Miniconda2-latest-Linux-x86.sh -b
 miniconda2/bin/conda install -y scikit-learn
 sudo apt-get install -y python-pip python-dev
 sudo pip install --upgrade pip
-sudo pip install Cython 
+sudo pip install Cython
 sudo pip install nose
 sudo pip install numpy
-sudo pip install pandas  
+sudo pip install pandas
 sudo apt-get install -y python-scipy
 
 cd CausalForest/scikit-learn
