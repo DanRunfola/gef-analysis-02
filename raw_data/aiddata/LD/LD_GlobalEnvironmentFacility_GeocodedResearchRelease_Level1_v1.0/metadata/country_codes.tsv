@@ -1,0 +1,259 @@
+name	iso2	name_name	name_aiddata_code	name_aiddata_name	name_cow_alpha	name_cow_numeric	name_fao_code	name_fips	name_geonames_id	name_imf_code	name_iso2	name_iso3	name_iso_numeric	name_oecd_code	name_oecd_name	name_un_code	name_wb_code
+Anguilla	AI	Anguilla	8	Anguilla				AV	3573511	312	AI	AIA	660	376	Anguilla	660	AIA
+Montserrat	MS	Montserrat	200	Montserrat				MH	3578097	351	MS	MSR	500	385	Montserrat	500	MSR
+Tokelau		Tokelau	284	Tokelau				TL	4031074			TKL	772	868	Tokelau	772	TKL
+Tuvalu	TV	Tuvalu	133	Tuvalu	TUV	947	227	TV	2110297		TV	TUV	798	872	Tuvalu	798	TUV
+Samoa	WS	Samoa	245	Samoa	WSM	990	244	WS	4034894	862	WS	WSM	882	880	Samoa	882	WSM
+Burundi	BI	Burundi	37	Burundi	BUI	516	29	BY	433561	618	BI	BDI	108	228	Burundi	108	BDI
+Croatia	HR	Croatia	59	Croatia	CRO	344	98	HR	3202326	960	HR	HRV	191	62	Croatia	191	HRV
+Cyprus	CY	Cyprus	61	Cyprus	CYP	352	50	CY	146669	423	CY	CYP	196	30	Cyprus	196	CYP
+Denmark	DK	Denmark	64	Denmark	DEN	390	54	DA	2623032	128	DK	DNK	208	3	Denmark	208	DNK
+Aruba	AW	Aruba	12	Aruba				AA	3577279	314	AW	ABW	533	373	Aruba	533	ABW
+Angola	AO	Angola	7	Angola	ANG	540	7	AO	3351879	614	AO	AGO	24	225	Angola	24	AGO
+Albania	AL	Albania	3	Albania	ALB	339	3	AL	783754	914	AL	ALB	8	71	Albania	8	ALB
+Guernsey	GG	Guernsey						GK	3042362		GG	GGY	831			831	GGY
+Jersey	JE	Jersey						JE	3042142		JE	JEY	832			832	JEY
+Mayotte	YT	Mayotte	190	Mayotte				MF	1024031		YT	MYT	175	258	Mayotte	175	MYT
+Belize	BZ	Belize	24	Belize	BLZ	80	23	BH	3582678	339	BZ	BLZ	84	352	Belize	84	BLZ
+Canada	CA	Canada	40	Canada	CAN	20	33	CA	6251999	156	CA	CAN	124	301	Canada	124	CAN
+Gibraltar	GI	Gibraltar	96	Gibraltar				GI	2411586	823	GI	GIB	292	35	Gibraltar	292	GIB
+Hungary	HU	Hungary	112	Hungary	HUN	310	97	HU	719819	944	HU	HUN	348	75	Hungary	348	HUN
+Ireland	IE	Ireland	122	Ireland	IRE	205	104	EI	2963597	178	IE	IRL	372	21	Ireland	372	IRL
+Jamaica	JM	Jamaica	126	Jamaica	JAM	51	109	JM	3489940	343	JM	JAM	388	354	Jamaica	388	JAM
+Mozambique	MZ	Mozambique	202	Mozambique	MZM	541	144	MZ	1036973	688	MZ	MOZ	508	259	Mozambique	508	MOZ
+Niue	NU	Niue	218	Niue			160	NE	4036232		NU	NIU	570	856	Niue	570	NIU
+Nepal	NP	Nepal	209	Nepal	NEP	790	149	NP	1282988	558	NP	NPL	524	660	Nepal	524	NPL
+Nauru	NR	Nauru	207	Nauru	NAU	970	148	NR	2110425	836	NR	NRU	520	845	Nauru	520	NRU
+Portugal	PT	Portugal	238	Portugal	POR	235	174	PO	2264397	182	PT	PRT	620	9	Portugal	620	PRT
+Qatar	QA	Qatar	240	Qatar	QAT	694	179	QA	289688	453	QA	QAT	634	561	Qatar	634	QAT
+Turkmenistan	TM	Turkmenistan	289	Turkmenistan	TKM	701	213	TX	1218197	925	TM	TKM	795	616	Turkmenistan	795	TKM
+Ukraine	UA	Ukraine	135	Ukraine	UKR	369	230	UP	690791	926	UA	UKR	804	85	Ukraine	804	UKR
+Bulgaria	BG	Bulgaria	35	Bulgaria	BUL	355	27	BU	732800	918	BG	BGR	100	72	Bulgaria	100	BGR
+Barbados	BB	Barbados	21	Barbados	BAR	53	14	BB	3374084	316	BB	BRB	52	329	Barbados	52	BRB
+Botswana	BW	Botswana	30	Botswana	BOT	571	20	BC	933860	616	BW	BWA	72	227	Botswana	72	BWA
+Cameroon	CM	Cameroon	39	Cameroon	CAO	471	32	CM	2233387	622	CM	CMR	120	229	Cameroon	120	CMR
+Brunei	BN	Brunei	4715695	Brunei	BRU	835		BX	1820814	516	BN	BRN	96	725	Brunei	96	BRN
+Netherlands Antilles	AN	Netherlands Antilles	211	Netherlands Antilles				NT		353	AN	ANT	530	361	Netherlands Antilles		ANT
+French Southern Territories	TF	French Southern Territories						FS	1546748		TF	ATF	260				ATF
+Saint Barthelemy	BL	Saint Barthelemy						TB	3578476		BL	BLM	652			652	BLM
+Bermuda	BM	Bermuda	26	Bermuda				BD	3573345	319	BM	BMU	60	331	Bermuda	60	BMU
+Bouvet Island	BV	Bouvet Island						BV	3371123		BV	BVT	74				BVT
+Cocos Islands	CC	Cocos Islands						CK	1547376		CC	CCK	166				CCK
+Cook Islands	CK	Cook Islands	57	Cook Islands			47	CW	1899402	815	CK	COK	184	831	Cook Islands	184	COK
+Czechoslovakia	CS	Czechoslovakia			CZE	315					CS	CSK	200				
+Cuba	CU	Cuba	60	Cuba	CUB	40	49	CU	3562981	928	CU	CUB	192	338	Cuba	192	CUB
+Christmas Island	CX	Christmas Island						KT	2078138		CX	CXR	162				CXR
+Western Sahara	EH	Western Sahara						WI	2461445		EH	ESH	732			732	ESH
+France	FR	France	87	France	FRN	220	68	FR	3017382	132	FR	FRA	250	4	France	250	FRA
+Georgia	GE	Georgia	94	Georgia	GRG	372	73	GG	614540	915	GE	GEO	268	612	Georgia	268	GEO
+Guinea	GN	Guinea	104	Guinea	GUI	438	90	GV	2420477	656	GN	GIN	324	243	Guinea	324	GIN
+Grenada	GD	Grenada	100	Grenada	GRN	55	86	GJ	3580239	328	GD	GRD	308	381	Grenada	308	GRD
+Honduras	HN	Honduras	110	Honduras	HON	91	95	HO	3608932	268	HN	HND	340	351	Honduras	340	HND
+Kuwait	KW	Kuwait	162	Kuwait	KUW	690	118	KU	285570	443	KW	KWT	414	552	Kuwait	414	KWT
+Lebanon	LB	Lebanon	170	Lebanon	LEB	660	121	LE	272103	446	LB	LBN	422	555	Lebanon	422	LBN
+Lesotho	LS	Lesotho	171	Lesotho	LES	570	122	LT	932692	666	LS	LSO	426	249	Lesotho	426	LSO
+Latvia	LV	Latvia	168	Latvia	LAT	367	119	LG	458258	941	LV	LVA	428	83	Latvia	428	LVA
+Maldives	MV	Maldives	182	Maldives	MAD	781	132	MV	1282028	556	MV	MDV	462	655	Maldives	462	MDV
+Malawi	MW	Malawi	180	Malawi	MAW	553	130	MI	927384	676	MW	MWI	454	253	Malawi	454	MWI
+Malaysia	MY	Malaysia	181	Malaysia	MAL	820	131	MY	1733045	548	MY	MYS	458	751	Malaysia	458	MYS
+Romania	RO	Romania	242	Romania	ROM	360	183	RO	798549	968	RO	ROU	642	77	Romania	642	ROM
+Suriname	SR	Suriname	273	Suriname	SUR	115	207	NS	3382998	366	SR	SUR	740	457	Suriname	740	SUR
+Slovenia	SI	Slovenia	255	Slovenia	SLV	349	198	SI	3190538	961	SI	SVN	705	61	Slovenia	705	SVN
+Sweden	SE	Sweden	276	Sweden	SWD	380	210	SW	2661886	144	SE	SWE	752	10	Sweden	752	SWE
+Uruguay	UY	Uruguay	145	Uruguay	URU	165	234	UY	3439705	298	UY	URY	858	460	Uruguay	858	URY
+Vanuatu	VU	Vanuatu	148	Vanuatu	VAN	935	155	NH	2134431	846	VU	VUT	548	854	Vanuatu	548	VUT
+Zambia	ZM	Zambia	159	Zambia	ZAM	551	251	ZA	895949	754	ZM	ZMB	894	288	Zambia	894	ZMB
+Azerbaijan	AZ	Azerbaijan	17	Azerbaijan	AZE	373	52	AJ	587116	912	AZ	AZE	31	611	Azerbaijan	31	AZE
+Bahrain	BH	Bahrain	19	Bahrain	BAH	692	13	BA	290291	419	BH	BHR	48	530	Bahrain	48	BHR
+Belarus	BY	Belarus	22	Belarus	BLR	370	57	BO	630336	913	BY	BLR	112	86	Belarus	112	BLR
+Bosnia and Herzegovina	BA	Bosnia and Herzegovina	29	Bosnia-Herzegovina	BOS	346	80	BK	3277605	963	BA	BIH	70	64	Bosnia-Herzegovina	70	BIH
+China	CN	China	49	China	CHN	710	351	CH	1814991	924	CN	CHN	156	730	China	156	CHN
+Comoros	KM	Comoros	55	Comoros	COM	581	45	CN	921929	632	KM	COM	174	233	Comoros	174	COM
+Czech Republic	CZ	Czech Republic	62	Czech Republic	CZR	316	167	EZ	3077311	935	CZ	CZE	203	68	Czech Republic	203	CZE
+Djibouti	DJ	Djibouti	65	Djibouti	DJI	522	72	DJ	223816	611	DJ	DJI	262	274	Djibouti	262	DJI
+Dominican Republic	DO	Dominican Republic	67	Dominican Republic	DOM	42	56	DR	3508796	243	DO	DOM	214	340	Dominican Republic	214	DOM
+Equatorial Guinea	GQ	Equatorial Guinea	75	Equatorial Guinea	EQG	411	61	EK	2309096	642	GQ	GNQ	226	245	Equatorial Guinea	226	GNQ
+Eritrea	ER	Eritrea	76	Eritrea	ERI	531	178	ER	338010	643	ER	ERI	232	271	Eritrea	232	ERI
+Faroe Islands	FO	Faroe Islands					64	FO	2622320	816	FO	FRO	234			234	FRO
+Fiji	FJ	Fiji	84	Fiji	FIJ	950	66	FJ	2205218	819	FJ	FJI	242	832	Fiji	242	FJI
+Finland	FI	Finland	85	Finland	FIN	375	67	FI	660013	172	FI	FIN	246	18	Finland	246	FIN
+Antigua and Barbuda	AG	Antigua and Barbuda	4715693	Antigua & Barbuda	AAB	58	8	AC	3576396	311	AG	ATG	28	377	Antigua and Barbuda	28	ATG
+Papua New Guinea	PG	Papua New Guinea	232	Papua New Guinea	PNG	910	168	PP	2088628	853	PG	PNG	598	862	Papua New Guinea	598	PNG
+Somalia	SO	Somalia	257	Somalia	SOM	520	201	SO	51537	726	SO	SOM	706	273	Somalia	706	SOM
+Trinidad and Tobago	TT	Trinidad and Tobago	4715719	Trinidad & Tobago	TRI	52	220	TD	3573591	369	TT	TTO	780	375	Trinidad & Tobago	780	TTO
+Aland Islands	AX	Aland Islands							661882		AX	ALA	248			248	ALA
+Andorra	AD	Andorra			AND	232	6	AN	3041565		AD	AND	20			20	ADO
+United Arab Emirates	AE	United Arab Emirates	140	United Arab Emirates	UAE	696	225	AE	290557	466	AE	ARE	784	576	United Arab Emirates	784	ARE
+American Samoa	AS	American Samoa						AQ	5880801	859	AS	ASM	16			16	ASM
+Gilbert and Ellice Islands	GE	Gilbert and Ellice Islands									GE	GEL	296				
+Greenland	GL	Greenland						GL	3425505	326	GL	GRL	304			304	GRL
+Isle of Man	IM	Isle of Man						IM	3042225		IM	IMN	833			833	IMY
+Liechtenstein	LI	Liechtenstein	174	Liechtenstein	LIE	223		LS	3042058		LI	LIE	438	70	Liechtenstein	438	LIE
+Monaco	MC	Monaco			MNC	221	140	MN	2993457		MC	MCO	492			492	MCO
+Norfolk Island	NF	Norfolk Island						NF	2155115		NF	NFK	574			574	NFK
+Neutral Zone	NT	Neutral Zone									NT	NTZ	536				
+Puerto Rico	PR	Puerto Rico						RQ	4566966		PR	PRI	630			630	PRI
+Serbia and Montenegro	CS	Serbia and Montenegro						YI			CS	SCG	891				
+San Marino	SM	San Marino			SNM	331	192	SM	3168068	135	SM	SMR	674			674	SMR
+Syria	SY	Syria	278	Syria	SYR	652	212	SY	163843	463	SY	SYR	760	573	Syria	760	SYR
+Central African Republic	CF	Central African Republic	4715696	Central African Rep.	CEN	482	37	CT	239880	626	CF	CAF	140	231	Central African Rep.	140	CAF
+Solomon Islands	SB	Solomon Islands	256	Solomon Islands	SOL	940	25	BP	2103350	813	SB	SLB	90	866	Solomon Islands	90	SLB
+Saint Kitts and Nevis	KN	Saint Kitts and Nevis	267	St. Kitts & Nevis	SKN	60	188	SC	3575174	361	KN	KNA	659	382	St. Kitts-Nevis	659	KNA
+Antarctica	AQ	Antarctica						AY	6697173		AQ	ATA	10				ATA
+Australia	AU	Australia	15	Australia	AUL	900	10	AS	2077456	193	AU	AUS	36	801	Australia	36	AUS
+Burkina Faso	BF	Burkina Faso	36	Burkina Faso	BFO	439	233	UV	2361809	748	BF	BFA	854	287	Burkina Faso	854	BFA
+Switzerland	CH	Switzerland	277	Switzerland	SWZ	225	211	SZ	2658434	146	CH	CHE	756	11	Switzerland	756	CHE
+Cape Verde	CV	Cape Verde	42	Cape Verde	CAP	402	35	CV	3374766	624	CV	CPV	132	230	Cape Verde	132	CPV
+Costa Rica	CR	Costa Rica	58	Costa Rica	COS	94	48	CS	3624060	238	CR	CRI	188	336	Costa Rica	188	CRI
+Cayman Islands	KY	Cayman Islands	43	Cayman Islands				CJ	3580718	377	KY	CYM	136	386	Cayman Islands	136	CYM
+Falkland Islands	FK	Falkland Islands	82	Falkland Islands				FK	3474414	323	FK	FLK	238	443	Falkland Islands (Malvinas)	238	FLK
+French Guiana	GF	French Guiana	88	French Guiana				FG	3381670	333	GF	GUF	254		French Guiana	254	GUF
+Heard Island and McDonald Islands	HM	Heard Island and McDonald Islands						HM	1547314		HM	HMD	334				HMD
+British Indian Ocean Territory	IO	British Indian Ocean Territory						IO	1282588		IO	IOT	86				IOT
+Kyrgyzstan	KG	Kyrgyzstan	163	Kyrgyz Republic	KYR	703	113	KG	1527747	917	KG	KGZ	417	614	Kyrgyz Republic	417	KGZ
+Kiribati	KI	Kiribati	166	Kiribati	KIR	946	83	KR	4030945	826	KI	KIR	296	836	Kiribati	296	KIR
+Libya	LY	Libya	173	Libya	LIB	620	124	LY	2215636	672	LY	LBY	434	133	Libya	434	LBY
+Saint Lucia	LC	Saint Lucia	268	St. Lucia	SLU	56	189	ST	3576468	362	LC	LCA	662	383	St. Lucia	662	LCA
+Sri Lanka	LK	Sri Lanka	265	Sri Lanka	SRI	780	38	CE	1227603	524	LK	LKA	144	640	Sri Lanka	144	LKA
+Moldova	MD	Moldova	196	Moldova	MLD	359	146	MD	617790	921	MD	MDA	498	93	Moldova	498	MDA
+Marshall Islands	MH	Marshall Islands	186	Marshall Islands	MSI	983	127	RM	2080185	867	MH	MHL	584	859	Marshall Islands	584	MHL
+Northern Mariana Islands	MP	Northern Mariana Islands	4715709	Northern Marianas				CQ	4041468		MP	MNP	580	858	Northern Marianas	580	MNP
+New Zealand	NZ	New Zealand	213	New Zealand	NEW	920	156	NZ	2186224	196	NZ	NZL	554	820	New Zealand	554	NZL
+Pacific Islands, Trust Territory of the	PC	Pacific Islands, Trust Territory of the									PC	PCI	582				
+Saudi Arabia	SA	Saudi Arabia	248	Saudi Arabia	SAU	670	194	SA	102358	456	SA	SAU	682	566	Saudi Arabia	682	SAU
+Saint Helena	SH	Saint Helena	266	St. Helena				SH	3370751	856	SH	SHN	654	276	St. Helena	654	SHN
+Saint Pierre and Miquelon	PM	Saint Pierre and Miquelon	270	St. Pierre & Miquelon				SB	3424932	363	PM	SPM	666		St. Pierre & Miquelon	666	SPM
+South Sudan	SS	South Sudan		South Sudan	SSD	626		OD	7909807	733	SS	SSD	728			728	SSD
+Sao Tome and Principe	ST	Sao Tome and Principe	247	Sao Tome & Principe	STP	403	193	TP	2410758	716	ST	STP	678	268	Sao Tome & Principe	678	STP
+Slovakia	SK	Slovakia	254	Slovak Republic	SLO	317	199	LO	3057568	936	SK	SVK	703	69	Slovak Republic	703	SVK
+Turks and Caicos Islands	TC	Turks and Caicos Islands	4715720	Turks and Caicos Islands				TK	3576916		TC	TCA	796	387	Turks and Caicos Islands	796	TCA
+Tanzania	TZ	Tanzania	281	Tanzania	TAZ	510	215	TZ	149590	738	TZ	TZA	834	282	Tanzania	834	TZA
+Vatican	VA	Vatican			PAP	327		VT	3164670		VA	VAT	336			336	VAT
+Saint Vincent and the Grenadines	VC	Saint Vincent and the Grenadines	4715717	St.Vincent & Grenadines	SVG	57	191	VC	3577815	364	VC	VCT	670	384	St.Vincent & Grenadines	670	VCT
+Vietnam	VN	Vietnam	4715721	Viet Nam	RVN	816	237	VM	1562822	582	VN	VNM	704	769	Vietnam	704	VNM
+States Ex-Yugoslavia	YU	States Ex-Yugoslavia	4715716	Sts Ex-Yugo. Unspec.	YUG	345					YU	YUG	891	88	States Ex-Yugoslavia		
+South Africa	ZA	South Africa	259	South Africa	SAF	560	202	SF	953987	199	ZA	ZAF	710	218	South Africa	710	ZAF
+Zimbabwe	ZW	Zimbabwe	160	Zimbabwe	ZIM	552	181	ZI	878675	698	ZW	ZWE	716	265	Zimbabwe	716	ZWE
+Saint Martin	MF	Saint Martin						RN	3578421		MF	MAF	663			663	MAF
+U.S. Virgin Islands	VI	U.S. Virgin Islands	146	Virgin Islands (US)				VQ	4796775		VI	VIR	850		Virgin Islands (US)	850	VIR
+Argentina	AR	Argentina	10	Argentina	ARG	160	9	AR	3865483	213	AR	ARG	32	425	Argentina	32	ARG
+Dominica	DM	Dominica	66	Dominica	DMA	54	55	DO	3575830	321	DM	DMA	212	378	Dominica	212	DMA
+Nigeria	NG	Nigeria	216	Nigeria	NIG	475	159	NI	2328926	694	NG	NGA	566	261	Nigeria	566	NGA
+Brazil	BR	Brazil	31	Brazil	BRA	140	21	BR	3469034	223	BR	BRA	76	431	Brazil	76	BRA
+Gabon	GA	Gabon	91	Gabon	GAB	481	74	GB	2400553	646	GA	GAB	266	239	Gabon	266	GAB
+Luxembourg	LU	Luxembourg	176	Luxembourg	LUX	212	256	LU	2960313	137	LU	LUX	442	22	Luxembourg	442	LUX
+Greece	GR	Greece	98	Greece	GRC	350	84	GR	390903	174	GR	GRC	300	40	Greece	300	GRC
+Guyana	GY	Guyana	106	Guyana	GUY	110	91	GY	3378535	336	GY	GUY	328	446	Guyana	328	GUY
+Mauritania	MR	Mauritania	188	Mauritania	MAA	435	136	MR	2378080	682	MR	MRT	478	256	Mauritania	478	MRT
+Pakistan	PK	Pakistan	228	Pakistan	PAK	770	165	PK	1168579	564	PK	PAK	586	665	Pakistan	586	PAK
+Afghanistan	AF	Afghanistan	1	Afghanistan	AFG	700	2	AF	1149361	512	AF	AFG	4	625	Afghanistan	4	AFG
+Bhutan	BT	Bhutan	27	Bhutan	BHU	760	18	BT	1252634	514	BT	BTN	64	630	Bhutan	64	BTN
+Spain	ES	Spain	264	Spain	SPN	230	203	SP	2510769	184	ES	ESP	724	50	Spain	724	ESP
+Swaziland	SZ	Swaziland	275	Swaziland	SWA	572	209	WZ	934841	734	SZ	SWZ	748	280	Swaziland	748	SWZ
+Tonga	TO	Tonga	285	Tonga	TON	955	219	TN	4032283	866	TO	TON	776	870	Tonga	776	TON
+Netherlands	NL	Netherlands	210	Netherlands	NTH	210	150	NL	2750405	138	NL	NLD	528	7	Netherlands	528	NLD
+Algeria	DZ	Algeria	4	Algeria	ALG	615	4	AG	2589581	612	DZ	DZA	12	130	Algeria	12	DZA
+Bangladesh	BD	Bangladesh	20	Bangladesh	BNG	771	16	BG	1210997	513	BD	BGD	50	666	Bangladesh	50	BGD
+Armenia	AM	Armenia	11	Armenia	ARM	371	1	AM	174982	911	AM	ARM	51	610	Armenia	51	ARM
+Benin	BJ	Benin	25	Benin	BEN	434	53	BN	2395170	638	BJ	BEN	204	236	Benin	204	BEN
+Chile	CL	Chile	48	Chile	CHL	155	40	CI	3895114	228	CL	CHL	152	434	Chile	152	CHL
+Chad	TD	Chad	46	Chad	CHA	483	39	CD	2434508	628	TD	TCD	148	232	Chad	148	TCD
+Colombia	CO	Colombia	54	Colombia	COL	100	44	CO	3686110	233	CO	COL	170	437	Colombia	170	COL
+Ecuador	EC	Ecuador	72	Ecuador	ECU	130	58	EC	3658394	248	EC	ECU	218	440	Ecuador	218	ECU
+Mauritius	MU	Mauritius	189	Mauritius	MAS	590	137	MP	934292	684	MU	MUS	480	257	Mauritius	480	MUS
+Malta	MT	Malta	184	Malta	MLT	338	134	MT	2562770	181	MT	MLT	470	45	Malta	470	MLT
+Mali	ML	Mali	183	Mali	MLI	432	133	ML	2453866	678	ML	MLI	466	255	Mali	466	MLI
+Madagascar	MG	Madagascar	179	Madagascar	MAG	580	129	MA	1062947	674	MG	MDG	450	252	Madagascar	450	MDG
+Lithuania	LT	Lithuania	175	Lithuania	LIT	368	126	LH	597427	946	LT	LTU	440	84	Lithuania	440	LTU
+Liberia	LR	Liberia	172	Liberia	LBR	450	123	LI	2275384	668	LR	LBR	430	251	Liberia	430	LBR
+Kosovo	XK	Kosovo	167	Kosovo	KOS	347		KV	831053		XK	XKX		57	Kosovo		KSV
+Kenya	KE	Kenya	132	Kenya	KEN	501	114	KE	192950	664	KE	KEN	404	248	Kenya	404	KEN
+Iraq	IQ	Iraq	121	Iraq	IRQ	645	103	IZ	99237	433	IQ	IRQ	368	543	Iraq	368	IRQ
+Kazakhstan	KZ	Kazakhstan	130	Kazakhstan	KZK	705	108	KZ	1522867	916	KZ	KAZ	398	613	Kazakhstan	398	KAZ
+Haiti	HT	Haiti	107	Haiti	HAI	41	93	HA	3723988	263	HT	HTI	332	349	Haiti	332	HTI
+Iceland	IS	Iceland	113	Iceland	ICE	395	99	IC	2629691	176	IS	ISL	352	20	Iceland	352	ISL
+Ghana	GH	Ghana	95	Ghana	GHA	452	81	GH	2300660	652	GH	GHA	288	241	Ghana	288	GHA
+Guatemala	GT	Guatemala	103	Guatemala	GUA	90	89	GT	3595528	258	GT	GTM	320	347	Guatemala	320	GTM
+Nicaragua	NI	Nicaragua	214	Nicaragua	NIC	93	157	NU	3617476	278	NI	NIC	558	364	Nicaragua	558	NIC
+Niger	NE	Nigeria	216	Nigeria	NIG	475	159	NI	2328926	694	NG	NGA	566	261	Nigeria	566	NGA
+Palau	PW	Palau	229	Palau	PAL	986	180	PS	1559582	565	PW	PLW	585	861	Palau	585	PLW
+Paraguay	PY	Paraguay	233	Paraguay	PAR	150	169	PA	3437598	288	PY	PRY	600	451	Paraguay	600	PRY
+Peru	PE	Peru	234	Peru	PER	135	170	PE	3932488	293	PE	PER	604	454	Peru	604	PER
+Poland	PL	Poland	237	Poland	POL	290	173	PL	798544	964	PL	POL	616	76	Poland	616	POL
+Rwanda	RW	Rwanda	244	Rwanda	RWA	517	184	RW	49518	714	RW	RWA	646	266	Rwanda	646	RWA
+Senegal	SN	Senegal	249	Senegal	SEN	433	195	SG	2245662	722	SN	SEN	686	269	Senegal	686	SEN
+Seychelles	SC	Seychelles	251	Seychelles	SEY	591	196	SE	241170	718	SC	SYC	690	270	Seychelles	690	SYC
+Singapore	SG	Singapore	253	Singapore	SIN	830		SN	1880251	576	SG	SGP	702	761	Singapore	702	SGP
+Tajikistan	TJ	Tajikistan	280	Tajikistan	TAJ	702	208	TI	1220409	923	TJ	TJK	762	615	Tajikistan	762	TJK
+Togo	TG	Togo	283	Togo	TOG	461	217	TO	2363686	742	TG	TGO	768	283	Togo	768	TGO
+Uganda	UG	Uganda	134	Uganda	UGA	500	226	UG	226074	746	UG	UGA	800	285	Uganda	800	UGA
+Turkey	TR	Turkey	288	Turkey	TUR	640	223	TU	298795	186	TR	TUR	792	55	Turkey	792	TUR
+Tunisia	TN	Tunisia	287	Tunisia	TUN	616	222	TS	2464461	744	TN	TUN	788	139	Tunisia	788	TUN
+Uzbekistan	UZ	Uzbekistan	147	Uzbekistan	UZB	704	235	UZ	1512440	927	UZ	UZB	860	617	Uzbekistan	860	UZB
+Philippines	PH	Philippines	235	Philippines	PHI	840	171	RP	1694008	566	PH	PHL	608	755	Philippines	608	PHL
+Myanmar	MM	Myanmar	203	Myanmar	MYA	775	28	BM	1327865	518	MM	MMR	104	635	Myanmar	104	MMR
+Israel	IL	Israel	124	Israel	ISR	666	105	IS	294640	436	IL	ISR	376	546	Israel	376	ISR
+Oman	OM	Oman	226	Oman	OMA	698	221	MU	286963	449	OM	OMN	512	558	Oman	512	OMN
+Mexico	MX	Mexico	192	Mexico	MEX	70	138	MX	3996063	273	MX	MEX	484	358	Mexico	484	MEX
+Jordan	JO	Jordan	129	Jordan	JOR	663	112	JO	248816	439	JO	JOR	400	549	Jordan	400	JOR
+Bolivia	BO	Bolivia	28	Bolivia	BOL	145	19	BL	3923057	218	BO	BOL	68	428	Bolivia	68	BOL
+Curacao	CW	Curacao						UC	7626836		CW	CUW	531			531	CUW
+Laos	LA	Laos	164	Laos	LAO	812	120	LA	1655842	544	LA	LAO	418	745	Laos	418	LAO
+Austria	AT	Austria	16	Austria	AUS	305	11	AU	2782113	122	AT	AUT	40	1	Austria	40	AUT
+Belgium	BE	Belgium	23	Belgium	BEL	211	255	BE	2802361	124	BE	BEL	56	2	Belgium	56	BEL
+Japan	JP	Japan	127	Japan	JPN	740	110	JA	1861060	158	JP	JPN	392	701	Japan	392	JPN
+Taiwan	TW	Taiwan	279	Taiwan	TAW	713		TW	1668284	528	TW	TWN	158	732	Chinese Taipei		TWN
+Ivory Coast	CI	Ivory Coast	161	Cote D'Ivoire	CDI	437	107	IV	2287781	662	CI	CIV	384	247	Cote D'Ivoire	384	CIV
+Ethiopia	ET	Ethiopia	78	Ethiopia	ETH	530	238	ET	337996	644	ET	ETH	231	238	Ethiopia	231	ETH
+Germany	DE	Germany	298	Germany	GMY	255	79	GM	2921044	134	DE	DEU	276	5	Germany	276	DEU
+Indonesia	ID	Indonesia	119	Indonesia	INS	850	101	ID	1643084	536	ID	IDN	360	738	Indonesia	360	IDN
+Iran	IR	Iran	120	Iran	IRN	630	102	IR	130758	429	IR	IRN	364	540	Iran	364	IRN
+North Korea	KP	North Korea	4715703	Korea, Dem. Rep.	PRK		116	KN	1873107		KP	PRK	408	740	Korea, Dem. Rep.	408	PRK
+Panama	PA	Panama	231	Panama	PAN	95	166	PM	3703430	283	PA	PAN	591	366	Panama	591	PAN
+Macedonia	MK	Macedonia	4715706	Macedonia, FYR	MAC	343	154	MK	718075	962	MK	MKD	807	66	Macedonia, FYR	807	MKD
+Venezuela	VE	Venezuela	150	Venezuela	VEN	101	236	VE	3625428	299	VE	VEN	862	463	Venezuela	862	VEN
+Wallis and Futuna	WF	Wallis and Futuna	4715723	Wallis & Futuna				WF	4034749		WF	WLF	876	876	Wallis & Futuna	876	WLF
+Yemen	YE	Yemen	157	Yemen	YEM	679	249	YM	69543	474	YE	YEM	887	580	Yemen	887	YEM
+Sudan	SD	Sudan	272	Sudan	SUD	625	206	SU	366755	732	SD	SDN	736	278	Sudan	729	SDN
+Sint Maarten	SX	Sint Maarten						NN	7609695		SX	SXM	534			534	SXM
+Thailand	TH	Thailand	282	Thailand	THI	800	216	TH	1605651	578	TH	THA	764	764	Thailand	764	THA
+El Salvador	SV	El Salvador	74	El Salvador	SAL	92	60	ES	3585968	253	SV	SLV	222	342	El Salvador	222	SLV
+Sierra Leone	SL	Sierra Leone	252	Sierra Leone	SIE	451	197	SL	2403846	724	SL	SLE	694	272	Sierra Leone	694	SLE
+Russia	RU	Russia	243	Russia	RUS	365	185	RS	2017370	922	RU	RUS	643	87	Russia	643	RUS
+Norway	NO	Norway	225	Norway	NOR	385	162	NO	3144096	142	NO	NOR	578	8	Norway	578	NOR
+Namibia	-NA	Namibia	206	Namibia	NAM	565	147	WA	3355338		NA	NAM	516	275	Namibia	516	NAM
+Mongolia	MN	Mongolia	198	Mongolia	MON	712	141	MG	2029969	948	MN	MNG	496	753	Mongolia	496	MNG
+Morocco	MA	Morocco	201	Morocco	MOR	600	143	MO	2542007	686	MA	MAR	504	136	Morocco	504	MAR
+Italy	IT	Italy	125	Italy	ITA	325	106	IT	3175395	136	IT	ITA	380	6	Italy	380	ITA
+India	IN	India	118	India	IND	750	100	IN	1269750	534	IN	IND	356	645	India	356	IND
+Estonia	EE	Estonia	77	Estonia	EST	366	63	EN	453733	939	EE	EST	233	82	Estonia	233	EST
+South Korea	KR	South Korea	4715702	Korea	ROK	732	117	KS	1835841	542	KR	KOR	410	742	Korea	410	KOR
+Democratic Republic of the Congo	CD	Democratic Republic of the Congo	4715698	Congo, Dem. Rep.	DRC	490	250	CG	203312	636	CD	COD	180	235	Congo, Dem. Rep.	180	ZAR
+Cambodia	KH	Cambodia	38	Cambodia	CAM	811	115	CB	1831722	522	KH	KHM	116	728	Cambodia	116	KHM
+United States	US	United States	142	United States	USA	2	231	US	6252001	111	US	USA	840	302	United States	840	USA
+Reunion	RE	Reunion	241	Reunion				RE	935317	696	RE	REU	638		Reunion	638	REU
+French Polynesia	PF	French Polynesia	89	French Polynesia				FP	4030656	887	PF	PYF	258	840	French Polynesia	258	PYF
+New Caledonia	NC	New Caledonia	212	New Caledonia				NC	2139685	839	NC	NCL	540	850	New Caledonia	540	NCL
+Martinique	MQ	Martinique	187	Martinique				MB	3570311	349	MQ	MTQ	474		Martinique	474	MTQ
+Guinea-Bissau	GW	Guinea-Bissau	105	Guinea-Bissau	GNB	404	175	PU	2372248	654	GW	GNB	624	244	Guinea-Bissau	624	GNB
+Guam	GU	Guam						GQ	4043988	829	GU	GUM	316			316	GUM
+Guadeloupe	GP	Guadeloupe	101	Guadeloupe				GP	3579143	329	GP	GLP	312		Guadeloupe	312	GLP
+United Kingdom	GB	United Kingdom	141	United Kingdom	UKG	200	229	UK	2635167	112	GB	GBR	826	12	United Kingdom	826	GBR
+British Virgin Islands	VG	British Virgin Islands	4715722	Virgin Islands (UK)				VI	3577718		VG	VGB	92	388	Virgin Islands (UK)	92	VGB
+United States Minor Outlying Islands	UM	United States Minor Outlying Islands							5854968		UM	UMI	581				UMI
+East Timor	TL	East Timor	4715718	Timor-Leste	ETM	860	176	TT	1966436	537	TL	TLS	626	765	Timor-Leste	626	TMP
+Serbia	RS	Serbia	4715711	Serbia			272	RI	6290252	965	RS	SRB	688	63	Serbia	688	SRB
+Montenegro	ME	Montenegro	40000031	Montenegro	MNG	341	273	MJ	3194884	943	ME	MNE	499	65	Montenegro	499	MNE
+Micronesia	FM	Micronesia	4715707	Micronesia, Federated States of	FSM	987	145	FM	2081918	868	FM	FSM	583	860	Micronesia, Fed. States	583	FSM
+Gambia	GM	Gambia	92	Gambia	GAM	420	75	GA	2413451	648	GM	GMB	270	240	Gambia	270	GMB
+Bahamas	BS	Bahamas	18	Bahamas	BHM	31	12	BF	3572887	313	BS	BHS	44	328	Bahamas	44	BHS
+Macao	MO	Macao	4715705	Macao				MC	1821275	546	MO	MAC	446	748	Macao	446	MAC
+Hong Kong	HK	Hong Kong	4715701	Hong Kong, China	HKG			HK	1819730	532	HK	HKG	344	735	Hong Kong, China	344	HKG
+Egypt	EG	Egypt	3254689	Egypt	EGY	651	59	EG	357994	469	EG	EGY	818	142	Egypt	818	EGY
+Republic of the Congo	CG	Republic of the Congo	4715699	Congo, Rep.	CON	484	46	CF	2260494	634	CG	COG	178	234	Congo, Rep.	178	COG
+Svalbard and Jan Mayen	SJ	Svalbard and Jan Mayen						SV	607072		SJ	SJM	744			744	SJM
+South Georgia and the South Sandwich Islands	GS	South Georgia and the South Sandwich Islands						SX	3474415		GS	SGS	239				SGS
+Pitcairn	PN	Pitcairn						PC	4030699		PN	PCN	612			612	PCN
+Palestinian Territory	PS	Palestinian Territory	4715710	Palestinian Adm. Areas				WE	6254930		PS	PSE	275		Palestinian Adm. Areas	275	WBG
+Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified	Unspecified
+Africa, regional	XR	Africa, regional										Africa, regional					

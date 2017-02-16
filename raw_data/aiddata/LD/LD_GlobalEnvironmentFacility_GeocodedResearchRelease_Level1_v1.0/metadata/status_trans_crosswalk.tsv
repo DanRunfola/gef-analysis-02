@@ -1,0 +1,6 @@
+status_name	ad_status_code	status	ad_sector_description
+Under Implmentation	2	Implementation	The activity is currently being implemented
+Project Completion	3	Completion	Physical activity is complete or the final disbursement has been made.
+CEO Approved	1	Pipeline/identification	The activity is being scoped or planned
+Project Closure	3	Completion	Physical activity is complete or the final disbursement has been made.
+Unspecified		Unspecified	replaces value with null

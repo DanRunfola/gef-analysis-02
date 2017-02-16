@@ -1,0 +1,438 @@
+{
+  "name": "globalenvironmentfacility_geocodedresearchrelease_level1_v1_0", 
+  "title": "GlobalEnvironmentFacility GeocodedResearchRelease", 
+  "description": "This is a sample description", 
+  "version": "1.0", 
+  "resources": [
+    {
+      "name": "projects.csv", 
+      "path": "data/projects.csv", 
+      "bytes": 79071, 
+      "schema": {
+        "fields": [
+          {
+            "type": "int", 
+            "name": "is_geocoded"
+          }, 
+          {
+            "type": "string", 
+            "name": "end_actual_type"
+          }, 
+          {
+            "type": "", 
+            "name": "start_actual_isodate"
+          }, 
+          {
+            "type": "string", 
+            "name": "start_actual_type"
+          }, 
+          {
+            "type": "string", 
+            "name": "recipients"
+          }, 
+          {
+            "type": "string", 
+            "name": "donors"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_sector_names"
+          }, 
+          {
+            "type": "string", 
+            "name": "transactions_start_year"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_purpose_names"
+          }, 
+          {
+            "type": "float", 
+            "name": "total_disbursements"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_purpose_codes"
+          }, 
+          {
+            "type": "string", 
+            "name": "status"
+          }, 
+          {
+            "type": "string", 
+            "name": "donors_iso3"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_sector_codes"
+          }, 
+          {
+            "type": "float", 
+            "name": "total_commitments"
+          }, 
+          {
+            "type": "string", 
+            "name": "recipients_iso3"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_id"
+          }, 
+          {
+            "type": "", 
+            "name": "end_actual_isodate"
+          }, 
+          {
+            "type": "string", 
+            "name": "transactions_end_year"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_title"
+          }
+        ]
+      }
+    }, 
+    {
+      "name": "locations.csv", 
+      "path": "data/locations.csv", 
+      "bytes": 335497, 
+      "schema": {
+        "fields": [
+          {
+            "type": "string", 
+            "name": "gazetteer_adm_code"
+          }, 
+          {
+            "type": "string", 
+            "name": "location_type_name"
+          }, 
+          {
+            "type": "float", 
+            "name": "longitude"
+          }, 
+          {
+            "type": "int", 
+            "name": "geoname_id"
+          }, 
+          {
+            "type": "string", 
+            "name": "gazetteer_adm_name"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_location_id"
+          }, 
+          {
+            "type": "int", 
+            "name": "location_class"
+          }, 
+          {
+            "type": "string", 
+            "name": "location_type_code"
+          }, 
+          {
+            "type": "float", 
+            "name": "latitude"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_id"
+          }, 
+          {
+            "type": "int", 
+            "name": "geographic_exactness"
+          }, 
+          {
+            "type": "int", 
+            "name": "precision_code"
+          }, 
+          {
+            "type": "string", 
+            "name": "place_name"
+          }
+        ]
+      }
+    }, 
+    {
+      "name": "transactions.csv", 
+      "path": "data/transactions.csv", 
+      "bytes": 23327, 
+      "schema": {
+        "fields": [
+          {
+            "type": "int", 
+            "name": "transaction_year"
+          }, 
+          {
+            "type": "", 
+            "name": "transaction_isodate"
+          }, 
+          {
+            "type": "float", 
+            "name": "transaction_value"
+          }, 
+          {
+            "type": "string", 
+            "name": "transaction_currency"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_id"
+          }, 
+          {
+            "type": "string", 
+            "name": "transaction_value_code"
+          }, 
+          {
+            "type": "string", 
+            "name": "transaction_id"
+          }
+        ]
+      }
+    }, 
+    {
+      "name": "level_1a.csv", 
+      "path": "data/level_1a.csv", 
+      "bytes": 1026875, 
+      "schema": {
+        "fields": [
+          {
+            "type": "string", 
+            "name": "end_actual_type"
+          }, 
+          {
+            "type": "string", 
+            "name": "gazetteer_adm_name"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_location_id"
+          }, 
+          {
+            "type": "int", 
+            "name": "location_class"
+          }, 
+          {
+            "type": "string", 
+            "name": "location_type_code"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_sector_codes"
+          }, 
+          {
+            "type": "string", 
+            "name": "place_name"
+          }, 
+          {
+            "type": "int", 
+            "name": "is_geocoded"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_purpose_names"
+          }, 
+          {
+            "type": "string", 
+            "name": "location_type_name"
+          }, 
+          {
+            "type": "float", 
+            "name": "even_split_disbursements"
+          }, 
+          {
+            "type": "float", 
+            "name": "latitude"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_id"
+          }, 
+          {
+            "type": "int", 
+            "name": "geographic_exactness"
+          }, 
+          {
+            "type": "string", 
+            "name": "status"
+          }, 
+          {
+            "type": "string", 
+            "name": "donors"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_purpose_codes"
+          }, 
+          {
+            "type": "string", 
+            "name": "recipients"
+          }, 
+          {
+            "type": "string", 
+            "name": "ad_sector_names"
+          }, 
+          {
+            "type": "string", 
+            "name": "transactions_end_year"
+          }, 
+          {
+            "type": "string", 
+            "name": "start_actual_type"
+          }, 
+          {
+            "type": "float", 
+            "name": "even_split_commitments"
+          }, 
+          {
+            "type": "string", 
+            "name": "transactions_start_year"
+          }, 
+          {
+            "type": "", 
+            "name": "start_actual_isodate"
+          }, 
+          {
+            "type": "string", 
+            "name": "project_title"
+          }, 
+          {
+            "type": "string", 
+            "name": "recipients_iso3"
+          }, 
+          {
+            "type": "float", 
+            "name": "longitude"
+          }, 
+          {
+            "type": "int", 
+            "name": "geoname_id"
+          }, 
+          {
+            "type": "float", 
+            "name": "total_disbursements"
+          }, 
+          {
+            "type": "float", 
+            "name": "total_commitments"
+          }, 
+          {
+            "type": "string", 
+            "name": "gazetteer_adm_code"
+          }, 
+          {
+            "type": "", 
+            "name": "end_actual_isodate"
+          }, 
+          {
+            "type": "int", 
+            "name": "precision_code"
+          }, 
+          {
+            "type": "string", 
+            "name": "donors_iso3"
+          }
+        ]
+      }
+    }
+  ], 
+  "extras": [
+    {
+      "value": "1.0-beta.10", 
+      "key": "Datapackage Version"
+    }, 
+    {
+      "value": "AidData. 2016. GlobalEnvironmentFacility_GeocodedResearchRelease_Level1_v1.0 geocoded dataset. Williamsburg, VA and Washington, DC: AidData. Accessed on [date]. http://aiddata.org/research-datasets.", 
+      "key": "Citation"
+    }, 
+    {
+      "value": "http://opendatacommons.org/licenses/by/", 
+      "key": "Licenses Url"
+    }, 
+    {
+      "value": "1.0", 
+      "key": "Licenses Version"
+    }, 
+    {
+      "value": "Open Data Commons Attribution", 
+      "key": "Licenses Name"
+    }, 
+    {
+      "value": "odc-pddl", 
+      "key": "Licenses Id"
+    }, 
+    {
+      "value": "Not Available", 
+      "key": "Sources Web"
+    }, 
+    {
+      "value": "Global Environment Facility", 
+      "key": "Sources Name"
+    }, 
+    {
+      "value": "http://aiddata.org", 
+      "key": "Maintainers Web"
+    }, 
+    {
+      "value": "AidData Data Team", 
+      "key": "Maintainers Name"
+    }, 
+    {
+      "value": "data@aiddata.org", 
+      "key": "Maintainers Email"
+    }, 
+    {
+      "value": "http://aiddata.org", 
+      "key": "Publishers Web"
+    }, 
+    {
+      "value": "AidData", 
+      "key": "Publishers Name"
+    }, 
+    {
+      "value": "info@aiddata.org", 
+      "key": "Publishers Email"
+    }, 
+    {
+      "value": "2002", 
+      "key": "Temporal Start"
+    }, 
+    {
+      "value": "2014", 
+      "key": "Temporal End"
+    }, 
+    {
+      "value": "Project Start Date Coverage", 
+      "key": "Temporal Name"
+    }, 
+    {
+      "value": "GlobalEnvironmentFacility", 
+      "key": "Data Set Preamble"
+    }, 
+    {
+      "value": "GeocodedResearchRelease", 
+      "key": "Data Type"
+    }, 
+    {
+      "value": "Level1", 
+      "key": "Processing Level"
+    }, 
+    {
+      "value": "", 
+      "key": "Source Type"
+    }, 
+    {
+      "value": "", 
+      "key": "Source Subtype"
+    }, 
+    {
+      "value": "Not Available", 
+      "key": "Source Link"
+    }, 
+    {
+      "value": "07/22/16", 
+      "key": "Date Updated"
+    }
+  ]
+}
