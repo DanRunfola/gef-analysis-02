@@ -11,6 +11,12 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m2_data.csv",
 
 # -----------------------------------------------------------------------------
 
+# m1a - add var for 'years since implementation'; add a random year to controls.
+#     - need to re-calculate outcome as average NDVI from 2000 until year before project implementation - average after implementation (inc. iimplementation year)
+#     - NDVI mean instead of max
+#     - Everything else stays the same
+
+# m2b - Same changes as m1a, only difference is the treatment/control groups
 
 
 # -----------------------------------------------------------------------------

@@ -9,9 +9,17 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1_data.csv", check.name
 #/vagrant/data_prep/analysis_cases/m3_data.csv
 
 
+# -----------------------------------------------------------------------------
+
+# m1b - Outcome should be the same as m1a, but total loss average change (confirm this is the case)
+#     - add var for years since implemetation; add a random year to controls
+#     - everything else the same
+
+
+
 #Calculate outcome
 tot.forest.percent <- (full.dta$"00forest25.na.sum" -
-                        rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count 
+                        rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count
 
 
 #Convert to square kilometers of forest cover
@@ -19,6 +27,7 @@ full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
 
 full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
 
+# -----------------------------------------------------------------------------
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",

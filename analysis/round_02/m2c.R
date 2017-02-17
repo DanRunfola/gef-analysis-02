@@ -11,6 +11,10 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m2_data.csv",
 
 # -----------------------------------------------------------------------------
 
+# m2b - Same changes as m1a, only difference is the treatment/control groups
+
+# m2c - Same changes as m1b, only difference is the treatment / control groups
+
 
 #Calculate outcome
 tot.forest.percent <- (full.dta$'00forest25.na.sum' -

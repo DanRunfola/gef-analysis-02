@@ -12,6 +12,31 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m4_data.csv",
 # -----------------------------------------------------------------------------
 
 
+# m1a - add var for 'years since implementation'; add a random year to controls.
+#     - need to re-calculate outcome as average NDVI from 2000 until year before project implementation - average after implementation (inc. iimplementation year)
+#     - NDVI mean instead of max
+#     - Everything else stays the same
+
+# m3a - change GEF project grant endorse stage to years-since-implementation.
+#     - Include total dollar value of projects
+#     - Include a binary indicating if it was in GEF phase 3
+#     - Include a binary indicating if it was in GEF phase 4
+#     - Include a binary indicating if it was in GEF phase 5
+#     - Include a binary indicating if it was in GEF phase 6
+#     - Include a binayr indicating if it not in phases 3-6
+#     - Include the total Cofinancing (already there)
+#     - Make sure the outcome measure is the same as m1a
+
+
+# m2a - Filter any units of observation that have a year of implementation > the last state score measurement
+#     - Add var for years since implementation; add a random year to controls
+#     - everything else the same
+
+
+# m4a - Same updates as m3a, make sure outcome measure is the same as in m2a
+#     - Filter the same as in m2a
+
+
 full.dta$'GEF Project Grant CEO endorse stage' <- gsub(",","",full.dta$'GEF Project Grant CEO endorse stage')
 full.dta$'GEF Project Grant CEO endorse stage' <- as.numeric(as.character(full.dta$'GEF Project Grant CEO endorse stage'))
 

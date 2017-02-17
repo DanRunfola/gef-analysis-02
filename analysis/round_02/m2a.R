@@ -6,9 +6,18 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m2_data.csv", 
-                     check.names = FALSE, 
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m2_data.csv",
+                     check.names = FALSE,
                      stringsAsFactors=FALSE)
+
+
+# -----------------------------------------------------------------------------
+
+# m2a - Filter any units of observation that have a year of implementation > the last state score measurement
+#     - Add var for years since implementation; add a random year to controls
+#     - everything else the same
+
+# -----------------------------------------------------------------------------
 
 
 # Define control variables

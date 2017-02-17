@@ -6,9 +6,20 @@ file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1_data.csv", 
-                     check.names = FALSE, 
+full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1_data.csv",
+                     check.names = FALSE,
                      stringsAsFactors=FALSE)
+
+
+# -----------------------------------------------------------------------------
+
+# - add var for 'years since implementation';
+# - need to re-calculate outcome as average NDVI from 2000 until year before project implementation - average after implementation (inc. iimplementation year)
+# - NDVI mean instead of max
+# - Everything else stays the same
+
+# -----------------------------------------------------------------------------
+
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
