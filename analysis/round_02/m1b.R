@@ -11,6 +11,11 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1_data.csv", check.name
 
 # -----------------------------------------------------------------------------
 
+# m1a - add var for 'years since implementation';
+#     - need to re-calculate outcome as average NDVI from 2000 until year before project implementation - average after implementation (inc. iimplementation year)
+#     - NDVI mean instead of max
+#     - Everything else stays the same
+
 # m1b - Outcome should be the same as m1a, but total loss average change (confirm this is the case)
 #     - add var for years since implemetation; add a random year to controls
 #     - everything else the same

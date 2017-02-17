@@ -40,7 +40,7 @@ def build_case(case_id, treatment, control):
     return case_df, stats
 
 
-def output_case(case_id, dry_run=dry_run):
+def output_case(case_id, case_out, dry_run=dry_run):
     print "Outputting {0}".format(str(case_id).upper())
     case_out = "{0}/data_prep/analysis_cases/{1}_data.csv".format(repo_dir, case_id)
     if not dry_run:
@@ -94,7 +94,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 # -------------------------------------
@@ -112,7 +112,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -134,7 +134,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -152,7 +152,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -170,7 +170,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 # -----------------------------------------------------------------------------
@@ -192,7 +192,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 # -------------------------------------
@@ -210,7 +210,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -233,7 +233,7 @@ case_df, case_stats = build_case(case_name, case_t, case_c)
 # modify
 #
 
-output_case(case_name, dry_run=dry_run)
+output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
