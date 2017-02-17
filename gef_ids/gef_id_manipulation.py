@@ -53,7 +53,7 @@ prog_ids = list(set(ancillary.loc[ancillary['round'].isin(['Programmatic'])]['ge
 # gef spreadsheets
 
 # this is csv combining MFA+LD SFA sheet and BD SFA sheet
-gef_valid = read_csv('~/git/GEF_Programmatic/gef_ids/gef_ids.csv')
+gef_valid = read_csv('~/git/GEF_Programmatic/gef_ids/valid_mfa_and_sfa.csv')
 
 mfa_valid = list(set(gef_valid['mfa'][gef_valid['mfa'].notnull()].astype('int').astype('str')))
 ld_valid = list(set(gef_valid['ld'][gef_valid['ld'].notnull()].astype('int').astype('str')))

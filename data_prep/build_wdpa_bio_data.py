@@ -1,3 +1,19 @@
+"""
+input are two sets of data where each row has a gef id and between 1 and 4
+wdpa ids.
+
+wdpa polygons are then used to build a dataframe where each row has a wdpa id
+and the longitude and latitude of the wdpa polygon centroid.
+
+we then iterate over the concatenation of the original two data sets and
+check for any match between their wdpa ids and the wdpa centroid lookup.
+the first match found for the given wdpa ids becomes the "geocoded" coordinates
+associated with that gef id project instance
+
+result is saved as a geojson
+"""
+
+
 
 import os
 import re
@@ -42,13 +58,14 @@ gef_wdpa_2015_df = gef_wdpa_2015_df[['gef_id', 'WDPA ID', 'Other WDPA IDs']]
 gef_wdpa_2015_df.columns = ['gef_id', 'wdpa01', 'wdpa02']
 
 
+gef_wdpa_df = pd.concat([gef_wdpa_2014_df, gef_wdpa_2015_df])
+
+
 gef_wdpa_df['wdpa01'] = gef_wdpa_df['wdpa01'].astype(int).astype(str)
 gef_wdpa_df['wdpa02'] = gef_wdpa_df['wdpa02'].astype(int).astype(str)
 gef_wdpa_df['wdpa03'] = gef_wdpa_df['wdpa03'].astype(int).astype(str)
 gef_wdpa_df['wdpa04'] = gef_wdpa_df['wdpa04'].astype(int).astype(str)
 
-
-gef_wdpa_df = pd.concat([gef_wdpa_2014_df, gef_wdpa_2015_df])
 
 gef_wdpa_df['longitude'] = -999
 gef_wdpa_df['latitude'] = -999
@@ -78,8 +95,10 @@ wdpa_id_list = list(set(wdpa_id_list))
 
 # -----------------------------------------------------------------------------
 
-
-wdpa_shp_path = "{0}/raw_data/wdpa/shps/WDPA_poly_simp_Dec2016.shp".format(repo_dir)
+# this is just polygon features from WDPA export
+# which have been simplified
+# excess attribute fields may have been removed as well
+wdpa_shp_path = "{0}/raw_data/wdpa/shps/WDPA_Dec2016_poly_simp.shp".format(repo_dir)
 wdpa_shp = fiona.open(wdpa_shp_path)
 
 wdpa_centroid_lookup = pd.DataFrame(columns=['index', 'wdpa_id', 'longitude', 'latitide'])
