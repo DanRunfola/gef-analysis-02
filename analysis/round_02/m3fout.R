@@ -57,8 +57,8 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean"
-           # , "years_since_implementation",
+           "ltdr_yearly_ndvi_mean.2002.mean",
+           # "years_since_implementation",
            "total_commitments", "gef_phase_3", "gef_phase_4", "gef_phase_5", "gef_phase_6", "gef_phase_other"
 )
 
