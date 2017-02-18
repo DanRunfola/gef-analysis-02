@@ -265,24 +265,51 @@ data_df['years_since_implementation'] = current_year - data_df['transactions_sta
 # -------------------------------------
 # ndvi pre-post difference
 
-def calc_ndvi_pre_average(z):
-    return 1
 
+def calc_ndvi_period_average(row, period):
+    total = 0
+    count = 0
+    start_year = int(row['transactions_start_year'])
 
-def calc_ndvi_post_average(z):
-    return 1
+    if period == "pre":
+        years = range(start_year, 2014)
+    elif period == "post":
+        years = range(2000, start_year)
+    else:
+        raise Exception("Invalid ndvi period (use `pre` or `post`)")
+
+    for year in years:
+        cname = "ltdr_yearly_ndvi_mean.{0}.mean".format(year)
+        try:
+            total += float(row[cname])
+            count += 1
+        except:
+            pass
+
+    if count > 0:
+        return total / float(count)
+    else:
+        return float('nan')
 
 
 # average ndvi 2000:implementation (not including implmentation)
-data_df['ndvi_pre_average'] = data_df.apply(lambda z: calc_ndvi_pre_average(z), axis=1)
+data_df['ndvi_pre_average'] = data_df.apply(lambda z: calc_ndvi_period_average(z, period="pre"), axis=1)
 
 # average ndvi implementation:2013 (including 2013)
-data_df['ndvi_post_average'] = data_df.apply(lambda z: calc_ndvi_post_average(z), axis=1)
+data_df['ndvi_post_average'] = data_df.apply(lambda z: calc_ndvi_period_average(z, period="post"), axis=1)
 
 # difference
 data_df['ndvi_pre_post_diff'] = data_df['ndvi_pre_average'] - data_df['ndvi_post_average']
 
 
+# -------------------------------------
+# GEF phase
+
+data_df['gef_phase_3'] = map(int, data_df["GEF replenishment phase"] == "GEF - 3")
+data_df['gef_phase_4'] = map(int, data_df["GEF replenishment phase"] == "GEF - 4")
+data_df['gef_phase_5'] = map(int, data_df["GEF replenishment phase"] == "GEF - 5")
+data_df['gef_phase_6'] = map(int, data_df["GEF replenishment phase"] == "GEF - 6")
+data_df['gef_phase_other'] = map(int, data_df["GEF replenishment phase"].isnull())
 
 # -------------------------------------
 # valid projects
@@ -367,8 +394,8 @@ case_c = (
 )
 case_df, case_stats = build_case(case_name, case_t, case_c)
 
-# modify
-#
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
 
 output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -407,7 +434,7 @@ case_c = (
 )
 case_df, case_stats = build_case(case_name, case_t, case_c)
 
-# Filter any units of observation that have a year of implementation > the last state score measurement
+# filter any units of observation that have a year of implementation > the last state score measurement
 case_df = case_df.loc[(case_df['transactions_start_year'] <= case_df['iba_year'])]
 
 output_case(case_name, case_df, dry_run=dry_run)
@@ -425,8 +452,8 @@ case_c = (
 )
 case_df, case_stats = build_case(case_name, case_t, case_c)
 
-# modify
-#
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
 
 output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -465,8 +492,8 @@ case_c = (
 )
 case_df, case_stats = build_case(case_name, case_t, case_c)
 
-# modify
-#
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
 
 output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -506,7 +533,7 @@ case_c = (
 )
 case_df, case_stats = build_case(case_name, case_t, case_c)
 
-# Filter any units of observation that have a year of implementation > the last state score measurement
+# filter any units of observation that have a year of implementation > the last state score measurement
 case_df = case_df.loc[(case_df['transactions_start_year'] <= case_df['iba_year'])]
 
 output_case(case_name, case_df, dry_run=dry_run)

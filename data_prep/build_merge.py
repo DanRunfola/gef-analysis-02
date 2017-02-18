@@ -55,7 +55,7 @@ data_df = data_df.merge(locations_df, on='project_location_id', how='left')
 # get year info from projects table
 projects_csv = "{0}/raw_data/aiddata/GlobalEnvironmentFacility_GeocodedResearchRelease_Level1_v1.0/data/projects.csv".format(repo_dir)
 projects_df = read_csv(projects_csv)
-projects_df = projects_df[['project_id', 'transactions_start_year', 'transactions_end_year']]
+projects_df = projects_df[['project_id', 'transactions_start_year', 'transactions_end_year', 'total_commitments', 'total_disbursements']]
 data_df = data_df.merge(projects_df, on='project_id', how='left')
 
 

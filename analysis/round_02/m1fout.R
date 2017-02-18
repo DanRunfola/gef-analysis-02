@@ -11,7 +11,6 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1_data.csv", check.name
 
 # -----------------------------------------------------------------------------
 
-
 #Calculate outcome
 tot.forest.percent <- (full.dta$"00forest25.na.sum" -
                         rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count
@@ -23,6 +22,7 @@ full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
 full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
 
 # -----------------------------------------------------------------------------
+
 
 # Define control variables
 Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",

@@ -11,7 +11,6 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m2_data.csv",
 
 # -----------------------------------------------------------------------------
 
-
 #Calculate outcome
 tot.forest.percent <- (full.dta$'00forest25.na.sum' -
                         rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count
@@ -21,7 +20,6 @@ tot.forest.percent <- (full.dta$'00forest25.na.sum' -
 full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
 
 full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
-
 
 # -----------------------------------------------------------------------------
 
