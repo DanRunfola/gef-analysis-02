@@ -73,8 +73,8 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)"
-              # , "years_since_implementation",
+              "NDVI (2002, Unitless)",
+              # "years_since_implementation",
               "total_commitments", "gef_phase_3", "gef_phase_4", "gef_phase_5", "gef_phase_6", "gef_phase_other"
 )
 
