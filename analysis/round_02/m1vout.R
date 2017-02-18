@@ -45,7 +45,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)"
+              "NDVI (2002, Unitless)",
               "years since implementation"
 )
 
