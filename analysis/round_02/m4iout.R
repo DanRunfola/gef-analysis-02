@@ -11,17 +11,6 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m4iout_data.csv",
 
 # -----------------------------------------------------------------------------
 
-# - Include total dollar value of projects
-# - Include the total Cofinancing (already there)
-
-# - Include a binary indicating if it was in GEF phase 3
-# - Include a binary indicating if it was in GEF phase 4
-# - Include a binary indicating if it was in GEF phase 5
-# - Include a binary indicating if it was in GEF phase 6
-# - Include a binary indicating if it not in phases 3-6
-
-# -----------------------------------------------------------------------------
-
 # full.dta$'GEF Project Grant CEO endorse stage' <- gsub(",","",full.dta$'GEF Project Grant CEO endorse stage')
 # full.dta$'GEF Project Grant CEO endorse stage' <- as.numeric(as.character(full.dta$'GEF Project Grant CEO endorse stage'))
 
@@ -46,7 +35,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
            "ltdr_yearly_ndvi_mean.2002.mean", "iba_distance",
-           # "years_since_implementation",
+           "years_since_implementation",
            "total_commitments", "gef_phase_3", "gef_phase_4", "gef_phase_5", "gef_phase_6", "gef_phase_other"
 )
 
@@ -62,8 +51,8 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
               "NDVI (2002, Unitless)", "Distance to IBA",
-              # "years_since_implementation",
-              "total_commitments", "gef_phase_3", "gef_phase_4", "gef_phase_5", "gef_phase_6", "gef_phase_other"
+              "years since implementation",
+              "total commitments", "gef phase 3", "gef phase 4", "gef phase 5", "gef phase 6", "gef phase other"
 )
 
 out_path = "/vagrant/results/m4iout/"
