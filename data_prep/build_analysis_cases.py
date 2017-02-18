@@ -342,19 +342,19 @@ def build_case(case_id, treatment, control):
     case_df.loc[treatment, 'treatment'] = 1
     case_df.loc[control, 'treatment'] = 0
     case_df = case_df.loc[case_df['treatment'] != -1]
-    stats = {}
-    stats['treatment_count'] = sum(treatment)
-    stats['control_count'] = sum(control)
-    stats['total_count'] = len(case_df)
-    return case_df, stats
+    return case_df
 
 
 def output_case(case_id, case_out, dry_run=dry_run):
     print "Outputting {0}".format(str(case_id).upper())
-    case_out = "{0}/data_prep/analysis_cases/{1}_data.csv".format(repo_dir, case_id)
+    case_path = "{0}/data_prep/analysis_cases/{1}_data.csv".format(repo_dir, case_id)
+    stats = {}
+    stats['treatment_count'] = sum(case_out['treatment'] == 1)
+    stats['control_count'] = sum(case_out['treatment'] == 0)
+    stats['total_count'] = len(case_out)
     if not dry_run:
-        case_df.to_csv(case_out, index=False, encoding='utf-8')
-
+        case_out.to_csv(case_path, index=False, encoding='utf-8')
+    return stats
 
 
 # =============================================================================
@@ -371,7 +371,12 @@ def output_case(case_id, case_out, dry_run=dry_run):
 # case_c = (
 
 # )
-# case_stats = build_case(case_name, case_t, case_c, dry_run=dry_run)
+# case_df = build_case(case_name, case_t, case_c)
+
+# Modify
+#
+
+# case_stats = output_case(case_name, case_df, dry_run=dry_run)
 # print case_stats
 
 
@@ -392,12 +397,12 @@ case_t = (
 case_c = (
     (data_df['type'] == 'rand')
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
 case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 # -------------------------------------
@@ -410,12 +415,12 @@ case_t = (
 case_c = (
     (data_df['type'] == 'rand')
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # modify
 #
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -432,12 +437,12 @@ case_t = (
 case_c = (
     (data_df['type'] == 'rand')
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # filter any units of observation that have a year of implementation > the last state score measurement
-case_df = case_df.loc[(case_df['transactions_start_year'] <= case_df['iba_year'])]
+case_df = case_df.loc[(case_df['transactions_start_year'] > case_df['iba_year'])]
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -450,12 +455,12 @@ case_t = (
 case_c = (
     (data_df['type'] == 'rand')
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
 case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -468,12 +473,12 @@ case_t = (
 case_c = (
     (data_df['type'] == 'rand')
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # modify
 #
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 # -----------------------------------------------------------------------------
@@ -490,12 +495,12 @@ case_c = (
     (data_df['type'].isin(['land']))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
 case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 # -------------------------------------
@@ -508,12 +513,12 @@ case_c = (
     (data_df['type'].isin(['land']))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # modify
 #
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
@@ -531,12 +536,12 @@ case_c = (
     (data_df['type'].isin(['bio', 'ext_bio']))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
-case_df, case_stats = build_case(case_name, case_t, case_c)
+case_df = build_case(case_name, case_t, case_c)
 
 # filter any units of observation that have a year of implementation > the last state score measurement
-case_df = case_df.loc[(case_df['transactions_start_year'] <= case_df['iba_year'])]
+case_df = case_df.loc[(case_df['transactions_start_year'] > case_df['iba_year'])]
 
-output_case(case_name, case_df, dry_run=dry_run)
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
