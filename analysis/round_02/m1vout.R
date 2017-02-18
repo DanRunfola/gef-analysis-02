@@ -13,7 +13,7 @@ full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1vout_data.csv",
 
 # -----------------------------------------------------------------------------
 
-
+full.dta$years_since_implementation = as.numeric(full.dta$years_since_implementation)
 
 # -----------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean"#, "years_since_implementation"
+           "ltdr_yearly_ndvi_mean.2002.mean", "years_since_implementation"
 )
 
 VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
@@ -44,7 +44,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)"#, "years_since_implementation"
+              "NDVI (2002, Unitless)", "years_since_implementation"
 )
 
 out_path = "/vagrant/results/m1vout/"
