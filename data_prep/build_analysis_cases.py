@@ -59,17 +59,23 @@ ancillary_01_csv = "{0}/raw_data/ancillary/CD_MFA_CD_projects_sheet.csv".format(
 ancillary_02_csv = "{0}/raw_data/ancillary/CD_MFA_MFA_projects_sheet.csv".format(repo_dir)
 ancillary_03_csv = "{0}/raw_data/ancillary/GEF_MFA_AidData_Ancillary.csv".format(repo_dir)
 ancillary_04_csv = "{0}/raw_data/ancillary/gef_projects_160726.csv".format(repo_dir)
+ancillary_05_csv = "{0}/raw_data/ancillary/programmatic_list.csv".format(repo_dir)
+ancillary_06_csv = "{0}/raw_data/ancillary/valid_mfa_and_sfa.csv".format(repo_dir)
+
 
 ancillary_01_df = read_csv(ancillary_01_csv)
 ancillary_02_df = read_csv(ancillary_02_csv)
 ancillary_03_df = read_csv(ancillary_03_csv)
 ancillary_04_df = read_csv(ancillary_04_csv)
+ancillary_05_df = read_csv(ancillary_05_csv)
+ancillary_06_df = read_csv(ancillary_06_csv)
 
 
 # -------------------------------------
-# build land list
+# build land component list
 
-land_id_list_00 = list(data_raw_df.loc[data_raw_df['type'] == 'land', 'gef_id'])
+# # check geocoded land degradation
+# land_id_list_00 = list(data_raw_df.loc[data_raw_df['type'] == 'land', 'gef_id'])
 
 
 # check GEF project records (if any column contains "LD")
@@ -99,15 +105,16 @@ land_id_list_03 = list(ancillary_03_df.loc[clean_land_matches, 'GEF_ID']
 
 
 # combine different land id lists
-land_id_list = land_id_list_00 + land_id_list_01 + land_id_list_02 + land_id_list_03
-land_id_list = list(set(land_id_list))
-print 'land id count: {0}'.format(len(land_id_list))
+land_partial_id_list = land_id_list_01 + land_id_list_02 + land_id_list_03
+land_partial_id_list = list(set(land_partial_id_list))
+print 'land partial id count: {0}'.format(len(land_partial_id_list))
+
 
 # -------------------------------------
-# build bio list
+# build bio component list
 
-# check geocoded land degradation
-bio_id_list_00 = list(data_raw_df.loc[data_raw_df['type'].isin(['bio', 'ext_bio']), 'gef_id'])
+# # check geocoded biodiversity
+# bio_id_list_00 = list(data_raw_df.loc[data_raw_df['type'].isin(['bio', 'ext_bio']), 'gef_id'])
 
 
 # check GEF project records (if any column contains "BD")
@@ -135,20 +142,47 @@ bio_id_list_03 = list(ancillary_03_df.loc[clean_bio_matches, 'GEF_ID']
     .astype('int').astype('str'))
 
 
-# combine different land id lists
-bio_id_list = bio_id_list_00 + bio_id_list_01 + bio_id_list_02 + bio_id_list_03
-bio_id_list = list(set(bio_id_list))
-print 'bio id count: {0}'.format(len(bio_id_list))
+# combine different bio id lists
+bio_partial_id_list = bio_id_list_01 + bio_id_list_02 + bio_id_list_03
+bio_partial_id_list = list(set(bio_partial_id_list))
+print 'bio partial id count: {0}'.format(len(bio_partial_id_list))
+
 
 # -------------------------------------
-# build prog and mfa lists
+# build project type id lists
 
-prog_id_list = list(set(data_raw_df.loc[data_raw_df['type'] == "prog", 'gef_id']))
+# sfa  lists
+land_sfa_id_list = list(set(ancillary_06_df['ld'][ancillary_06_df['ld'].notnull()].astype('int').astype('str')))
+bio_sfa_id_list = list(set(ancillary_06_df['bio'][ancillary_06_df['bio'].notnull()].astype('int').astype('str')))
 
-mfa_id_list = list(set(data_raw_df.loc[data_raw_df['type'] == "mfa", 'gef_id']))
+
+# any land/bio lists
+land_id_list = list(set(land_sfa_id_list + land_partial_id_list))
+bio_id_list = list(set(bio_sfa_id_list + bio_partial_id_list))
+
+
+# prog and mfa lists
+# prog_id_list = list(set(data_raw_df.loc[data_raw_df['type'] == "prog", 'gef_id']))
+prog_id_list = list(set(ancillary_05_df['Project GEF_ID'].astype('int').astype('str')))
+
+# mfa_id_list = list(set(data_raw_df.loc[data_raw_df['type'] == "mfa", 'gef_id']))
+mfa_id_list = list(set(ancillary_06_df['mfa'][ancillary_06_df['mfa'].notnull()].astype('int').astype('str')))
+
+
+# print prog_id_list
+# print mfa_id_list
+# print land_id_list
+# print bio_id_list
+# print len(prog_id_list)
+# print len(mfa_id_list)
+# print len(land_id_list)
+# print len(bio_id_list)
+# raise
+
 
 # -------------------------------------
 # build multi country and multi agency lists
+
 multicountry_id_list = list(set(ancillary_04_df.loc[ancillary_04_df["Country"].isin(["Regional", "Global"]), 'GEF_ID'].astype('int').astype('str')))
 
 multiagency_id_list = list(set(ancillary_04_df.loc[~ancillary_04_df["Secondary agency(ies)"].isnull(), 'GEF_ID'].astype('int').astype('str')))
@@ -332,16 +366,13 @@ data_df['gef_phase_other'] = map(int, data_df["GEF replenishment phase"].isnull(
 # -------------------------------------
 # valid projects
 
-# drop projects that are not prog and not in gef sheet of mfa, sfa land, or sfa bio
-gef_valid = read_csv("{0}/raw_data/ancillary/valid_mfa_and_sfa.csv".format(repo_dir))
+# drop projects that are not true prog, mfa, sfa land, sfa bio
+total_valid = list(set(prog_id_list + mfa_id_list + land_sfa_id_list + bio_sfa_id_list))
 
-mfa_valid = list(set(gef_valid['mfa'][gef_valid['mfa'].notnull()].astype('int').astype('str')))
-ld_valid = list(set(gef_valid['ld'][gef_valid['ld'].notnull()].astype('int').astype('str')))
-bio_valid = list(set(gef_valid['bio'][gef_valid['bio'].notnull()].astype('int').astype('str')))
-
-total_valid = list(set(mfa_valid + ld_valid + bio_valid))
-
-data_df = data_df.loc[(data_df['type'].isin(['prog', 'rand'])) | (data_df['gef_id'].isin(total_valid))]
+data_df = data_df.loc[
+    (data_df['type'].isin(['rand']))
+    | (data_df['gef_id'].isin(total_valid))
+]
 
 
 
@@ -414,7 +445,7 @@ def output_case(case_id, case_out, dry_run=dry_run):
 # -------------------------------------
 case_name = "m1vout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
 )
 case_c = (
@@ -435,7 +466,7 @@ print case_stats
 
 case_name = "m1fout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
 )
 case_c = (
@@ -458,7 +489,7 @@ print case_stats
 # -------------------------------------
 case_name = "m2vout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
 )
 case_c = (
@@ -478,7 +509,7 @@ print case_stats
 # -------------------------------------
 case_name = "m2fout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
 )
 case_c = (
@@ -496,7 +527,7 @@ print case_stats
 # # -------------------------------------
 # case_name = "m2iout"
 # case_t = (
-#     (data_df['type'] == 'prog')
+#     (data_df['gef_id'].isin(prog_id_list))
 #     & (data_df['gef_id'].isin(bio_id_list))
 # )
 # case_c = (
@@ -521,11 +552,11 @@ print case_stats
 # -------------------------------------
 case_name = "m3vout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
 )
 case_c = (
-    (data_df['type'].isin(['land']))
+    (data_df['gef_id'].isin(land_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
@@ -542,11 +573,11 @@ print case_stats
 # -------------------------------------
 case_name = "m3fout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
 )
 case_c = (
-    (data_df['type'].isin(['land']))
+    (data_df['gef_id'].isin(land_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
@@ -567,11 +598,11 @@ print case_stats
 # -------------------------------------
 case_name = "m4vout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
 )
 case_c = (
-    (data_df['type'].isin(['bio', 'ext_bio']))
+    (data_df['gef_id'].isin(bio_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
@@ -592,11 +623,11 @@ print case_stats
 # -------------------------------------
 case_name = "m4fout"
 case_t = (
-    (data_df['type'] == 'prog')
+    (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
 )
 case_c = (
-    (data_df['type'].isin(['bio', 'ext_bio']))
+    (data_df['gef_id'].isin(bio_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
@@ -611,11 +642,11 @@ print case_stats
 # # -------------------------------------
 # case_name = "m4iout"
 # case_t = (
-#     (data_df['type'] == 'prog')
+#    (data_df['gef_id'].isin(prog_id_list))
 #     & (data_df['gef_id'].isin(bio_id_list))
 # )
 # case_c = (
-#     (data_df['type'].isin(['bio', 'ext_bio']))
+#    (data_df['gef_id'].isin(bio_id_list))
 #     & ~(data_df['gef_id'].isin(prog_id_list))
 # )
 # case_df = build_case(case_name, case_t, case_c)
