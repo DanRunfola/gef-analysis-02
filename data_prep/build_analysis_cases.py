@@ -307,11 +307,11 @@ data_df['ndvi_pre_post_diff'] = data_df['ndvi_pre_average'] - data_df['ndvi_post
 
 lossyr25_cols = [i for i in list(data_df.columns)
                  if i.startswith('lossyr25.na.categorical_')
-                 and not i.endswith('_count')]
+                 and not i.endswith(('_count', '_noloss'))]
 
-lossyr25_sum = data_df[lossyr25_cols].sum(axis=1)
+data_df['lossyr25_sum'] = data_df[lossyr25_cols].sum(axis=1)
 
-data_df['chg.forest.km.outcome'] = (lossyr25_sum / data_df['lossyr25.na.categorical_count']) *  (np.pi * 10**2)
+data_df['chg.forest.km.outcome'] = (data_df['lossyr25_sum'] / data_df['lossyr25.na.categorical_count']) *  (np.pi * 10**2)
 
 
 # -------------------------------------

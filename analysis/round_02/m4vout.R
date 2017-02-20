@@ -30,7 +30,8 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "ltdr_yearly_ndvi_mean.2002.mean",
 	         "years_since_implementation",
            # "total_commitments",
-           "gef_phase_3", "gef_phase_4", "gef_phase_5"#,
+           #"gef_phase_3",
+           "gef_phase_4", "gef_phase_5"#,
            # "gef_phase_6", "gef_phase_other"
 )
 
@@ -48,7 +49,8 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "NDVI (2002, Unitless)",
               "years since implementation",
               # "total commitments",
-              "gef phase 3", "gef phase 4", "gef phase 5"#,
+              #"gef phase 3",
+              "gef phase 4", "gef phase 5"#,
               # "gef phase 6", "gef phase other"
 )
 
@@ -62,9 +64,9 @@ t <- geoML(dta=full.dta,
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=5.5,
+           caliper=0.5,
            counterfactual.name = "Non-Programmatic w/ LD",
-           tree.ctrl = c(2,500),
+           tree.ctrl = c(20,500),
            tree.cex = 0.25,
            col.invert = FALSE,
            tree.cnt = 100001
