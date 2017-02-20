@@ -1,19 +1,16 @@
 
 
-path <- "/vagrant/results/m1vout"
+case <- "m1vout"
+
+path <- paste("/vagrant/results/", case, sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1vout_data.csv",
-                     check.names = FALSE,
-                     stringsAsFactors=FALSE)
+input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
+full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
-
-# -----------------------------------------------------------------------------
-
-# full.dta$years_since_implementation = as.numeric(full.dta$years_since_implementation) 
 
 # -----------------------------------------------------------------------------
 
@@ -49,13 +46,12 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "years since implementation"
 )
 
-out_path = "/vagrant/results/m1vout/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ LD"),
            ctrl=c(Vars, VarNames),
            outcome=c("ndvi_pre_post_diff", "NDVI Diff pre-post implementation"),
-           out_path=out_path,
+           out_path=path,
            file.prefix="NDVI_diff",
            kvar=c("v4composites_calibrated.2002.mean","treecover2000.na.mean",
                   "ltdr_yearly_ndvi_mean.2002.mean","srtm_slope_500m.na.mean"),

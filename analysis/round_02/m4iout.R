@@ -1,23 +1,16 @@
 
-path <- "/vagrant/results/m4iout"
+
+case <- "m4iout"
+
+path <- paste("/vagrant/results/", case, sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m4iout_data.csv",
-                     check.names=FALSE, stringsAsFactors=FALSE)
+input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
+full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
-
-# -----------------------------------------------------------------------------
-
-# full.dta$'GEF Project Grant CEO endorse stage' <- gsub(",","",full.dta$'GEF Project Grant CEO endorse stage')
-# full.dta$'GEF Project Grant CEO endorse stage' <- as.numeric(as.character(full.dta$'GEF Project Grant CEO endorse stage'))
-
-# full.dta$'Cofinance CEO endorse stage' <- gsub(",","",full.dta$'Cofinance CEO endorse stage')
-# full.dta$'Cofinance CEO endorse stage' <- as.numeric(as.character(full.dta$'Cofinance CEO endorse stage'))
-
-# full.dta <- full.dta[!is.na(full.dta$'GEF Project Grant CEO endorse stage'),]
 
 # -----------------------------------------------------------------------------
 
@@ -36,8 +29,8 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "v4composites_calibrated.2002.mean",
            "ltdr_yearly_ndvi_mean.2002.mean", "iba_distance",
            "years_since_implementation",
-           # "total_commitments", 
-           "gef_phase_3", "gef_phase_4", "gef_phase_5"#, 
+           # "total_commitments",
+           "gef_phase_3", "gef_phase_4", "gef_phase_5"#,
            # "gef_phase_6", "gef_phase_other"
 )
 
@@ -54,18 +47,17 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Nightime Lights (2002, Relative)",
               "NDVI (2002, Unitless)", "Distance to IBA",
               "years since implementation",
-              # "total commitments", 
-              "gef phase 3", "gef phase 4", "gef phase 5"#, 
+              # "total commitments",
+              "gef phase 3", "gef phase 4", "gef phase 5"#,
               # "gef phase 6", "gef phase other"
 )
 
-out_path = "/vagrant/results/m4iout/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ Bio"),
            ctrl=c(Vars, VarNames),
            outcome=c("iba_statescore", "IBA State Score"),
-           out_path=out_path,
+           out_path=path,
            file.prefix="IBA_state",
            kvar=c("v4composites_calibrated.2002.mean","treecover2000.na.mean",
                   "ltdr_yearly_ndvi_mean.2002.mean","srtm_slope_500m.na.mean"),

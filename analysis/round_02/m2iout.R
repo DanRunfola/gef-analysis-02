@@ -1,18 +1,15 @@
 
 
-path <- "/vagrant/results/m2iout"
+case <- "m2iout"
+
+path <- paste("/vagrant/results/", case, sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m2iout_data.csv",
-                     check.names = FALSE,
-                     stringsAsFactors=FALSE)
-
-
-# -----------------------------------------------------------------------------
-
+input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
+full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
 
 # -----------------------------------------------------------------------------
@@ -49,13 +46,12 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "years since implementation"
 )
 
-out_path = "/vagrant/results/m2iout/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ Bio"),
            ctrl=c(Vars, VarNames),
            outcome=c("iba_statescore", "IBA State Score"),
-           out_path=out_path,
+           out_path=path,
            file.prefix="IBA_state",
            kvar=c("v4composites_calibrated.2002.mean","treecover2000.na.mean",
                   "ltdr_yearly_ndvi_mean.2002.mean","srtm_slope_500m.na.mean"),

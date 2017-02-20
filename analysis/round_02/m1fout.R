@@ -1,25 +1,16 @@
 
-path <- "/vagrant/results/m1fout"
+
+case <- "m1fout"
+
+path <- paste("/vagrant/results/", case, sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
 source("/home/vagrant/geoML/geoML.R")
 
-full.dta <- read.csv("/vagrant/data_prep/analysis_cases/m1fout_data.csv", check.names = FALSE)
-#/vagrant/data_prep/analysis_cases/m3_data.csv
+input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
+full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
-
-# -----------------------------------------------------------------------------
-
-#Calculate outcome
-tot.forest.percent <- (full.dta$"00forest25.na.sum" -
-                        rowSums(full.dta[33:46])) / full.dta$lossyr25.na.categorical_count
-
-
-#Convert to square kilometers of forest cover
-full.dta$tot.forest.km.outcome <- (as.vector(tot.forest.percent) * (pi * 10^2))
-
-full.dta$chg.forest.km.outcome <- (rowSums(full.dta[33:45]) / (full.dta$lossyr25.na.categorical_count)) * (pi*10^2)
 
 # -----------------------------------------------------------------------------
 
@@ -55,13 +46,12 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "years since implementation"
 )
 
-out_path = "/vagrant/results/m1fout/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ LD"),
            ctrl=c(Vars, VarNames),
            outcome=c("chg.forest.km.outcome", "Forest Cover Loss 2000 to 2013 (Sq. km)"),
-           out_path=out_path,
+           out_path=path,
            file.prefix="forest_cover",
            kvar=c("v4composites_calibrated.2002.mean","treecover2000.na.mean",
                   "ltdr_yearly_ndvi_mean.2002.mean","srtm_slope_500m.na.mean"),

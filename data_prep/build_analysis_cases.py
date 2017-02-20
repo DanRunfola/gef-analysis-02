@@ -303,6 +303,24 @@ data_df['ndvi_pre_post_diff'] = data_df['ndvi_pre_average'] - data_df['ndvi_post
 
 
 # -------------------------------------
+# forest cover change
+
+lossyr25_cols = [i for i in list(data_df.columns)
+                 if i.startswith('lossyr25.na.categorical_')
+                 and not i.endswith('_count')]
+
+lossyr25_sum = data_df[lossyr25_cols].sum(axis=1)
+
+data_df['chg.forest.km.outcome'] = (lossyr25_sum / data_df['lossyr25.na.categorical_count']) *  (np.pi * 10**2)
+
+
+# -------------------------------------
+# iba year filter
+
+data_df['iba_start_diff'] = data_df['iba_year'] - data_df['transactions_start_year']
+
+
+# -------------------------------------
 # GEF phase
 
 data_df['gef_phase_3'] = map(int, data_df["GEF replenishment phase"] == "GEF - 3")
@@ -329,11 +347,13 @@ data_df = data_df.loc[(data_df['type'].isin(['prog', 'rand'])) | (data_df['gef_i
 
 # -----------------------------------------------------------------------------
 # output
+
 data_df_out = "{0}/data_prep/analysis_cases/base_data.csv".format(repo_dir)
 data_df.to_csv(data_df_out, index=False, encoding='utf-8')
 
 
 # -----------------------------------------------------------------------------
+
 
 def build_case(case_id, treatment, control):
     print "Running {0}".format(str(case_id).upper())
@@ -358,6 +378,7 @@ def output_case(case_id, case_out, dry_run=dry_run):
 
 
 # =============================================================================
+# =============================================================================
 # Example case
 #
 # Treatment:  Definitiion of treatment for `case_t`
@@ -381,9 +402,11 @@ def output_case(case_id, case_out, dry_run=dry_run):
 
 
 # =============================================================================
+# =============================================================================
 # programmatic
 
 
+# -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # Treatment:  Programmatic w/ LD objectives
 # Control:    Null Case Comparisons
@@ -401,9 +424,12 @@ case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
 case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
+
 
 # -------------------------------------
 
@@ -417,34 +443,17 @@ case_c = (
 )
 case_df = build_case(case_name, case_t, case_c)
 
-# modify
-#
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Treatment:  Programmatic w/ Biodiversity objectives
 # Control:    Null Case Comparisons
-
-# -------------------------------------
-case_name = "m2iout"
-case_t = (
-    (data_df['type'] == 'prog')
-    & (data_df['gef_id'].isin(bio_id_list))
-)
-case_c = (
-    (data_df['type'] == 'rand')
-)
-case_df = build_case(case_name, case_t, case_c)
-
-# filter any units of observation that have a year of implementation > the last state score measurement
-case_df = case_df.loc[(case_df['transactions_start_year'] > case_df['iba_year'])]
-
-case_stats = output_case(case_name, case_df, dry_run=dry_run)
-print case_stats
-
 
 # -------------------------------------
 case_name = "m2vout"
@@ -459,6 +468,8 @@ case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
 case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -475,12 +486,34 @@ case_c = (
 )
 case_df = build_case(case_name, case_t, case_c)
 
-# modify
-#
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
+
+# # -------------------------------------
+# case_name = "m2iout"
+# case_t = (
+#     (data_df['type'] == 'prog')
+#     & (data_df['gef_id'].isin(bio_id_list))
+# )
+# case_c = (
+#     (data_df['type'] == 'rand')
+# )
+# case_df = build_case(case_name, case_t, case_c)
+
+# # filter any units of observation that have a year of implementation > the last state score measurement
+# case_df = case_df.loc[(case_df['transactions_start_year'] > case_df['iba_year'])]
+# # start year >= 2008
+# case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+
+# case_stats = output_case(case_name, case_df, dry_run=dry_run)
+# print case_stats
+
+
+# -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # Treatment:  Programmatic projects w/ LD objectives
 # Control:    Non-Programmatic projects w/ LD objectives
@@ -499,9 +532,12 @@ case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
 case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
+
 
 # -------------------------------------
 case_name = "m3fout"
@@ -515,19 +551,21 @@ case_c = (
 )
 case_df = build_case(case_name, case_t, case_c)
 
-# modify
-#
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
 
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Treatment:  Programmatic projects w/ Bio objectives
 # Control:    Non-Programmatic projects w/ Bio objectives
 
+
 # -------------------------------------
-case_name = "m4iout"
+case_name = "m4vout"
 case_t = (
     (data_df['type'] == 'prog')
     & (data_df['gef_id'].isin(bio_id_list))
@@ -538,12 +576,59 @@ case_c = (
 )
 case_df = build_case(case_name, case_t, case_c)
 
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 # filter any units of observation that have a year of implementation > the last state score measurement
-case_df = case_df.loc[(case_df['transactions_start_year'] > case_df['iba_year'])]
+# case_df = case_df.loc[(data_df['iba_start_diff'] > 0)]
+# iba dist less than 2 decimal degrees or ~200km
+# case_df = case_df.loc[(case_df['iba_distance'] < 2)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
+
+# -------------------------------------
+case_name = "m4fout"
+case_t = (
+    (data_df['type'] == 'prog')
+    & (data_df['gef_id'].isin(bio_id_list))
+)
+case_c = (
+    (data_df['type'].isin(['bio', 'ext_bio']))
+    & ~(data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# # -------------------------------------
+# case_name = "m4iout"
+# case_t = (
+#     (data_df['type'] == 'prog')
+#     & (data_df['gef_id'].isin(bio_id_list))
+# )
+# case_c = (
+#     (data_df['type'].isin(['bio', 'ext_bio']))
+#     & ~(data_df['gef_id'].isin(prog_id_list))
+# )
+# case_df = build_case(case_name, case_t, case_c)
+
+# # start year >= 2008
+# case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+# # filter any units of observation that have a year of implementation > the last state score measurement
+# # case_df = case_df.loc[(data_df['iba_start_diff'] > 0)]
+# # iba dist less than 2 decimal degrees or ~200km
+# # case_df = case_df.loc[(case_df['iba_distance'] < 2)]
+
+# case_stats = output_case(case_name, case_df, dry_run=dry_run)
+# print case_stats
 
 
 
