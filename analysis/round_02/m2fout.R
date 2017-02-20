@@ -2,7 +2,7 @@
 
 case <- "m2fout"
 
-path <- paste("/vagrant/results/", case, sep="")
+path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
@@ -61,7 +61,7 @@ t <- geoML(dta=full.dta,
            counterfactual.name = "Null Comparison",
            tree.ctrl = c(20,500),
            tree.cex = 0.25,
-           col.invert = FALSE,
+           col.invert = TRUE,
            tree.cnt = 100001
 )
 

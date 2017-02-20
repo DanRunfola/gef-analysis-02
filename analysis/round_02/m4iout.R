@@ -2,7 +2,7 @@
 
 case <- "m4iout"
 
-path <- paste("/vagrant/results/", case, sep="")
+path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 

@@ -2,7 +2,7 @@
 
 case <- "m4fout"
 
-path <- paste("/vagrant/results/", case, sep="")
+path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
@@ -66,7 +66,7 @@ t <- geoML(dta=full.dta,
            geog.fields = c("latitude", "longitude"),
            caliper=0.5,
            counterfactual.name = "Non-Programmatic w/ LD",
-           tree.ctrl = c(20,500),
+           tree.ctrl = c(5,500),
            tree.cex = 0.25,
            col.invert = TRUE,
            tree.cnt = 100001

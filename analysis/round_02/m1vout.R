@@ -2,7 +2,7 @@
 
 case <- "m1vout"
 
-path <- paste("/vagrant/results/", case, sep="")
+path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
@@ -61,6 +61,7 @@ t <- geoML(dta=full.dta,
            top.rep=c("GEF_ID", "Title"),
            tree.ctrl = c(20,500),
            col.invert = FALSE,
+           tree.cex = 0.25,
            tree.cnt = 100001
 )
 
