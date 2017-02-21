@@ -46,7 +46,6 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "years since implementation"
 )
 
-out_path = "/vagrant/results/m2fout/"
 
 t <- geoML(dta=full.dta,
            trt=c("treatment", "Programmatic w/ Bio"),
