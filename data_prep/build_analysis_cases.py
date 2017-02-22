@@ -796,3 +796,34 @@ case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
+
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Treatment:  Programmatic projects w/ SFA Bio
+# Control:    No-CD SFA Bio
+
+# -------------------------------------
+case_name = "prog7vout"
+case_t = (
+    (data_df['gef_id'].isin(prog_id_list))
+    & (data_df['gef_id'].isin(bio_id_list))
+)
+case_c = (
+    (data_df['gef_id'].isin(bio_id_list))
+    & ~(data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+# filter any units of observation that have a year of implementation > the last state score measurement
+# case_df = case_df.loc[(data_df['iba_start_diff'] > 0)]
+# iba dist less than 2 decimal degrees or ~200km
+# case_df = case_df.loc[(case_df['iba_distance'] < 2)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
