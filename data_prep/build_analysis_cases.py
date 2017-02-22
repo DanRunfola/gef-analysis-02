@@ -168,6 +168,25 @@ prog_id_list = list(set(ancillary_05_df['Project GEF_ID'].astype('int').astype('
 # mfa_id_list = list(set(data_raw_df.loc[data_raw_df['type'] == "mfa", 'gef_id']))
 mfa_id_list = list(set(ancillary_06_df['mfa'][ancillary_06_df['mfa'].notnull()].astype('int').astype('str')))
 
+# alt_mfa_id_list = list(set(data_raw_df.loc[data_raw_df['Focal Area'] == 'Multi Focal Area', 'gef_id'].astype('int').astype('str')))
+# alt_non_mfa_id_list = list(set(data_raw_df.loc[data_raw_df['Focal Area'] != 'Multi Focal Area', 'gef_id'].astype('int').astype('str')))
+
+
+print len(mfa_id_list)
+# print len(alt_mfa_id_list)
+# print len(set(mfa_id_list) & set(alt_mfa_id_list))
+
+# print len(list(set(mfa_id_list + alt_mfa_id_list)))
+# print len(list(set([i for i in mfa_id_list if i in alt_mfa_id_list])))
+# print len(list(set([i for i in alt_mfa_id_list if i in mfa_id_list])))
+
+
+print len(prog_id_list)
+
+print len(set(mfa_id_list) & set(prog_id_list))
+print len(list(set([i for i in mfa_id_list if i in prog_id_list])))
+
+raise
 
 # print prog_id_list
 # print mfa_id_list
@@ -443,7 +462,7 @@ def output_case(case_id, case_out, dry_run=dry_run):
 # Control:    Null Case Comparisons
 
 # -------------------------------------
-case_name = "m1vout"
+case_name = "prog1vout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
@@ -464,7 +483,7 @@ print case_stats
 
 # -------------------------------------
 
-case_name = "m1fout"
+case_name = "prog1fout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
@@ -487,7 +506,7 @@ print case_stats
 # Control:    Null Case Comparisons
 
 # -------------------------------------
-case_name = "m2vout"
+case_name = "prog2vout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
@@ -507,7 +526,7 @@ print case_stats
 
 
 # -------------------------------------
-case_name = "m2fout"
+case_name = "prog2fout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
@@ -525,7 +544,7 @@ print case_stats
 
 
 # # -------------------------------------
-# case_name = "m2iout"
+# case_name = "prog2iout"
 # case_t = (
 #     (data_df['gef_id'].isin(prog_id_list))
 #     & (data_df['gef_id'].isin(bio_id_list))
@@ -550,7 +569,7 @@ print case_stats
 # Control:    Non-Programmatic projects w/ LD objectives
 
 # -------------------------------------
-case_name = "m3vout"
+case_name = "prog3vout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
@@ -571,7 +590,7 @@ print case_stats
 
 
 # -------------------------------------
-case_name = "m3fout"
+case_name = "prog3fout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(land_id_list))
@@ -596,7 +615,7 @@ print case_stats
 
 
 # -------------------------------------
-case_name = "m4vout"
+case_name = "prog4vout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
@@ -621,7 +640,7 @@ print case_stats
 
 
 # -------------------------------------
-case_name = "m4fout"
+case_name = "prog4fout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
     & (data_df['gef_id'].isin(bio_id_list))
@@ -640,7 +659,7 @@ print case_stats
 
 
 # # -------------------------------------
-# case_name = "m4iout"
+# case_name = "prog4iout"
 # case_t = (
 #    (data_df['gef_id'].isin(prog_id_list))
 #     & (data_df['gef_id'].isin(bio_id_list))
@@ -662,4 +681,118 @@ print case_stats
 # print case_stats
 
 
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Treatment:  Programmatic projects w/ LD objectives
+# Control:    Non-Programmatic projects w/ LD objectives
 
+
+# case_df["GEF ID"]
+# case_df["GEF phase"]
+# case_df["List of project's focal areas_y"]
+# case_df["GET_BD_"]
+# case_df["GET_CC_"]
+# case_df["GET_IW_"]
+# case_df["GET_LD_"]
+# case_df["GET_Multi focal area_"]
+# case_df["GET_M_Capacity building"]
+# case_df["GET_M_SFM"]
+# case_df["GET_Ozone_"]
+# case_df["GET_POPs_"]
+# case_df["GET_P_HG"]
+# case_df["LDCF_CC_"]
+# case_df["NPIF_BD_"]
+# case_df["SCCF_CC_"]
+# case_df["Total GEF grant at CEO endorsement"]
+
+
+# -------------------------------------
+case_name = "prog5vout"
+case_t = (
+    (data_df['gef_id'].isin(prog_id_list))
+    & (data_df['gef_id'].isin(land_id_list))
+)
+case_c = (
+    (data_df['gef_id'].isin(land_id_list))
+    & ~(data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# -------------------------------------
+case_name = "prog5fout"
+case_t = (
+    (data_df['gef_id'].isin(prog_id_list))
+    & (data_df['gef_id'].isin(land_id_list))
+)
+case_c = (
+    (data_df['gef_id'].isin(land_id_list))
+    & ~(data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Treatment:  Programmatic projects w/ Bio objectives
+# Control:    Non-Programmatic projects w/ Bio objectives
+
+# -------------------------------------
+case_name = "prog6vout"
+case_t = (
+    (data_df['gef_id'].isin(prog_id_list))
+    & (data_df['gef_id'].isin(bio_id_list))
+)
+case_c = (
+    (data_df['gef_id'].isin(bio_id_list))
+    & ~(data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+# filter any units of observation that have a year of implementation > the last state score measurement
+# case_df = case_df.loc[(data_df['iba_start_diff'] > 0)]
+# iba dist less than 2 decimal degrees or ~200km
+# case_df = case_df.loc[(case_df['iba_distance'] < 2)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# -------------------------------------
+case_name = "prog6fout"
+case_t = (
+    (data_df['gef_id'].isin(prog_id_list))
+    & (data_df['gef_id'].isin(bio_id_list))
+)
+case_c = (
+    (data_df['gef_id'].isin(bio_id_list))
+    & ~(data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
