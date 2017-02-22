@@ -1,13 +1,13 @@
 {
-  "name": "globalenvironmentfacility_geocodedresearchrelease_level1_v1_0", 
+  "name": "globalenvironmentfacility_geocodedresearchrelease_level1_v1_1", 
   "title": "GlobalEnvironmentFacility GeocodedResearchRelease", 
   "description": "This is a sample description", 
-  "version": "1.0", 
+  "version": "1.1", 
   "resources": [
     {
       "name": "projects.csv", 
       "path": "data/projects.csv", 
-      "bytes": 250381, 
+      "bytes": 251018, 
       "schema": {
         "fields": [
           {
@@ -96,7 +96,7 @@
     {
       "name": "locations.csv", 
       "path": "data/locations.csv", 
-      "bytes": 984340, 
+      "bytes": 989914, 
       "schema": {
         "fields": [
           {
@@ -157,11 +157,11 @@
     {
       "name": "transactions.csv", 
       "path": "data/transactions.csv", 
-      "bytes": 93730, 
+      "bytes": 94022, 
       "schema": {
         "fields": [
           {
-            "type": "float", 
+            "type": "int", 
             "name": "transaction_year"
           }, 
           {
@@ -194,7 +194,7 @@
     {
       "name": "level_1a.csv", 
       "path": "data/level_1a.csv", 
-      "bytes": 2755829, 
+      "bytes": 2769241, 
       "schema": {
         "fields": [
           {
@@ -343,7 +343,7 @@
       "key": "Datapackage Version"
     }, 
     {
-      "value": "AidData. 2017. GlobalEnvironmentFacility_GeocodedResearchRelease_Level1_v1.0 geocoded dataset. Williamsburg, VA and Washington, DC: AidData. Accessed on [date]. http://aiddata.org/research-datasets.", 
+      "value": "AidData. 2017. GlobalEnvironmentFacility_GeocodedResearchRelease_Level1_v1.1 geocoded dataset. Williamsburg, VA and Washington, DC: AidData. Accessed on [date]. http://aiddata.org/research-datasets.", 
       "key": "Citation"
     }, 
     {
@@ -431,7 +431,7 @@
       "key": "Source Link"
     }, 
     {
-      "value": "02/16/17", 
+      "value": "02/21/17", 
       "key": "Date Updated"
     }
   ]
