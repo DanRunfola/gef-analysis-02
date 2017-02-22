@@ -154,7 +154,7 @@ mfa_nocd_id_list = list(set(ancillary_06_df['mfa'][ancillary_06_df['mfa'].notnul
 mfa_master_id_list = list(set(data_raw_df.loc[data_raw_df['Focal Area'] == 'Multi Focal Area', 'gef_id'].astype('int').astype('str')))
 # non_mfa_id_list = list(set(data_raw_df.loc[data_raw_df['Focal Area'] != 'Multi Focal Area', 'gef_id'].astype('int').astype('str')))
 
-mfa_financials_id_list = list(set(data_raw_df.loc[~data_raw_df['GEF ID'].isnull(), 'gef_id'].astype('int').astype('str')))
+mfa_financials_id_list = list(set(data_raw_df.loc[data_raw_df['GEF ID'].notnull(), 'gef_id'].astype('int').astype('str')))
 
 prog_id_list = list(set(ancillary_05_df['Project GEF_ID'].astype('int').astype('str')))
 
@@ -186,6 +186,7 @@ prog_id_list = list(set(ancillary_05_df['Project GEF_ID'].astype('int').astype('
 # # print len(land_nocd_id_list + land_component_id_list)
 # # print len(bio_nocd_id_list + bio_component_id_list)
 # # raw_bio_matches
+
 # =============================================================================
 
 # -------------------------------------
@@ -193,7 +194,7 @@ prog_id_list = list(set(ancillary_05_df['Project GEF_ID'].astype('int').astype('
 
 multicountry_id_list = list(set(ancillary_04_df.loc[ancillary_04_df["Country"].isin(["Regional", "Global"]), 'GEF_ID'].astype('int').astype('str')))
 
-multiagency_id_list = list(set(ancillary_04_df.loc[~ancillary_04_df["Secondary agency(ies)"].isnull(), 'GEF_ID'].astype('int').astype('str')))
+multiagency_id_list = list(set(ancillary_04_df.loc[ancillary_04_df["Secondary agency(ies)"].notnull(), 'GEF_ID'].astype('int').astype('str')))
 
 
 # -----------------------------------------------------------------------------
@@ -246,7 +247,7 @@ def date_to_year(d):
 stage_01 = (
     (data_df['type'] != 'rand')
     & (data_df['transactions_start_year'].isnull())
-    & (~data_df['Actual date of implementation start'].isnull())
+    & (data_df['Actual date of implementation start'].notnull())
 )
 
 data_df.loc[stage_01, 'transactions_start_year'] = data_df.loc[stage_01]['Actual date of implementation start'].apply(lambda z: date_to_year(z))
@@ -256,7 +257,7 @@ stage_02 = (
     (data_df['type'] != 'rand')
     & (data_df['transactions_start_year'].isnull())
     & (data_df['Type acronym'].isin(['MSP', 'EA']))
-    & (~data_df['Date of CEO approval (MSP / EA)'].isnull())
+    & (data_df['Date of CEO approval (MSP / EA)'].notnull())
 )
 
 data_df.loc[stage_02, 'transactions_start_year'] = data_df.loc[stage_02]['Date of CEO approval (MSP / EA)'].apply(lambda z: date_to_year(z))
@@ -266,7 +267,7 @@ stage_03 = (
    (data_df['type'] != 'rand')
     & (data_df['transactions_start_year'].isnull())
     & (data_df['Type acronym'].isin(['FP']))
-    & (~data_df['Date of CEO endorsement (FSP)'].isnull())
+    & (data_df['Date of CEO endorsement (FSP)'].notnull())
 )
 
 data_df.loc[stage_03, 'transactions_start_year'] = data_df.loc[stage_03]['Date of CEO endorsement (FSP)'].apply(lambda z: date_to_year(z))
@@ -275,7 +276,7 @@ data_df.loc[stage_03, 'transactions_start_year'] = data_df.loc[stage_03]['Date o
 stage_04 = (
     (data_df['type'] != 'rand')
     & (data_df['transactions_start_year'].isnull())
-    & (~data_df['Date of project approval'].isnull())
+    & (data_df['Date of project approval'].notnull())
 )
 
 data_df.loc[stage_04, 'transactions_start_year'] = data_df.loc[stage_04]['Date of project approval'].apply(lambda z: date_to_year(z))
@@ -312,14 +313,12 @@ def calc_ndvi_period_average(row, period):
     total = 0
     count = 0
     start_year = int(row['transactions_start_year'])
-
     if period == "pre":
         years = range(start_year, 2014)
     elif period == "post":
         years = range(2000, start_year)
     else:
         raise Exception("Invalid ndvi period (use `pre` or `post`)")
-
     for year in years:
         cname = "ltdr_yearly_ndvi_mean.{0}.mean".format(year)
         try:
@@ -327,7 +326,6 @@ def calc_ndvi_period_average(row, period):
             count += 1
         except:
             pass
-
     if count > 0:
         return total / float(count)
     else:
@@ -381,6 +379,40 @@ data_df['gef_phase_other'] = map(int, data_df["GEF replenishment phase"].isnull(
 #     (data_df['type'].isin(['rand']))
 #     | (data_df['gef_id'].isin(total_valid))
 # ]
+
+
+# -------------------------------------
+# percentage land and bio funding for mfa projects
+
+# data_df["GEF ID"]
+# data_df["GEF phase"]
+# data_df["List of project's focal areas_y"]
+# data_df["GET_BD_"]
+# data_df["GET_CC_"]
+# data_df["GET_IW_"]
+# data_df["GET_LD_"]
+# data_df["GET_Multi focal area_"]
+# data_df["GET_M_Capacity building"]
+# data_df["GET_M_SFM"]
+# data_df["GET_Ozone_"]
+# data_df["GET_POPs_"]
+# data_df["GET_P_HG"]
+# data_df["LDCF_CC_"]
+# data_df["NPIF_BD_"]
+# data_df["SCCF_CC_"]
+# data_df["Total GEF grant at CEO endorsement"]
+
+
+funding_categories = [
+	"GET_BD_", "GET_CC_", "GET_IW_", "GET_LD_", "GET_Multi focal area_", 
+	"GET_M_Capacity building", "GET_M_SFM", "GET_Ozone_", "GET_POPs_", 
+	"GET_P_HG", "LDCF_CC_", "NPIF_BD_", "SCCF_CC_"
+]
+
+data_df["count_funding_categories"] = data_df[funding_categories].notnull().sum(axis=1)
+
+data_df["percent_land_funding"] = data_df["GET_LD_"] / data_df["Total GEF grant at CEO endorsement"]
+data_df["percent_bio_funding"] = data_df["GET_BD_"] / data_df["Total GEF grant at CEO endorsement"]
 
 
 
@@ -462,7 +494,7 @@ case_c = (
 case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
@@ -506,7 +538,7 @@ case_c = (
 case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
@@ -570,7 +602,7 @@ case_c = (
 case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
@@ -616,13 +648,9 @@ case_c = (
 case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
-# filter any units of observation that have a year of implementation > the last state score measurement
-# case_df = case_df.loc[(data_df['iba_start_diff'] > 0)]
-# iba dist less than 2 decimal degrees or ~200km
-# case_df = case_df.loc[(case_df['iba_distance'] < 2)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -672,28 +700,8 @@ print case_stats
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
-# Treatment:  Programmatic projects w/ LD objectives
-# Control:    Non-Programmatic projects w/ LD objectives
-
-
-# case_df["GEF ID"]
-# case_df["GEF phase"]
-# case_df["List of project's focal areas_y"]
-# case_df["GET_BD_"]
-# case_df["GET_CC_"]
-# case_df["GET_IW_"]
-# case_df["GET_LD_"]
-# case_df["GET_Multi focal area_"]
-# case_df["GET_M_Capacity building"]
-# case_df["GET_M_SFM"]
-# case_df["GET_Ozone_"]
-# case_df["GET_POPs_"]
-# case_df["GET_P_HG"]
-# case_df["LDCF_CC_"]
-# case_df["NPIF_BD_"]
-# case_df["SCCF_CC_"]
-# case_df["Total GEF grant at CEO endorsement"]
-
+# Treatment:  Prog MFA LD with Monetary Threshold
+# Control:    Non-Prog MFA LD with Monetary Threshold
 
 # -------------------------------------
 case_name = "prog5vout"
@@ -702,18 +710,21 @@ case_t = (
     & (data_df['gef_id'].isin(land_nocd_id_list + land_component_id_list))
 )
 case_c = (
-    (data_df['gef_id'].isin(land_nocd_id_list + land_component_id_list))
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
 
-
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
-
 # drop rows without ndvi diff outcome values
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+# financials
+case_df = case_df.loc[
+	(data_raw_df['GEF ID'].notnull())
+	& (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+]
+
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -726,13 +737,18 @@ case_t = (
     & (data_df['gef_id'].isin(land_nocd_id_list + land_component_id_list))
 )
 case_c = (
-    (data_df['gef_id'].isin(land_nocd_id_list + land_component_id_list))
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
 
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+# financials
+case_df = case_df.loc[
+	(data_raw_df['GEF ID'].notnull())
+	& (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -740,8 +756,8 @@ print case_stats
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
-# Treatment:  Programmatic projects w/ Bio objectives
-# Control:    Non-Programmatic projects w/ Bio objectives
+# Treatment:  Programmatic MFA Bio with Monetary Threshold
+# Control:    Non-Programmatic MFA Bio with Monetary Threshold
 
 # -------------------------------------
 case_name = "prog6vout"
@@ -750,19 +766,20 @@ case_t = (
     & (data_df['gef_id'].isin(bio_nocd_id_list + bio_component_id_list))
 )
 case_c = (
-    (data_df['gef_id'].isin(bio_nocd_id_list + bio_component_id_list))
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
-# filter any units of observation that have a year of implementation > the last state score measurement
-# case_df = case_df.loc[(data_df['iba_start_diff'] > 0)]
-# iba dist less than 2 decimal degrees or ~200km
-# case_df = case_df.loc[(case_df['iba_distance'] < 2)]
+# financials
+case_df = case_df.loc[
+	(data_raw_df['GEF ID'].notnull())
+	& (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -775,13 +792,17 @@ case_t = (
     & (data_df['gef_id'].isin(bio_nocd_id_list + bio_component_id_list))
 )
 case_c = (
-    (data_df['gef_id'].isin(bio_nocd_id_list + bio_component_id_list))
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
 
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+case_df = case_df.loc[
+	(data_raw_df['GEF ID'].notnull())
+	& (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
@@ -789,30 +810,46 @@ print case_stats
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
-# Treatment:  Programmatic projects w/ SFA Bio
-# Control:    No-CD SFA Bio
+# Treatment:  Programmatic SFA Bio
+# Control:    Non-Programmatic SFA Bio
 
 # -------------------------------------
 case_name = "prog7vout"
 case_t = (
     (data_df['gef_id'].isin(prog_id_list))
-    & (data_df['gef_id'].isin(bio_nocd_id_list + bio_component_id_list))
+    & (data_df['gef_id'].isin(bio_nocd_id_list))
+    & (~data_df['gef_id'].isin(bio_component_id_list))
 )
 case_c = (
-    (data_df['gef_id'].isin(bio_nocd_id_list + bio_component_id_list))
+    (data_df['gef_id'].isin(bio_nocd_id_list))
     & ~(data_df['gef_id'].isin(prog_id_list))
 )
 case_df = build_case(case_name, case_t, case_c)
 
 # drop rows without ndvi diff outcome values
-case_df = case_df.loc[~case_df['ndvi_pre_post_diff'].isnull()]
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
-# filter any units of observation that have a year of implementation > the last state score measurement
-# case_df = case_df.loc[(data_df['iba_start_diff'] > 0)]
-# iba dist less than 2 decimal degrees or ~200km
-# case_df = case_df.loc[(case_df['iba_distance'] < 2)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
+
+# -------------------------------------
+case_name = "prog7fout"
+case_t = (
+    (data_df['gef_id'].isin(prog_id_list))
+    & (data_df['gef_id'].isin(bio_nocd_id_list))
+    & (~data_df['gef_id'].isin(bio_component_id_list))
+)
+case_c = (
+    (data_df['gef_id'].isin(bio_nocd_id_list))
+    & ~(data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# start year >= 2008
+case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
