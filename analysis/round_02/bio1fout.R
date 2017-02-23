@@ -1,6 +1,6 @@
 
 
-case <- "mfa1fout"
+case <- "bio1fout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
@@ -56,7 +56,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
 
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "MFA Land projects with Monetary Threshold"),
+           trt=c("treatment", "SFA Bio"),
            ctrl=c(Vars, VarNames),
            outcome=c("chg.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
            out_path=path,
@@ -64,9 +64,9 @@ t <- geoML(dta=full.dta,
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=0.5,
-           counterfactual.name = "Null Case Comparisons",
-           tree.ctrl = c(5,500),
+           caliper=0.25,
+           counterfactual.name = "Null Case",
+           tree.ctrl = c(20,500),
            tree.cex = 0.25,
            col.invert = TRUE,
            tree.cnt = 100001

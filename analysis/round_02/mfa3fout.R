@@ -1,6 +1,6 @@
 
 
-case <- "mfa1fout"
+case <- "mfa3fout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
@@ -56,7 +56,7 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
 
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "MFA Land projects with Monetary Threshold"),
+           trt=c("treatment", "MFA Bio projects with Monetary Threshold"),
            ctrl=c(Vars, VarNames),
            outcome=c("chg.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
            out_path=path,

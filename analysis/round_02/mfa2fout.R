@@ -1,6 +1,6 @@
 
 
-case <- "mfa1fout"
+case <- "mfa2fout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
@@ -65,7 +65,7 @@ t <- geoML(dta=full.dta,
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
            caliper=0.5,
-           counterfactual.name = "Null Case Comparisons",
+           counterfactual.name = "SFA Land",
            tree.ctrl = c(5,500),
            tree.cex = 0.25,
            col.invert = TRUE,

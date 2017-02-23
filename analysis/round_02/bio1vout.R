@@ -1,6 +1,6 @@
 
 
-case <- "mfa1fout"
+case <- "bio1vout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
@@ -28,9 +28,9 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
            "ltdr_yearly_ndvi_mean.2002.mean"#,
-           # "years_since_implementation"#,
+	         # "years_since_implementation"#,
            # "total_commitments",
-           # "gef_phase_3",
+           #"gef_phase_3",
            # "gef_phase_4", "gef_phase_5"#,
            # "gef_phase_6", "gef_phase_other"
 )
@@ -49,25 +49,28 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "NDVI (2002, Unitless)"#,
               # "years since implementation"#,
               # "total commitments",
-              # "gef phase 3",
+              #"gef phase 3",
               # "gef phase 4", "gef phase 5"#,
               # "gef phase 6", "gef phase other"
 )
 
 
 t <- geoML(dta=full.dta,
-           trt=c("treatment", "MFA Land projects with Monetary Threshold"),
+           trt=c("treatment", "SFA Bio"),
            ctrl=c(Vars, VarNames),
-           outcome=c("chg.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
+           outcome=c("ndvi_pre_post_diff", "NDVI Diff pre-post implementation"),
            out_path=path,
-           file.prefix="FC_Hansen",
+           file.prefix="NDVI_diff",
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),
-           caliper=0.5,
-           counterfactual.name = "Null Case Comparisons",
-           tree.ctrl = c(5,500),
+           caliper=0.25,
+           counterfactual.name = "Null Case",
+           tree.ctrl = c(20,500),
            tree.cex = 0.25,
-           col.invert = TRUE,
+           col.invert = FALSE,
            tree.cnt = 100001
 )
+
+
+
