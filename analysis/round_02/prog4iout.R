@@ -1,6 +1,6 @@
 
 
-case <- "m4iout"
+case <- "prog4iout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)

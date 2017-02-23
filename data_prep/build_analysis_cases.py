@@ -142,7 +142,7 @@ bio_component_id_list = list(set(bio_component_id_list))
 # build project type id lists
 
 # land_component_id_list
-# bio_component_id_list 
+# bio_component_id_list
 
 
 # no cd lists
@@ -404,8 +404,8 @@ data_df['gef_phase_other'] = map(int, data_df["GEF replenishment phase"].isnull(
 
 
 funding_categories = [
-	"GET_BD_", "GET_CC_", "GET_IW_", "GET_LD_", "GET_Multi focal area_", 
-	"GET_M_Capacity building", "GET_M_SFM", "GET_Ozone_", "GET_POPs_", 
+	"GET_BD_", "GET_CC_", "GET_IW_", "GET_LD_", "GET_Multi focal area_",
+	"GET_M_Capacity building", "GET_M_SFM", "GET_Ozone_", "GET_POPs_",
 	"GET_P_HG", "LDCF_CC_", "NPIF_BD_", "SCCF_CC_"
 ]
 
@@ -609,7 +609,6 @@ case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
-
 # -------------------------------------
 case_name = "prog3fout"
 case_t = (
@@ -634,7 +633,6 @@ print case_stats
 # Treatment:  Programmatic projects w/ Bio objectives
 # Control:    Non-Programmatic projects w/ Bio objectives
 
-
 # -------------------------------------
 case_name = "prog4vout"
 case_t = (
@@ -655,7 +653,6 @@ case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
-
 # -------------------------------------
 case_name = "prog4fout"
 case_t = (
@@ -673,7 +670,6 @@ case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
-
 
 # # -------------------------------------
 # case_name = "prog4iout"
@@ -721,14 +717,12 @@ case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 # financials
 case_df = case_df.loc[
-	(data_raw_df['GEF ID'].notnull())
-	& (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+	(case_df['GEF ID'].notnull())
+	& (case_df["percent_land_funding"] >= 1 / case_df["count_funding_categories"])
 ]
-
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
-
 
 # -------------------------------------
 case_name = "prog5fout"
@@ -746,8 +740,8 @@ case_df = build_case(case_name, case_t, case_c)
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 # financials
 case_df = case_df.loc[
-	(data_raw_df['GEF ID'].notnull())
-	& (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+	(case_df['GEF ID'].notnull())
+	& (case_df["percent_land_funding"] >= 1 / case_df["count_funding_categories"])
 ]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
@@ -777,13 +771,12 @@ case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 # financials
 case_df = case_df.loc[
-	(data_raw_df['GEF ID'].notnull())
-	& (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+	(case_df['GEF ID'].notnull())
+	& (case_df["percent_bio_funding"] >= 1 / case_df["count_funding_categories"])
 ]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
-
 
 # -------------------------------------
 case_name = "prog6fout"
@@ -800,8 +793,8 @@ case_df = build_case(case_name, case_t, case_c)
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 case_df = case_df.loc[
-	(data_raw_df['GEF ID'].notnull())
-	& (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+	(case_df['GEF ID'].notnull())
+	& (case_df["percent_bio_funding"] >= 1 / case_df["count_funding_categories"])
 ]
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
@@ -834,7 +827,6 @@ case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats
 
-
 # -------------------------------------
 case_name = "prog7fout"
 case_t = (
@@ -850,6 +842,275 @@ case_df = build_case(case_name, case_t, case_c)
 
 # start year >= 2008
 case_df = case_df.loc[(case_df['transactions_start_year'] >= 2008)]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+
+# =============================================================================
+# =============================================================================
+# multi focal areas
+
+
+# -----------------------------------------------------------------------------
+# Treatment:  MFA Land projects with Monetary Threshold
+# Control:    Null Case Comparisons
+
+# -------------------------------------
+case_name = "mfa1vout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+# -------------------------------------
+case_name = "mfa1fout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# -----------------------------------------------------------------------------
+# Treatment:  MFA Land projects with Monetary Threshold
+# Control:    SFA Land
+
+# -------------------------------------
+case_name = "mfa2vout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['gef_id'].isin(land_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+# -------------------------------------
+case_name = "mfa2fout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_land_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['gef_id'].isin(land_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# -----------------------------------------------------------------------------
+# Treatment:  MFA Bio projects with Monetary Threshold
+# Control:    Null Case Comparisons
+
+# -------------------------------------
+case_name = "mfa3vout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+# -------------------------------------
+case_name = "mfa3fout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# -----------------------------------------------------------------------------
+# Treatment:  MFA Bio projects with Monetary Threshold
+# Control:    SFA Bio
+
+# -------------------------------------
+case_name = "mfa4vout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['gef_id'].isin(bio_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# -------------------------------------
+case_name = "mfa4fout"
+case_t = (
+    (data_df['gef_id'].isin(mfa_nocd_id_list))
+    & (data_raw_df['GEF ID'].notnull())
+    & (data_df["percent_bio_funding"] >= 1 / data_df["count_funding_categories"])
+)
+case_c = (
+    (data_df['gef_id'].isin(bio_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_df = build_case(case_name, case_t, case_c)
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# =============================================================================
+# =============================================================================
+# biodiversity
+
+# -----------------------------------------------------------------------------
+# Treatment:  SFA Bio
+# Control:    Null Case Comparisons
+
+# -------------------------------------
+case_name = "bio1vout"
+case_t = (
+    (data_df['gef_id'].isin(bio_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+# -------------------------------------
+case_name = "bio1fout"
+case_t = (
+    (data_df['gef_id'].isin(bio_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+# -------------------------------------
+case_name = "bio1iout"
+case_t = (
+    (data_df['gef_id'].isin(bio_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# filter any units of observation that have a year of implementation > the last state score measurement
+case_df = case_df.loc[(case_df['transactions_start_year'] > case_df['iba_year'])]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+
+# =============================================================================
+# =============================================================================
+# land degradation
+
+# -----------------------------------------------------------------------------
+# Treatment:  SFA Land
+# Control:    Null Case Comparisons
+
+# -------------------------------------
+case_name = "land1vout"
+case_t = (
+    (data_df['gef_id'].isin(land_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
+
+# drop rows without ndvi diff outcome values
+case_df = case_df.loc[case_df['ndvi_pre_post_diff'].notnull()]
+
+case_stats = output_case(case_name, case_df, dry_run=dry_run)
+print case_stats
+
+# -------------------------------------
+case_name = "land1fout"
+case_t = (
+    (data_df['gef_id'].isin(land_nocd_id_list))
+    & (~data_df['gef_id'].isin(mfa_master_id_list))
+    & (~data_df['gef_id'].isin(prog_id_list))
+)
+case_c = (
+    (data_df['type'] == 'rand')
+)
+case_df = build_case(case_name, case_t, case_c)
 
 case_stats = output_case(case_name, case_df, dry_run=dry_run)
 print case_stats

@@ -1,6 +1,6 @@
 
 
-case <- "m3vout"
+case <- "prog3vout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
