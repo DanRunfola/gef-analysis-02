@@ -11,7 +11,7 @@ if len(sys.argv) == 2:
         print "Running dry run..."
 
 
-if os.environ.get('USER') == "vagrant":
+if os.environ.get('USER') in ["vagrant", "ubuntu"]:
     repo_dir = os.path.dirname(
         os.path.dirname(os.path.realpath(__file__)))
 else:
