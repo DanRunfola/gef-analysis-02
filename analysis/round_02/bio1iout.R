@@ -6,7 +6,7 @@ path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
 file.remove(file.path(path, list.files(path)))
 
-source("/home/vagrant/geoML/geoML.R")
+source(path.expand("~/geoML/geoML.R"))
 
 input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
 full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
