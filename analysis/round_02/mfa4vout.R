@@ -1,6 +1,6 @@
 
 
-case <- "mfa4MFA Bio projects with Monetary Thresholdvout"
+case <- "mfa4vout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
