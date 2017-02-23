@@ -1,5 +1,3 @@
-
-
 case <- "mfa3fout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
@@ -11,6 +9,7 @@ source(path.expand("~/geoML/geoML.R"))
 input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
 full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
+full.dta <- full.dta[(full.dta["years_since_implementation"]<=8 | full.dta["treatment"] == 1),]
 
 # -----------------------------------------------------------------------------
 
