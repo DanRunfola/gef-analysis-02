@@ -1,4 +1,4 @@
 Treatment Cases:
 173
 Control Cases:
-9927
+7420
