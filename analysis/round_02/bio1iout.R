@@ -1,6 +1,6 @@
 
 
-case <- "prog2iout"
+case <- "bio1iout"
 
 path <- paste("/vagrant/results/", case, '/', sep="")
 dir.create(path)
