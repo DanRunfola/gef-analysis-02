@@ -11,6 +11,7 @@ source(path.expand("~/geoML/geoML.R"))
 input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
 full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
+full.dta <- full.dta[(full.dta["years_since_implementation"]<=8 | full.dta["treatment"] == 1),]
 
 # -----------------------------------------------------------------------------
 
@@ -27,8 +28,8 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_min.2002.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
-           "ltdr_yearly_ndvi_mean.2002.mean"#,
-           # "years_since_implementation"#,
+           "ltdr_yearly_ndvi_mean.2002.mean",
+           "years_since_implementation"#,
            # "total_commitments",
            # "gef_phase_3",
            # "gef_phase_4", "gef_phase_5"#,
@@ -46,8 +47,8 @@ VarNames <- c("Dist. to Rivers (m)", "Dist. to Roads (m)",
               "Min Temp (2002, C)",
               "Mean Temp (2002, C)",
               "Nightime Lights (2002, Relative)",
-              "NDVI (2002, Unitless)"#,
-              # "years since implementation"#,
+              "NDVI (2002, Unitless)",
+              "years since implementation"#,
               # "total commitments",
               # "gef phase 3",
               # "gef phase 4", "gef phase 5"#,
