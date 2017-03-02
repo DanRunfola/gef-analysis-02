@@ -13,6 +13,7 @@ full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
 full.dta <- full.dta[(full.dta["years_since_implementation"]<=8 | full.dta["treatment"] == 1),]
 
+
 # -----------------------------------------------------------------------------
 
 
@@ -61,7 +62,7 @@ t <- geoML(dta=full.dta,
            ctrl=c(Vars, VarNames),
            outcome=c("chg.forest.km.outcome", "2013 Forest Cover (Sq. km)"),
            out_path=path,
-           file.prefix="FC_Hansen",
+           # file.prefix="FC_Hansen",
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),

@@ -12,6 +12,8 @@ input <-paste("/vagrant/data_prep/analysis_cases/", case, "_data.csv", sep="")
 full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
 full.dta <- full.dta[(full.dta["years_since_implementation"]<=8 | full.dta["treatment"] == 1),]
+
+
 # -----------------------------------------------------------------------------
 
 
@@ -28,7 +30,7 @@ Vars <-  c("dist_to_all_rivers.na.mean", "dist_to_roads.na.mean",
            "udel_air_temp_v4_01_yearly_mean.2002.mean",
            "v4composites_calibrated.2002.mean",
            "ltdr_yearly_ndvi_mean.2002.mean",
-	   "years_since_implementation"
+	         "years_since_implementation"
            # "total_commitments",
            #"gef_phase_3",
            # "gef_phase_4", "gef_phase_5"#,
@@ -60,7 +62,7 @@ t <- geoML(dta=full.dta,
            ctrl=c(Vars, VarNames),
            outcome=c("ndvi_pre_post_diff", "NDVI Diff pre-post implementation"),
            out_path=path,
-           file.prefix="NDVI_diff",
+           # file.prefix="NDVI_diff",
            kvar=c("v4composites_calibrated.2002.mean","dist_to_roads.na.mean",
                   "accessibility_map.na.mean","srtm_slope_500m.na.mean"),
            geog.fields = c("latitude", "longitude"),

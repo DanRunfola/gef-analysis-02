@@ -13,6 +13,7 @@ full.dta <- read.csv(input, check.names=FALSE, stringsAsFactors=FALSE)
 
 #full.dta <- full.dta[(full.dta["years_since_implementation"]<=8 | full.dta["treatment"] == 1),]
 
+
 # -----------------------------------------------------------------------------
 
 
