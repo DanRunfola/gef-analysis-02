@@ -1,0 +1,50 @@
+n= 324 
+
+node), split, n, deviance, yval
+      * denotes terminal node
+
+    1) root 324 4.315118e+08 -1.258921e+00  
+      2) srtm_slope_500m.na.mean>=0.1727415 299 1.117358e+08 -6.145372e+00  
+        4) accessibility_map.na.mean< 1996.773 295 1.752494e+07 -7.770811e+00  
+          8) udel_precip_v4_01_yearly_mean.2002.mean< 143.199 215 1.317387e+07 -3.114749e+00  
+           16) udel_precip_v4_01_yearly_mean.2002.mean< 132.9646 200 2.635809e+06 -3.873882e+00  
+             32) udel_air_temp_v4_01_yearly_min.2002.mean< 27.675 197 2.054020e+06 -4.125974e+00  
+               64) udel_air_temp_v4_01_yearly_min.2002.mean< 18.43779 106 1.447452e+06 -2.124835e+00  
+                128) udel_precip_v4_01_yearly_max.2002.mean< 332.5307 85 2.287464e+04 -2.599828e+00  
+                  256) ltdr_yearly_ndvi_mean.2002.mean< 2807.061 75 1.993264e+04 -8.677399e-01  
+                    512) udel_air_temp_v4_01_yearly_min.2002.mean< 17.77727 71 1.605225e+04 -9.334472e-01  
+                     1024) v4composites_calibrated.2002.mean< 9.931076 66 2.599909e+03 -1.022888e+00  
+                       2048) treecover2000.na.mean< 21.2607 59 5.721020e+02 -8.831477e-01  
+                         4096) longitude>=-71.31779 51 2.438826e+02 -9.995985e-01  
+                           8192) treecover2000.na.mean< 7.338778 43 3.640604e+01 -1.840116e-02  
+                            16384) udel_air_temp_v4_01_yearly_min.2002.mean< 13.35023 34 2.136720e+00 -2.869409e-02  
+                              32768) dist_to_all_rivers.na.mean< 2498.307 26 1.979067e+00 -4.339347e-04  
+                                65536) udel_precip_v4_01_yearly_mean.2002.mean< 38.90567 23 1.088571e-04 -1.394527e-03 *
+                                65537) udel_precip_v4_01_yearly_mean.2002.mean>=38.90567 3 1.234970e+00  8.723333e-03 *
+                              32769) dist_to_all_rivers.na.mean>=2498.307 8 7.415866e-02 -8.057516e-02 *
+                            16385) udel_air_temp_v4_01_yearly_min.2002.mean>=13.35023 9 3.010685e+01  6.045788e-02  
+                              32770) v4composites_calibrated.2002.mean>=0.1824474 2 1.720916e+01  1.357764e-01 *
+                              32771) v4composites_calibrated.2002.mean< 0.1824474 7 1.171042e+00  1.467577e-02  
+                                65542) udel_air_temp_v4_01_yearly_max.2002.mean>=33.98234 2 6.954985e-01  1.898864e-02 *
+                                65543) udel_air_temp_v4_01_yearly_max.2002.mean< 33.98234 5 2.307301e-02  1.976765e-02 *
+                           8193) treecover2000.na.mean>=7.338778 8 1.198296e+02 -3.792964e+00 *
+                         4097) longitude< -71.31779 8 1.812005e+02  1.464331e+00  
+                           8194) udel_air_temp_v4_01_yearly_min.2002.mean>=12.48934 4 7.925105e+01  1.776735e+00 *
+                           8195) udel_air_temp_v4_01_yearly_min.2002.mean< 12.48934 4 5.680717e+01  1.138448e+00 *
+                       2049) treecover2000.na.mean>=21.2607 7 1.557290e+03  2.597941e+00  
+                         4098) udel_air_temp_v4_01_yearly_max.2002.mean>=13.67857 5 7.590392e+02  1.083299e+00  
+                           8196) srtm_elevation_500m.na.mean>=683.1448 3 1.696990e+02 -2.152705e+00 *
+                           8197) srtm_elevation_500m.na.mean< 683.1448 2 4.072383e+02  7.127879e+00 *
+                         4099) udel_air_temp_v4_01_yearly_max.2002.mean< 13.67857 2 6.169104e+02  5.809545e+00 *
+                     1025) v4composites_calibrated.2002.mean>=9.931076 5 8.520913e+03  1.173464e+00 *
+                    513) udel_air_temp_v4_01_yearly_min.2002.mean>=17.77727 4 1.929637e+03  5.245540e+00 *
+                  257) ltdr_yearly_ndvi_mean.2002.mean>=2807.061 10 1.302856e+03 -1.065058e+01  
+                    514) udel_air_temp_v4_01_yearly_mean.2002.mean< 18.9 5 9.953752e+02 -1.621423e+01 *
+                    515) udel_air_temp_v4_01_yearly_mean.2002.mean>=18.9 5 8.661436e+01 -5.263783e+00 *
+                129) udel_precip_v4_01_yearly_max.2002.mean>=332.5307 21 1.290427e+06  1.185559e+00 *
+               65) udel_air_temp_v4_01_yearly_min.2002.mean>=18.43779 91 6.049541e+05 -2.552447e+00 *
+             33) udel_air_temp_v4_01_yearly_min.2002.mean>=27.675 3 2.753866e+05  1.987836e+01 *
+           17) udel_precip_v4_01_yearly_mean.2002.mean>=132.9646 15 9.759630e+06  6.070745e+00 *
+          9) udel_precip_v4_01_yearly_mean.2002.mean>=143.199 80 4.209132e+06 -1.076568e+00 *
+        5) accessibility_map.na.mean>=1996.773 4 7.165470e+07  2.577638e+01 *
+      3) srtm_slope_500m.na.mean< 0.1727415 25 2.706119e+08  2.755531e+01 *
