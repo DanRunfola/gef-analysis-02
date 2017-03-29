@@ -1,0 +1,124 @@
+n= 324 
+
+node), split, n, deviance, yval
+      * denotes terminal node
+
+    1) root 324 8.034970e+10   -2.6422000  
+      2) srtm_slope_500m.na.mean>=16.16739 6 4.635601e+10 -334.6823000  
+        4) treecover2000.na.mean< 5.347992 2 7.667560e+06  -20.2582600 *
+        5) treecover2000.na.mean>=5.347992 4 4.105798e+10 -412.2911000 *
+      3) srtm_slope_500m.na.mean< 16.16739 318 2.491761e+10   23.9980600  
+        6) srtm_elevation_500m.na.mean< 5.016358 9 1.051639e+10 -349.4975000 *
+        7) srtm_elevation_500m.na.mean>=5.016358 309 1.310004e+10   36.6678300  
+         14) longitude>=111.3573 24 5.993113e+09  282.7636000  
+           28) udel_air_temp_v4_01_yearly_min.2002.mean>=26.4 5 4.676085e+09  542.7677000 *
+           29) udel_air_temp_v4_01_yearly_min.2002.mean< 26.4 19 1.570791e+08  163.6881000  
+             58) accessibility_map.na.mean>=852.1069 2 7.714279e+06 -500.1731000 *
+             59) accessibility_map.na.mean< 852.1069 17 1.279184e+08  224.5060000  
+              118) longitude>=117.76 12 3.593864e+07  247.4818000  
+                236) ltdr_yearly_ndvi_mean.2002.mean>=2289.131 6 3.159204e+07  345.7595000  
+                  472) wdpa_5km.na.sum>=1.245 4 6.719830e+04  225.4715000 *
+                  473) wdpa_5km.na.sum< 1.245 2 1.872826e+07  438.0667000 *
+                237) ltdr_yearly_ndvi_mean.2002.mean< 2289.131 6 1.670861e+04   54.0406200 *
+              119) longitude< 117.76 5 8.288762e+07  339.1365000  
+                238) srtm_slope_500m.na.mean>=7.170286 3 4.498159e+04  249.9928000 *
+                239) srtm_slope_500m.na.mean< 7.170286 2 5.057477e+07  408.2121000 *
+         15) longitude< 111.3573 285 6.485989e+09    0.9461252  
+           30) ltdr_yearly_ndvi_mean.2002.mean>=3551.886 14 2.664626e+09 -244.5194000  
+             60) treecover2000.na.mean< 43.86762 8 1.539128e+09 -626.3617000 *
+             61) treecover2000.na.mean>=43.86762 6 3.594990e+07 -282.0506000 *
+           31) ltdr_yearly_ndvi_mean.2002.mean< 3551.886 271 2.248239e+09   34.4846600  
+             62) years_since_implementation>=2.5 97 1.114350e+09  -90.1655700  
+              124) udel_air_temp_v4_01_yearly_max.2002.mean< 32.85 85 3.580569e+08  -20.8530400  
+                248) ltdr_yearly_ndvi_mean.2002.mean>=3237.933 4 7.544810e+07 -512.3989000 *
+                249) ltdr_yearly_ndvi_mean.2002.mean< 3237.933 81 2.221379e+08   11.0578200  
+                  498) ltdr_yearly_ndvi_mean.2002.mean>=2223.144 56 1.124296e+08  -61.5017200  
+                    996) latitude< 22.28537 47 5.669985e+07  -11.1047600  
+                     1992) ltdr_yearly_ndvi_mean.2002.mean< 2320.068 9 9.198795e+06 -276.3679000 *
+                     1993) ltdr_yearly_ndvi_mean.2002.mean>=2320.068 38 3.891505e+07   30.4587400  
+                       3986) accessibility_map.na.mean< 84.56205 4 1.362162e+07 -249.7657000 *
+                       3987) accessibility_map.na.mean>=84.56205 34 1.255130e+07   88.8060900  
+                         7974) accessibility_map.na.mean>=928.2533 2 1.078846e+06 -524.1409000 *
+                         7975) accessibility_map.na.mean< 928.2533 32 8.224158e+06  130.3535000  
+                          15950) dist_to_roads.na.mean>=12220.83 7 2.119695e+06  330.7071000  
+                            31900) ltdr_yearly_ndvi_mean.2002.mean>=2992.89 2 7.789771e+04  208.8702000 *
+                            31901) ltdr_yearly_ndvi_mean.2002.mean< 2992.89 5 1.052868e+06  383.4036000 *
+                          15951) dist_to_roads.na.mean< 12220.83 25 4.160024e+06   70.6103700  
+                            31902) gpw_v3_density.2000.mean< 81.08103 18 2.767045e+06  -52.6809000  
+                              63804) ltdr_yearly_ndvi_mean.2002.mean< 2781.847 6 1.519022e+06 -196.8625000 *
+                              63805) ltdr_yearly_ndvi_mean.2002.mean>=2781.847 12 3.614831e+05   60.3656000 *
+                            31903) gpw_v3_density.2000.mean>=81.08103 7 2.591592e+05  306.4919000 *
+                    997) latitude>=22.28537 9 2.143799e+07 -388.3670000 *
+                  499) ltdr_yearly_ndvi_mean.2002.mean< 2223.144 25 8.882292e+07  102.0410000  
+                    998) v4composites_calibrated.2002.mean>=1.526259 9 7.511793e+07  271.9288000  
+                     1996) years_since_implementation< 3.5 7 2.116052e+05  -26.6549800 *
+                     1997) years_since_implementation>=3.5 2 3.769613e+07  513.5744000 *
+                    999) v4composites_calibrated.2002.mean< 1.526259 16 9.422381e+06   53.7642200  
+                     1998) dist_to_all_rivers.na.mean>=2356.342 7 2.768072e+06  -58.9495800 *
+                     1999) dist_to_all_rivers.na.mean< 2356.342 9 4.561741e+06  131.9849000  
+                       3998) latitude>=-10.61111 7 1.149205e+06  107.2252000 *
+                       3999) latitude< -10.61111 2 1.578028e+06  438.0681000 *
+              125) udel_air_temp_v4_01_yearly_max.2002.mean>=32.85 12 2.760182e+08 -353.7238000 *
+             63) years_since_implementation< 2.5 174 1.007517e+09   93.9854700  
+              126) gpw_v3_density.2000.mean< 2.746934 24 2.075645e+07 -166.5851000  
+                252) udel_air_temp_v4_01_yearly_min.2002.mean< 25.67546 22 1.089089e+07 -131.1693000  
+                  504) dist_to_all_rivers.na.mean< 1949.531 8 6.849490e+06 -242.6170000  
+                   1008) accessibility_map.na.mean< 412.8094 6 5.338329e+06 -175.1108000 *
+                   1009) accessibility_map.na.mean>=412.8094 2 1.179921e+06 -519.4724000 *
+                  505) dist_to_all_rivers.na.mean>=1949.531 14 3.286186e+05  -55.9263700  
+                   1010) accessibility_map.na.mean< 184.9181 4 2.436962e+04 -181.2821000 *
+                   1011) accessibility_map.na.mean>=184.9181 10 1.710533e+05   -3.7837070 *
+                253) udel_air_temp_v4_01_yearly_min.2002.mean>=25.67546 2 4.980211e+06 -808.8899000 *
+              127) gpw_v3_density.2000.mean>=2.746934 150 9.768069e+08  139.1493000  
+                254) ltdr_yearly_ndvi_mean.2002.mean>=3418.701 3 1.822843e+08  342.8548000 *
+                255) ltdr_yearly_ndvi_mean.2002.mean< 3418.701 147 6.953425e+08  124.8157000  
+                  510) longitude>=65.29169 46 6.108776e+08  245.5957000  
+                   1020) treecover2000.na.mean>=0.4739847 36 3.839009e+07    5.4186960  
+                     2040) udel_precip_v4_01_yearly_max.2002.mean< 189.1831 8 1.429040e+07 -304.9090000  
+                       4080) longitude< 103.2852 3 3.269059e+06 -244.5547000 *
+                       4081) longitude>=103.2852 5 7.869888e+06 -469.8361000 *
+                     2041) udel_precip_v4_01_yearly_max.2002.mean>=189.1831 28 7.279816e+06  158.5638000  
+                       4082) ltdr_yearly_ndvi_mean.2002.mean< 2661.896 17 4.185982e+06  -14.5111900  
+                         8164) dist_to_all_rivers.na.mean< 1987.916 9 2.996592e+06 -132.7286000  
+                          16328) udel_precip_v4_01_yearly_max.2002.mean< 310.6134 7 1.469406e+06  -53.8948100 *
+                          16329) udel_precip_v4_01_yearly_max.2002.mean>=310.6134 2 7.016251e+05 -416.5405000 *
+                         8165) dist_to_all_rivers.na.mean>=1987.916 8 5.062366e+05  157.7291000 *
+                       4083) ltdr_yearly_ndvi_mean.2002.mean>=2661.896 11 1.568431e+06  447.9583000  
+                         8166) udel_air_temp_v4_01_yearly_max.2002.mean>=29.30631 4 4.494969e+04  935.0985000 *
+                         8167) udel_air_temp_v4_01_yearly_max.2002.mean< 29.30631 7 2.895010e+05  188.9321000 *
+                   1021) treecover2000.na.mean< 0.4739847 10 4.866510e+08  437.6725000  
+                     2042) latitude>=20.23448 3 3.130654e+08  593.8910000 *
+                     2043) latitude< 20.23448 7 2.117997e+05  351.4085000 *
+                  511) longitude< 65.29169 101 7.212223e+07   47.7103900  
+                   1022) longitude>=38.31386 12 2.253122e+07 -205.8118000  
+                     2044) udel_precip_v4_01_yearly_max.2002.mean< 200.1 9 9.473363e+05  -67.1490900 *
+                     2045) udel_precip_v4_01_yearly_max.2002.mean>=200.1 3 1.243676e+07 -372.4743000 *
+                   1023) longitude< 38.31386 89 4.746140e+07   57.5325000  
+                     2046) udel_precip_v4_01_yearly_min.2002.mean< 0.01501534 39 2.757726e+07  -43.1717200  
+                       4092) ltdr_yearly_ndvi_mean.2002.mean>=2675.338 7 6.969238e+06 -347.1791000 *
+                       4093) ltdr_yearly_ndvi_mean.2002.mean< 2675.338 32 1.067387e+07    5.0903660  
+                         8186) udel_air_temp_v4_01_yearly_mean.2002.mean< 29.69809 25 5.221700e+06  -29.5331200  
+                          16372) ltdr_yearly_ndvi_mean.2002.mean< 2207.226 14 2.148852e+06 -108.6349000  
+                            32744) srtm_slope_500m.na.mean< 0.4797401 11 1.519870e+06 -149.9834000 *
+                            32745) srtm_slope_500m.na.mean>=0.4797401 3 1.553232e+04 -102.2213000 *
+                          16373) ltdr_yearly_ndvi_mean.2002.mean>=2207.226 11 1.240661e+06   43.9554000  
+                            32746) wdpa_5km.na.sum< 104.42 9 4.156324e+05  -32.0763300  
+                              65492) treecover2000.na.mean>=12.5162 3 8.448867e+02 -359.1185000 *
+                              65493) treecover2000.na.mean< 12.5162 6 6.301464e+04   86.1337000 *
+                            32747) wdpa_5km.na.sum>=104.42 2 2.238316e+05  249.3678000 *
+                         8187) udel_air_temp_v4_01_yearly_mean.2002.mean>=29.69809 7 2.597469e+06  214.6378000 *
+                     2047) udel_precip_v4_01_yearly_min.2002.mean>=0.01501534 50 1.522262e+07  108.3397000  
+                       4094) udel_air_temp_v4_01_yearly_max.2002.mean>=32.38156 3 1.610334e+06  425.4263000 *
+                       4095) udel_air_temp_v4_01_yearly_max.2002.mean< 32.38156 47 1.159521e+07   84.2258200  
+                         8190) udel_air_temp_v4_01_yearly_max.2002.mean>=26.59994 6 3.538070e+06 -145.2067000  
+                          16380) wdpa_5km.na.sum< 36.65 3 2.476849e+06 -281.0495000 *
+                          16381) wdpa_5km.na.sum>=36.65 3 1.624061e+05 -162.4942000 *
+                         8191) udel_air_temp_v4_01_yearly_max.2002.mean< 26.59994 41 4.626534e+06  127.8603000  
+                          16382) treecover2000.na.mean>=83.76534 6 6.239729e+05  -25.7868400  
+                            32764) srtm_slope_500m.na.mean< 1.381061 2 3.018123e+04 -388.7400000 *
+                            32765) srtm_slope_500m.na.mean>=1.381061 4 3.669764e+04  133.3174000 *
+                          16383) treecover2000.na.mean< 83.76534 35 3.531604e+06  157.3650000  
+                            32766) udel_air_temp_v4_01_yearly_max.2002.mean>=26.02383 6 4.331367e+05  295.8729000 *
+                            32767) udel_air_temp_v4_01_yearly_max.2002.mean< 26.02383 29 1.601651e+06  149.2521000  
+                              65534) udel_precip_v4_01_yearly_min.2002.mean>=28.28892 4 2.947769e+04  -75.4362400 *
+                              65535) udel_precip_v4_01_yearly_min.2002.mean< 28.28892 25 1.027231e+06  186.3215000 *
