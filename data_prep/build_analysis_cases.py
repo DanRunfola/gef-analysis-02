@@ -320,9 +320,9 @@ def calc_ndvi_period_average(row, period):
     total = 0
     count = 0
     start_year = int(row['transactions_start_year'])
-    if period == "pre":
+    if period == "post":
         years = range(start_year, 2014)
-    elif period == "post":
+    elif period == "pre":
         years = range(2000, start_year)
     else:
         raise Exception("Invalid ndvi period (use `pre` or `post`)")
@@ -346,7 +346,7 @@ data_df['ndvi_pre_average'] = data_df.apply(lambda z: calc_ndvi_period_average(z
 data_df['ndvi_post_average'] = data_df.apply(lambda z: calc_ndvi_period_average(z, period="post"), axis=1)
 
 # difference
-data_df['ndvi_pre_post_diff'] = data_df['ndvi_pre_average'] - data_df['ndvi_post_average']
+data_df['ndvi_pre_post_diff'] = data_df['ndvi_post_average'] - data_df['ndvi_pre_average']
 
 
 # -------------------------------------
