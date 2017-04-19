@@ -202,6 +202,13 @@ multiagency_id_list = list(set(ancillary_04_df.loc[ancillary_04_df["Secondary ag
 
 data_df = data_raw_df.copy(deep=True)
 
+###
+# mfa_out = "{0}/data_prep/analysis_cases/all_mfa_data.csv".format(repo_dir)
+# data_df.loc[
+#     data_df['gef_id'].isin(mfa_nocd_id_list + mfa_master_id_list + mfa_financials_id_list)
+# ].to_csv(mfa_out, index=False, encoding='utf-8')
+# raise
+###
 
 # -------------------------------------
 # multiagency and multicountry
